@@ -1,0 +1,20 @@
+package: yfeed
+version: '1.0.0'
+author: Gregor Harlan, Thomas Blum
+supportpage: www.redaxo.org/de/forum/
+
+page:
+    title: 'translate:yfeed'
+    perm: yfeed[]
+    pjax: false
+    icon: rex-icon fa-rss
+    subpages:
+        rss:
+            title: 'translate:rss'
+        twitter:
+            title: 'translate:twitter'
+            subpages:
+                entries: { title: 'translate:twitter_entries' }
+                settings: { title: 'translate:twitter_settings' }
+        facebook:
+            title: 'translate:facebook'

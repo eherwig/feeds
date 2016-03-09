@@ -1,0 +1,46 @@
+yfeed = YFeed
+yfeed_add = Feed hinzufügen
+yfeed_edit = Feed bearbeiten
+yfeed_delete = Feed löschen
+yfeed_delete_question = Feed wirklich löschen?
+yfeed_fetch = Feed abrufen
+yfeed_fetched = Der Feed wurde abgerufen und die Einträge gespeichert ({0} hinzugefügt, {1} aktualisiert).
+
+yfeed_rss = RSS
+
+yfeed_title = Titel
+yfeed_url = URL
+yfeed_url_empty = Geben Sie eine URL an
+yfeed_image = Bild
+yfeed_table = Zieltabelle
+
+yfeed_fields = Feldverknüpfungen
+yfeed_fields_info = Falls Felder nicht benötigt werden, können sie leer gelassen werden. Nur das UID-Feld ist Pflicht.
+
+yfeed_field_feed_id = Feed-ID
+yfeed_field_uid = UID
+yfeed_field_title = Titel
+yfeed_field_content = Text
+yfeed_field_content_raw = Text (ungefiltert)
+yfeed_field_url = URL
+yfeed_field_date = Datum
+yfeed_field_author = Autor
+yfeed_field_language = Sprache
+yfeed_field_enclosure_url = Anhang-Url
+yfeed_field_enclosure_type = Anhang-Typ
+
+yfeed_cronjob = YFeed: Feeds abrufen
+
+yfeed_setings_config_saved = Einstellungen wurden gespeichert.
+
+yfeed_twitter = Twitter
+yfeed_twitter_entries = Einträge
+yfeed_twitter_settings = Einstellungen
+yfeed_twitter_consumer_key = Twitter API key (Customer Key)
+yfeed_twitter_consumer_secret = Twitter API secret (Customer Secret)
+yfeed_twitter_oauth_token = Twitter Access token
+yfeed_twitter_oauth_token_secret = Twitter Access token secret
+
+yfeed_twitter_screen_name = Benutzer
+yfeed_twitter_count = Anzahl der Tweets
+yfeed_twitter_exclude_replies = Antworten ausschließen
