@@ -25,5 +25,5 @@ CREATE TABLE IF NOT EXISTS `%TABLE_PREFIX%yfeed_response` (
     `media` varchar(255) NOT NULL,
     `raw` text NOT NULL,
     PRIMARY KEY (`id`),
-    KEY `config_id` (`config_id`)
+    KEY `stream_id` (`stream_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
