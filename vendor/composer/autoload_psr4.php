@@ -7,4 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'TwitterOAuth\\' => array($vendorDir . '/ricardoper/twitteroauth/src'),
+    'Symfony\\Component\\HttpFoundation\\' => array($vendorDir . '/symfony/http-foundation'),
+    'Facebook\\' => array($vendorDir . '/facebook/php-sdk-v4/src/Facebook'),
 );

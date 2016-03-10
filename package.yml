@@ -9,12 +9,14 @@ page:
     pjax: false
     icon: rex-icon fa-rss
     subpages:
-        rss:
-            title: 'translate:rss'
-        twitter:
-            title: 'translate:twitter'
+        streams:
+            title: 'translate:streams'
+        responses:
+            title: 'translate:response'
+        settings:
+            title: 'translate:settings'
             subpages:
-                entries: { title: 'translate:twitter_entries' }
-                settings: { title: 'translate:twitter_settings' }
-        facebook:
-            title: 'translate:facebook'
+                twitter:
+                    title: 'translate:twitter'
+                facebook:
+                    title: 'translate:facebook'
