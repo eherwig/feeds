@@ -17,7 +17,8 @@ $query = 'SELECT
             (CASE WHEN (r.title IS NULL or r.title = "")
                 THEN r.content
                 ELSE r.title
-            END) as title
+            END) as title,
+            r.url
         FROM
             ' . rex_yfeed_response::table() . ' AS r
             LEFT JOIN
@@ -34,10 +35,11 @@ $list->setColumnParams('', ['func' => 'edit', 'id' => '###id###']);
 
 $list->removeColumn('id');
 
-$list->setColumnLabel('stream_name', $this->i18n('yfeed_stream'));
+$list->setColumnLabel('namespace', $this->i18n('yfeed_namespace'));
 $list->setColumnLabel('type', $this->i18n('yfeed_type'));
 $list->setColumnLabel('title', $this->i18n('yfeed_title'));
-
+$list->setColumnLabel('url', $this->i18n('yfeed_url'));
+/*
 $list->addColumn($this->i18n('function'), $this->i18n('edit'));
 $list->setColumnLayout($this->i18n('function'), ['<th class="rex-table-action" colspan="3">###VALUE###</th>', '<td class="rex-table-action">###VALUE###</td>']);
 $list->setColumnParams($this->i18n('function'), array('func' => 'edit', 'id' => '###id###'));
@@ -48,11 +50,11 @@ $list->addLinkAttribute('delete', 'onclick', "return confirm('" . $this->i18n('y
 
 $list->addColumn('fetch', $this->i18n('yfeed_fetch'), -1, ['', '<td class="rex-table-action">###VALUE###</td>']);
 $list->setColumnParams('fetch', ['func' => 'fetch', 'id' => '###id###']);
-
+*/
 $content = $list->get();
 
 $fragment = new rex_fragment();
-$fragment->setVar('title', $this->i18n('streams'));
+$fragment->setVar('title', $this->i18n('response'));
 $fragment->setVar('content', $content, false);
 $content = $fragment->parse('core/page/section.php');
 
