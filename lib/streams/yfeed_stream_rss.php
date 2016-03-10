@@ -62,7 +62,9 @@ class rex_yfeed_stream_rss extends rex_yfeed_stream_abstract
             $response->setDate($item->getDate()->format('U'));
             $response->setAuthor($item->getAuthor());
             $response->setLanguage($item->getLanguage());
-            $response->setMedia($item->getEnclosureUrl());
+            if ($item->getEnclosureUrl()) {
+                $response->setMedia($item->getEnclosureUrl());
+            }
             $response->setRaw($item);
 
             if ($response->exists()) {
