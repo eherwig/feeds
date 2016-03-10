@@ -7,8 +7,7 @@ CREATE TABLE IF NOT EXISTS `%TABLE_PREFIX%yfeed_stream` (
     `image` varchar(255) NOT NULL,
     `etag` varchar(255) NOT NULL,
     `last_modified` varchar(255) NOT NULL,
-    PRIMARY KEY (`id`),
-    UNIQUE KEY `unique_key` (`namespace`)
+    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `%TABLE_PREFIX%yfeed_response` (
