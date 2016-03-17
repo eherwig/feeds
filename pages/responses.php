@@ -29,9 +29,26 @@ $query = 'SELECT
 $list = rex_list::factory($query);
 $list->addTableAttribute('class', 'table-striped');
 
-$tdIcon = '<i class="rex-icon fa-rss"></i>';
-$list->addColumn('', $tdIcon, 0, ['<th class="rex-table-icon">###VALUE###</th>', '<td class="rex-table-icon">###VALUE###</td>']);
-$list->setColumnParams('', ['func' => 'edit', 'id' => '###id###']);
+$list->addColumn('icon', '', 0, ['<th class="rex-table-icon">###VALUE###</th>', '<td class="rex-table-icon">###VALUE###</td>']);
+$list->setColumnParams('icon', ['func' => 'edit', 'id' => '###id###']);
+$list->setColumnFormat('icon', 'custom', function($params) {
+    $type = explode('_', $params['list']->getValue('s.type'));
+    $icon = 'fa-paper-plane-o';
+    if (isset($type[0])) {
+        switch ($type[0]) {
+            case 'rss':
+                $icon = 'fa-rss';
+                break;
+            case 'twitter':
+                $icon = 'fa-twitter';
+                break;
+            case 'facebook':
+                $icon = 'fa-facebook';
+                break;
+        }
+        return $params['list']->getColumnLink('icon', '<i class="rex-icon ' . $icon . '"></i>');
+    }
+});
 
 $list->removeColumn('id');
 
