@@ -29,6 +29,24 @@ if ('' == $func) {
     $tdIcon = '<i class="rex-icon fa-twitter"></i>';
     $thIcon = '<a href="' . $list->getUrl(['func' => 'add']) . '"' . rex::getAccesskey($this->i18n('add'), 'add') . '><i class="rex-icon rex-icon-add-article"></i></a>';
     $list->addColumn($thIcon, $tdIcon, 0, ['<th class="rex-table-icon">###VALUE###</th>', '<td class="rex-table-icon">###VALUE###</td>']);
+    $list->setColumnFormat($thIcon, 'custom', function($params) use ($thIcon) {
+        $type = explode('_', $params['list']->getValue('type'));
+        $icon = 'fa-paper-plane-o';
+        if (isset($type[0])) {
+            switch ($type[0]) {
+                case 'rss':
+                    $icon = 'fa-rss';
+                    break;
+                case 'twitter':
+                    $icon = 'fa-twitter';
+                    break;
+                case 'facebook':
+                    $icon = 'fa-facebook';
+                    break;
+            }
+            return $params['list']->getColumnLink($thIcon, '<i class="rex-icon ' . $icon . '"></i>');
+        }
+    });
     $list->setColumnParams($thIcon, ['func' => 'edit', 'id' => '###id###']);
 
     $list->removeColumn('id');
