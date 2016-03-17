@@ -1,51 +1,47 @@
 yfeed = YFeed
-yfeed_add = Feed hinzufügen
-yfeed_edit = Feed bearbeiten
-yfeed_delete = Feed löschen
-yfeed_delete_question = Feed wirklich löschen?
-yfeed_fetch = Feed abrufen
-yfeed_fetched = Der Feed wurde abgerufen und die Einträge gespeichert ({0} hinzugefügt, {1} aktualisiert).
+yfeed_add = hinzufügen
+yfeed_edit = bearbeiten
+yfeed_delete = löschen
+yfeed_delete_question = Wirklich löschen?
 
 
-yfeed_namespace = Namespace
-yfeed_namespace_error = Der Namespace darf nicht leer sein und darf nur Kleinbuchstaben und den Unterstrich beinhalten.
-yfeed_namespace_notice = Eindeutigen Namen vergeben. Mit dem Namespace kann man die SQL-Abfrage filtern.
+
 yfeed_response = Fundgrube
+yfeed_response_author = Autor
+yfeed_response_content = Inhalt
+yfeed_response_content_raw = Inhalt (unverarbeitet / ungefiltert)
+yfeed_response_date = Timestamp
+yfeed_response_edit = Eintrag bearbeiten
+yfeed_response_language = Sprache / Sprachkürzel
+yfeed_response_media = Medium
+yfeed_response_raw = Gesamte Daten als Json
+yfeed_response_title = Titel
+yfeed_response_url = Url
+yfeed_response_uid = Id
+
 yfeed_settings = Einstellungen
 yfeed_settings_saved = Einstellungen wurden gespeichert.
+
 yfeed_streams = Streams
 yfeed_stream_add = Stream hinzufügen
 yfeed_stream_edit = Stream bearbeiten
-yfeed_type = Typ
+yfeed_stream_delete = Stream löschen
+yfeed_stream_delete_question = Stream wirklich löschen?
+yfeed_stream_fetch = Stream abrufen
+yfeed_stream_fetched = Der Stream wurde abgerufen und die Einträge gespeichert ({0} hinzugefügt; {1} aktualisiert; {2} nicht aktualisert, da von einem Benutzer bearbeitet).
+yfeed_stream_general = Allgemeines
+yfeed_stream_image = Bild
+yfeed_stream_namespace = Namespace
+yfeed_stream_namespace_error = Der Namespace darf nicht leer sein und darf nur Kleinbuchstaben und den Unterstrich beinhalten.
+yfeed_stream_namespace_notice = Eindeutigen Namen vergeben. Mit dem Namespace kann man die SQL-Abfrage filtern.
+yfeed_stream_select_type = Typen auswählen
+yfeed_stream_title = Titel
+yfeed_stream_type = Typ
+yfeed_stream_url = URL
 
-
-
-
-yfeed_title = Titel
-yfeed_url = URL
-yfeed_url_empty = Geben Sie eine URL an
-yfeed_image = Bild
-yfeed_table = Zieltabelle
-
-yfeed_fields = Feldverknüpfungen
-yfeed_fields_info = Falls Felder nicht benötigt werden, können sie leer gelassen werden. Nur das UID-Feld ist Pflicht.
-
-yfeed_field_feed_id = Feed-ID
-yfeed_field_uid = UID
-yfeed_field_title = Titel
-yfeed_field_content = Text
-yfeed_field_content_raw = Text (ungefiltert)
-yfeed_field_url = URL
-yfeed_field_date = Datum
-yfeed_field_author = Autor
-yfeed_field_language = Sprache
-yfeed_field_enclosure_url = Anhang-Url
-yfeed_field_enclosure_type = Anhang-Typ
 
 yfeed_cronjob = YFeed: Feeds abrufen
 
-yfeed_stream_general = Allgemeines
-yfeed_stream_select_type = Typen auswählen
 
 yfeed_rss = RSS
 yfeed_rss_feed = RSS Feed
@@ -73,3 +69,4 @@ yfeed_twitter_user_timeline = Twitter :: Tweets vom Benutzer
 yfeed_twitter_hashtag = Twitter :: Hashtag
 yfeed_twitter_hashtag_q = Hashtag
 yfeed_twitter_hashtag_with_prefix = Hashtag mit # eingeben
+
