@@ -83,7 +83,9 @@ class rex_yfeed_stream_twitter_hashtag extends rex_yfeed_stream_abstract
             $response->setLanguage($item->lang);
             $response->setRaw($item);
 
-            if ($response->exists()) {
+            if ($response->changedByUser()) {
+                $this->countNotUpdatedChangedByUser++;
+            } elseif ($response->exists()) {
                 $this->countUpdated++;
             } else {
                 $this->countAdded++;

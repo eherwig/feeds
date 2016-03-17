@@ -67,7 +67,9 @@ class rex_yfeed_stream_rss extends rex_yfeed_stream_abstract
             }
             $response->setRaw($item);
 
-            if ($response->exists()) {
+            if ($response->changedByUser()) {
+                $this->countNotUpdatedChangedByUser++;
+            } elseif ($response->exists()) {
                 $this->countUpdated++;
             } else {
                 $this->countAdded++;

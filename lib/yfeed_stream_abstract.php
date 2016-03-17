@@ -20,7 +20,8 @@ abstract class rex_yfeed_stream_abstract
         $etag,
         $lastModified,
         $countAdded = 0,
-        $countUpdated = 0;
+        $countUpdated = 0,
+        $countNotUpdatedChangedByUser = 0;
 
     public function setTypeParams(array $params)
     {
@@ -50,6 +51,11 @@ abstract class rex_yfeed_stream_abstract
     public function getUpdateCount()
     {
         return $this->countUpdated;
+    }
+
+    public function getChangedByUserCount()
+    {
+        return $this->countNotUpdatedChangedByUser;
     }
 
 

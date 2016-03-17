@@ -29,6 +29,7 @@ class rex_yfeed_response
 
         $primaryId,
         $debug = false,
+        $changedByUser,
         $exists;
 
 
@@ -38,12 +39,29 @@ class rex_yfeed_response
         $this->streamId = (int)$streamId;
         $this->uid = $uid;
         $this->exists = false;
+        $this->changedByUser = false;
 
         $sql = rex_sql::factory();
-        $sql->setQuery('SELECT `id` FROM ' . self::table() . ' WHERE `stream_id` = :stream_id AND `uid` = :uid LIMIT 1', ['stream_id' => $this->streamId, 'uid' => $this->uid]);
+        $sql->setQuery('
+            SELECT      `id`,
+                        `changed_by_user`
+            FROM        ' . self::table() . '
+            WHERE       `stream_id` = :stream_id
+                AND     `uid` = :uid
+            LIMIT       1',
+            [
+                'stream_id' => $this->streamId,
+                'uid' => $this->uid
+            ]
+        );
+
         if ($sql->getRows()) {
-            $this->primaryId = $sql->getValue('id');
-            $this->exists = true;
+            if ($sql->getValue('changed_by_user') == '1') {
+                $this->changedByUser = true;
+            } else {
+                $this->primaryId = $sql->getValue('id');
+                $this->exists = true;
+            }
         }
     }
 
@@ -103,13 +121,21 @@ class rex_yfeed_response
         return $this->exists;
     }
 
+
+    public function changedByUser()
+    {
+        return $this->changedByUser;
+    }
+
     public function save()
     {
+        if ($this->changedByUser) {
+            return;
+        }
+
         $sql = rex_sql::factory();
         $sql->setDebug($this->debug);
         $sql->setTable(self::table());
-
-        $sql->setValue('uid', $this->uid);
 
         if ($this->title) {
             $sql->setValue('title', $this->title);
@@ -143,10 +169,13 @@ class rex_yfeed_response
             $where = '`id` = :id AND `uid` = :uid';
             $params = ['id' => $this->primaryId, 'uid' => $this->uid];
             $sql->setWhere($where, $params);
+            $sql->addGlobalUpdateFields();
             $sql->update();
         } else {
             $sql->setValue('uid', $this->uid);
             $sql->setValue('stream_id', $this->streamId);
+            $sql->addGlobalCreateFields();
+            $sql->addGlobalUpdateFields();
             $sql->insert();
         }
     }

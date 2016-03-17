@@ -16,7 +16,7 @@ $id = rex_request('id', 'integer');
 if ('fetch' === $func) {
     $stream = rex_yfeed_stream::get($id);
     $stream->fetch();
-    echo rex_view::success($this->i18n('yfeed_fetched', $stream->getAddedCount(), $stream->getUpdateCount()));
+    echo rex_view::success($this->i18n('yfeed_stream_fetched', $stream->getAddedCount(), $stream->getUpdateCount(), $stream->getChangedByUserCount()));
     $func = '';
 }
 
@@ -51,9 +51,9 @@ if ('' == $func) {
 
     $list->removeColumn('id');
 
-    $list->setColumnLabel('namespace', $this->i18n('yfeed_namespace'));
-    $list->setColumnLabel('type', $this->i18n('yfeed_type'));
-    $list->setColumnLabel('title', $this->i18n('yfeed_title'));
+    $list->setColumnLabel('namespace', $this->i18n('yfeed_stream_namespace'));
+    $list->setColumnLabel('type', $this->i18n('yfeed_stream_type'));
+    $list->setColumnLabel('title', $this->i18n('yfeed_stream_title'));
 
     $list->addColumn($this->i18n('function'), $this->i18n('edit'));
     $list->setColumnLayout($this->i18n('function'), ['<th class="rex-table-action" colspan="3">###VALUE###</th>', '<td class="rex-table-action">###VALUE###</td>']);
@@ -61,9 +61,9 @@ if ('' == $func) {
 
     $list->addColumn('delete', $this->i18n('yfeed_delete'), -1, ['', '<td class="rex-table-action">###VALUE###</td>']);
     $list->setColumnParams('delete', ['func' => 'delete', 'id' => '###id###']);
-    $list->addLinkAttribute('delete', 'onclick', "return confirm('" . $this->i18n('yfeed_delete_question') . "');");
+    $list->addLinkAttribute('delete', 'onclick', "return confirm('" . $this->i18n('yfeed_stream_delete_question') . "');");
 
-    $list->addColumn('fetch', $this->i18n('yfeed_fetch'), -1, ['', '<td class="rex-table-action">###VALUE###</td>']);
+    $list->addColumn('fetch', $this->i18n('yfeed_stream_fetch'), -1, ['', '<td class="rex-table-action">###VALUE###</td>']);
     $list->setColumnParams('fetch', ['func' => 'fetch', 'id' => '###id###']);
 
     $content = $list->get();
@@ -91,26 +91,24 @@ if ('' == $func) {
     $form->addFieldset($this->i18n('yfeed_stream_general'));
 
     $field = $form->addTextField('namespace');
-    $field->setLabel($this->i18n('yfeed_namespace'));
-    $field->setNotice($this->i18n('yfeed_namespace_notice'));
-    $field->getValidator()->add('notEmpty', $this->i18n('yfeed_namespace_error'));
-    $field->getValidator()->add('match', $this->i18n('yfeed_namespace_error'), '/^[a-z0-9_]*$/');
+    $field->setLabel($this->i18n('yfeed_stream_namespace'));
+    $field->setNotice($this->i18n('yfeed_stream_namespace_notice'));
+    $field->getValidator()->add('notEmpty', $this->i18n('yfeed_stream_namespace_error'));
+    $field->getValidator()->add('match', $this->i18n('yfeed_stream_namespace_error'), '/^[a-z0-9_]*$/');
 
     $field = $form->addTextField('title');
-    $field->setLabel($this->i18n('yfeed_title'));
+    $field->setLabel($this->i18n('yfeed_stream_title'));
 
     $field = $form->addMediaField('image');
-    $field->setLabel($this->i18n('yfeed_image'));
+    $field->setLabel($this->i18n('yfeed_stream_image'));
     $field->setTypes('jpg,jpeg,gif,png');
 
     $form->addFieldset($this->i18n('yfeed_stream_select_type'));
 
     $field = $form->addSelectField('type');
-    $field->getValidator()->add('notEmpty', $this->i18n('type_error'));
     $field->setPrefix('<div class="rex-select-style">');
     $field->setSuffix('</div>');
-    $field->setLabel($this->i18n('type'));
-    //$field->setAttribute('onchange', 'yfeed_stream_type(this);');
+    $field->setLabel($this->i18n('stream_type'));
     $fieldSelect = $field->getSelect();
 
     $script = '
