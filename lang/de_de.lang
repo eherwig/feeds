@@ -54,8 +54,8 @@ yfeed_rss_url = Url
 yfeed_twitter = Twitter
 yfeed_twitter_entries = Einträge
 yfeed_twitter_settings = Einstellungen
-yfeed_twitter_consumer_key = Twitter API key (Customer Key)
-yfeed_twitter_consumer_secret = Twitter API secret (Customer Secret)
+yfeed_twitter_consumer_key = Twitter API key (Consumer Key)
+yfeed_twitter_consumer_secret = Twitter API secret (Consumer Secret)
 yfeed_twitter_oauth_token = Twitter Access token
 yfeed_twitter_oauth_token_secret = Twitter Access token secret
 
