@@ -43,26 +43,31 @@ yfeed_stream_url = URL
 yfeed_cronjob = YFeed: Feeds abrufen
 
 
+yfeed_facebook = Facebook
+yfeed_facebook_app_id = App Id
+yfeed_facebook_app_secret = App Secret
+yfeed_facebook_app_title = Titel der App
+yfeed_facebook_app_title_note = optional
+yfeed_facebook_settings = Facebook App
+
 yfeed_rss = RSS
 yfeed_rss_feed = RSS Feed
 yfeed_rss_url = Url
 
 yfeed_twitter = Twitter
-yfeed_twitter_entries = Einträge
-yfeed_twitter_settings = Einstellungen
 yfeed_twitter_consumer_key = Twitter API key (Consumer Key)
 yfeed_twitter_consumer_secret = Twitter API secret (Consumer Secret)
+yfeed_twitter_count = Anzahl der Tweets
+yfeed_twitter_entries = Einträge
+yfeed_twitter_exclude_replies = Antworten ausschließen
 yfeed_twitter_oauth_token = Twitter Access token
 yfeed_twitter_oauth_token_secret = Twitter Access token secret
-
-
-yfeed_twitter_screen_name = Benutzername
-yfeed_twitter_count = Anzahl der Tweets
-yfeed_twitter_exclude_replies = Antworten ausschließen
 yfeed_twitter_result_type = Ergebnis
 yfeed_twitter_result_type_mixed = Hole die neuesten und beliebtesten Tweets
 yfeed_twitter_result_type_recent = Hole nur die neuesten Tweets
 yfeed_twitter_result_type_popular = Hole nur die beliebtesten Tweets
+yfeed_twitter_screen_name = Benutzername
+yfeed_twitter_settings = Einstellungen
 
 yfeed_twitter_user_timeline = Twitter :: Tweets vom Benutzer
 
