@@ -47,106 +47,6 @@
         ]
     },
     {
-        "name": "fguillot/picofeed",
-        "version": "v0.1.19",
-        "version_normalized": "0.1.19.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/fguillot/picoFeed.git",
-            "reference": "c270ef4474a2460d857f99c84612025c5f9975f2"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/fguillot/picoFeed/zipball/c270ef4474a2460d857f99c84612025c5f9975f2",
-            "reference": "c270ef4474a2460d857f99c84612025c5f9975f2",
-            "shasum": ""
-        },
-        "require": {
-            "ext-dom": "*",
-            "ext-iconv": "*",
-            "ext-libxml": "*",
-            "ext-simplexml": "*",
-            "ext-xml": "*",
-            "php": ">=5.3.0",
-            "zendframework/zendxml": "^1.0"
-        },
-        "suggest": {
-            "ext-curl": "PicoFeed will use cURL if present"
-        },
-        "time": "2016-02-11 19:52:02",
-        "bin": [
-            "picofeed"
-        ],
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "PicoFeed": "lib/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Frédéric Guillot"
-            }
-        ],
-        "description": "Modern library to handle RSS/Atom feeds",
-        "homepage": "https://github.com/fguillot/picoFeed"
-    },
-    {
-        "name": "ricardoper/twitteroauth",
-        "version": "v2.1.4",
-        "version_normalized": "2.1.4.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/ricardoper/TwitterOAuth.git",
-            "reference": "026a5cbad0e53fbce1379e3baa6322c484f73ae8"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/ricardoper/TwitterOAuth/zipball/026a5cbad0e53fbce1379e3baa6322c484f73ae8",
-            "reference": "026a5cbad0e53fbce1379e3baa6322c484f73ae8",
-            "shasum": ""
-        },
-        "require": {
-            "ext-curl": "*",
-            "ext-json": "*",
-            "lib-curl": "*",
-            "lib-openssl": "*",
-            "php": ">=5.3"
-        },
-        "time": "2016-03-04 12:38:50",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "TwitterOAuth\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Ricardo Pereira",
-                "email": "github@ricardopereira.es",
-                "homepage": "http://ricardopereira.es"
-            }
-        ],
-        "description": "PHP library to communicate with Twitter OAuth API version 1.1",
-        "homepage": "https://github.com/ricardoper",
-        "keywords": [
-            "API v1.1",
-            "oauth",
-            "php",
-            "twitter"
-        ]
-    },
-    {
         "name": "facebook/php-sdk-v4",
         "version": "5.1.2",
         "version_normalized": "5.1.2.0",
@@ -204,41 +104,34 @@
         ]
     },
     {
-        "name": "symfony/http-foundation",
-        "version": "v3.0.3",
-        "version_normalized": "3.0.3.0",
+        "name": "ricardoper/twitteroauth",
+        "version": "v2.1.5",
+        "version_normalized": "2.1.5.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/symfony/http-foundation.git",
-            "reference": "52065702c71743c05d415a8facfcad6d4257e8d7"
+            "url": "https://github.com/ricardoper/TwitterOAuth.git",
+            "reference": "98cc0cbc58dc662c06a951456967ae0602fd3af4"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/http-foundation/zipball/52065702c71743c05d415a8facfcad6d4257e8d7",
-            "reference": "52065702c71743c05d415a8facfcad6d4257e8d7",
+            "url": "https://api.github.com/repos/ricardoper/TwitterOAuth/zipball/98cc0cbc58dc662c06a951456967ae0602fd3af4",
+            "reference": "98cc0cbc58dc662c06a951456967ae0602fd3af4",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.5.9"
+            "ext-curl": "*",
+            "ext-json": "*",
+            "lib-curl": "*",
+            "lib-openssl": "*",
+            "php": ">=5.3"
         },
-        "require-dev": {
-            "symfony/expression-language": "~2.8|~3.0"
-        },
-        "time": "2016-02-28 16:24:34",
+        "time": "2016-03-30 12:11:38",
         "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "3.0-dev"
-            }
-        },
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "Symfony\\Component\\HttpFoundation\\": ""
-            },
-            "exclude-from-classmap": [
-                "/Tests/"
-            ]
+                "TwitterOAuth\\": "src/"
+            }
         },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
@@ -246,47 +139,56 @@
         ],
         "authors": [
             {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
-            },
-            {
-                "name": "Symfony Community",
-                "homepage": "https://symfony.com/contributors"
+                "name": "Ricardo Pereira",
+                "email": "github@ricardopereira.es",
+                "homepage": "http://ricardopereira.es"
             }
         ],
-        "description": "Symfony HttpFoundation Component",
-        "homepage": "https://symfony.com"
+        "description": "PHP library to communicate with Twitter OAuth API version 1.1",
+        "homepage": "https://github.com/ricardoper",
+        "keywords": [
+            "API v1.1",
+            "oauth",
+            "php",
+            "twitter"
+        ]
     },
     {
-        "name": "data-uri/data-uri",
-        "version": "0.2.2",
-        "version_normalized": "0.2.2.0",
+        "name": "fguillot/picofeed",
+        "version": "v0.1.19",
+        "version_normalized": "0.1.19.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/alchemy-fr/PHP-dataURI.git",
-            "reference": "2bdebb65e002bc936bb1d670b20ebf8c7fd8e12f"
+            "url": "https://github.com/fguillot/picoFeed.git",
+            "reference": "c270ef4474a2460d857f99c84612025c5f9975f2"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/alchemy-fr/PHP-dataURI/zipball/2bdebb65e002bc936bb1d670b20ebf8c7fd8e12f",
-            "reference": "2bdebb65e002bc936bb1d670b20ebf8c7fd8e12f",
+            "url": "https://api.github.com/repos/fguillot/picoFeed/zipball/c270ef4474a2460d857f99c84612025c5f9975f2",
+            "reference": "c270ef4474a2460d857f99c84612025c5f9975f2",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.3.2",
-            "symfony/http-foundation": "~2.0|~3.0"
+            "ext-dom": "*",
+            "ext-iconv": "*",
+            "ext-libxml": "*",
+            "ext-simplexml": "*",
+            "ext-xml": "*",
+            "php": ">=5.3.0",
+            "zendframework/zendxml": "^1.0"
         },
-        "require-dev": {
-            "ext-curl": "*",
-            "phpunit/phpunit": "^4.0|^5.0",
-            "sami/sami": "dev-master"
+        "suggest": {
+            "ext-curl": "PicoFeed will use cURL if present"
         },
-        "time": "2015-12-10 14:04:57",
+        "time": "2016-02-11 19:52:02",
+        "bin": [
+            "picofeed"
+        ],
         "type": "library",
         "installation-source": "dist",
         "autoload": {
             "psr-0": {
-                "DataURI": "src"
+                "PicoFeed": "lib/"
             }
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -295,20 +197,10 @@
         ],
         "authors": [
             {
-                "name": "nlegoff",
-                "email": "legoff.n@gmail.com"
-            },
-            {
-                "name": "Alchemy",
-                "email": "info@alchemy.fr",
-                "homepage": "http://www.alchemy.fr"
+                "name": "Frédéric Guillot"
             }
         ],
-        "description": "PHP DataURI component",
-        "keywords": [
-            "data",
-            "data-uri",
-            "uri"
-        ]
+        "description": "Modern library to handle RSS/Atom feeds",
+        "homepage": "https://github.com/fguillot/picoFeed"
     }
 ]

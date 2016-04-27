@@ -104,10 +104,9 @@ class rex_yfeed_item
         $this->language = $value;
     }
 
-    public function setMedia($path)
+    public function setMedia($url)
     {
-        $dataObject = DataURI\Data::buildFromUrl($path);
-        $this->media = DataURI\Dumper::dump($dataObject);
+        $this->media = rex_yfeed_helper::getDataUri($url);
     }
 
     public function setRaw($value)

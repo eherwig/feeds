@@ -4,61 +4,9 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c6d8eecf43b09d1fc556695ec33e32ec",
-    "content-hash": "c3e9ca7c9278588a890b20f4e2488744",
+    "hash": "0898d9ece1122b0980baf4617a4d394b",
+    "content-hash": "8e00e76950a9e98d559017a59154ed12",
     "packages": [
-        {
-            "name": "data-uri/data-uri",
-            "version": "0.2.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/alchemy-fr/PHP-dataURI.git",
-                "reference": "2bdebb65e002bc936bb1d670b20ebf8c7fd8e12f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/alchemy-fr/PHP-dataURI/zipball/2bdebb65e002bc936bb1d670b20ebf8c7fd8e12f",
-                "reference": "2bdebb65e002bc936bb1d670b20ebf8c7fd8e12f",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.2",
-                "symfony/http-foundation": "~2.0|~3.0"
-            },
-            "require-dev": {
-                "ext-curl": "*",
-                "phpunit/phpunit": "^4.0|^5.0",
-                "sami/sami": "dev-master"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "DataURI": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "nlegoff",
-                    "email": "legoff.n@gmail.com"
-                },
-                {
-                    "name": "Alchemy",
-                    "email": "info@alchemy.fr",
-                    "homepage": "http://www.alchemy.fr"
-                }
-            ],
-            "description": "PHP DataURI component",
-            "keywords": [
-                "data",
-                "data-uri",
-                "uri"
-            ],
-            "time": "2015-12-10 14:04:57"
-        },
         {
             "name": "facebook/php-sdk-v4",
             "version": "5.1.2",
@@ -164,16 +112,16 @@
         },
         {
             "name": "ricardoper/twitteroauth",
-            "version": "v2.1.4",
+            "version": "v2.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ricardoper/TwitterOAuth.git",
-                "reference": "026a5cbad0e53fbce1379e3baa6322c484f73ae8"
+                "reference": "98cc0cbc58dc662c06a951456967ae0602fd3af4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ricardoper/TwitterOAuth/zipball/026a5cbad0e53fbce1379e3baa6322c484f73ae8",
-                "reference": "026a5cbad0e53fbce1379e3baa6322c484f73ae8",
+                "url": "https://api.github.com/repos/ricardoper/TwitterOAuth/zipball/98cc0cbc58dc662c06a951456967ae0602fd3af4",
+                "reference": "98cc0cbc58dc662c06a951456967ae0602fd3af4",
                 "shasum": ""
             },
             "require": {
@@ -208,59 +156,7 @@
                 "php",
                 "twitter"
             ],
-            "time": "2016-03-04 12:38:50"
-        },
-        {
-            "name": "symfony/http-foundation",
-            "version": "v3.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/http-foundation.git",
-                "reference": "52065702c71743c05d415a8facfcad6d4257e8d7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/52065702c71743c05d415a8facfcad6d4257e8d7",
-                "reference": "52065702c71743c05d415a8facfcad6d4257e8d7",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5.9"
-            },
-            "require-dev": {
-                "symfony/expression-language": "~2.8|~3.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\HttpFoundation\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony HttpFoundation Component",
-            "homepage": "https://symfony.com",
-            "time": "2016-02-28 16:24:34"
+            "time": "2016-03-30 12:11:38"
         },
         {
             "name": "zendframework/zendxml",

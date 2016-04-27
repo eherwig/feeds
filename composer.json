@@ -1,8 +1,7 @@
 {
     "require": {
-        "fguillot/picofeed": "~0.1",
+        "fguillot/picofeed": "0.1.19",
         "ricardoper/TwitterOAuth": "~2.1.4",
-        "facebook/php-sdk-v4": "~5.1.2",
-        "data-uri/data-uri": "~0.2.2"
+        "facebook/php-sdk-v4": "~5.1.2"
     }
 }
