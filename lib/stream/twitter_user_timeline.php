@@ -43,17 +43,16 @@ class rex_yfeed_stream_twitter_user_timeline extends rex_yfeed_stream_abstract
                 'default' => 1,
             ],
         ];
-
     }
 
     public function fetch()
     {
-        $credentials = array(
+        $credentials = [
             'consumer_key' => rex_config::get('yfeed', 'twitter_consumer_key'),
             'consumer_secret' => rex_config::get('yfeed', 'twitter_consumer_secret'),
             'oauth_token' => rex_config::get('yfeed', 'twitter_oauth_token'),
             'oauth_token_secret' => rex_config::get('yfeed', 'twitter_oauth_token_secret'),
-        );
+        ];
         $auth = new ApplicationOnlyAuth($credentials, new ObjectSerializer());
         $items = $auth->get('statuses/user_timeline', $this->typeParams);
         /*
@@ -63,7 +62,6 @@ class rex_yfeed_stream_twitter_user_timeline extends rex_yfeed_stream_abstract
         exit();
         */
         foreach ($items as $twitterItem) {
-
             $item = new rex_yfeed_item($this->streamId, $twitterItem->id);
             $item->setContentRaw($twitterItem->text);
             $item->setContent(strip_tags($twitterItem->text));
@@ -79,11 +77,11 @@ class rex_yfeed_stream_twitter_user_timeline extends rex_yfeed_stream_abstract
             $item->setRaw($twitterItem);
 
             if ($item->changedByUser()) {
-                $this->countNotUpdatedChangedByUser++;
+                ++$this->countNotUpdatedChangedByUser;
             } elseif ($item->exists()) {
-                $this->countUpdated++;
+                ++$this->countUpdated;
             } else {
-                $this->countAdded++;
+                ++$this->countAdded;
             }
 
             $item->save();

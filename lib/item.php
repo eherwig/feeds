@@ -10,33 +10,29 @@
  * file that was distributed with this source code.
  */
 
-
-
 class rex_yfeed_item
 {
-    private
-        $streamId,
-        $uid,
-        $title,
-        $content,
-        $contentRaw,
-        $url,
-        $date,
-        $author,
-        $language,
-        $media,
-        $raw,
+    private $streamId;
+    private $uid;
+    private $title;
+    private $content;
+    private $contentRaw;
+    private $url;
+    private $date;
+    private $author;
+    private $language;
+    private $media;
+    private $raw;
 
-        $primaryId,
-        $debug = false,
-        $changedByUser,
-        $exists;
-
+    private $primaryId;
+    private $debug = false;
+    private $changedByUser;
+    private $exists;
 
     public function __construct($streamId, $uid)
     {
         $this->primaryId = 0;
-        $this->streamId = (int)$streamId;
+        $this->streamId = (int) $streamId;
         $this->uid = $uid;
         $this->exists = false;
         $this->changedByUser = false;
@@ -51,7 +47,7 @@ class rex_yfeed_item
             LIMIT       1',
             [
                 'stream_id' => $this->streamId,
-                'uid' => $this->uid
+                'uid' => $this->uid,
             ]
         );
 
@@ -70,11 +66,11 @@ class rex_yfeed_item
         return rex::getTable('yfeed_item');
     }
 
-
     public function setTitle($value)
     {
         $this->title = $value;
     }
+
     public function setContentRaw($value)
     {
         $this->contentRaw = $value;
@@ -89,6 +85,7 @@ class rex_yfeed_item
     {
         $this->url = $value;
     }
+
     public function setDate($value)
     {
         if (!rex_yfeed_helper::isValidTimeStamp($value)) {
@@ -96,14 +93,17 @@ class rex_yfeed_item
         }
         $this->date = $value;
     }
+
     public function setAuthor($value)
     {
         $this->author = $value;
     }
+
     public function setLanguage($value)
     {
         $this->language = $value;
     }
+
     public function setMedia($path)
     {
         $dataObject = DataURI\Data::buildFromUrl($path);
@@ -112,15 +112,13 @@ class rex_yfeed_item
 
     public function setRaw($value)
     {
-        $this->raw = json_encode( (array)$value );
+        $this->raw = json_encode((array) $value);
     }
-
 
     public function exists()
     {
         return $this->exists;
     }
-
 
     public function changedByUser()
     {
@@ -179,5 +177,4 @@ class rex_yfeed_item
             $sql->insert();
         }
     }
-
 }

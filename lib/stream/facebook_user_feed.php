@@ -10,7 +10,6 @@
  * file that was distributed with this source code.
  */
 
-
 class rex_yfeed_stream_facebook_user_feed extends rex_yfeed_stream_abstract
 {
     public function getTypeName()
@@ -27,16 +26,15 @@ class rex_yfeed_stream_facebook_user_feed extends rex_yfeed_stream_abstract
                 'type' => 'string',
             ],
         ];
-
     }
 
     public function fetch()
     {
-        $credentials = array(
+        $credentials = [
             'app_id' => rex_config::get('yfeed', 'facebook_app_id'),
             'app_secret' => rex_config::get('yfeed', 'facebook_app_secret'),
             'default_graph_version' => 'v2.5',
-        );
+        ];
         $auth = new Facebook\Facebook($credentials);
         $auth->setDefaultAccessToken('user-access-token');
         //$helper = $auth->getPageTabHelper();
@@ -45,11 +43,11 @@ class rex_yfeed_stream_facebook_user_feed extends rex_yfeed_stream_abstract
         try {
             //$item = $auth->get('/me', $token);
             $response = $auth->request('GET', '/me/feed');
-        } catch(Facebook\Exceptions\FacebookResponseException $e) {
+        } catch (Facebook\Exceptions\FacebookResponseException $e) {
             // When Graph returns an error
             echo rex_view::error('Graph returned an error: ' . $e->getMessage());
             exit;
-        } catch(Facebook\Exceptions\FacebookSDKException $e) {
+        } catch (Facebook\Exceptions\FacebookSDKException $e) {
             // When validation fails or other local issues
             echo rex_view::error('Facebook SDK returned an error: ' . $e->getMessage());
             exit;
@@ -60,10 +58,11 @@ class rex_yfeed_stream_facebook_user_feed extends rex_yfeed_stream_abstract
         echo '<pre>'; print_r($this->fields); echo '</pre><hr />';
         echo '<pre>'; print_r($auth->getHeaders()); echo '</pre>';
         */
-        echo '<pre>'; print_r($item); echo '</pre><hr />';
+        echo '<pre>';
+        print_r($item);
+        echo '</pre><hr />';
         exit();
         foreach ($items as $facebookItem) {
-
             $item = new rex_yfeed_item($this->streamId, $facebookItem->id);
             $item->setContentRaw($facebookItem->text);
             $item->setContent(strip_tags($facebookItem->text));
@@ -79,11 +78,11 @@ class rex_yfeed_stream_facebook_user_feed extends rex_yfeed_stream_abstract
             $item->setRaw($facebookItem);
 
             if ($item->changedByUser()) {
-                $this->countNotUpdatedChangedByUser++;
+                ++$this->countNotUpdatedChangedByUser;
             } elseif ($item->exists()) {
-                $this->countUpdated++;
+                ++$this->countUpdated;
             } else {
-                $this->countAdded++;
+                ++$this->countAdded;
             }
 
             $item->save();

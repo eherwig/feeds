@@ -10,9 +10,7 @@
  * file that was distributed with this source code.
  */
 use PicoFeed\Parser\Item;
-use PicoFeed\PicoFeedException;
 use PicoFeed\Reader\Reader;
-
 
 class rex_yfeed_stream_rss extends rex_yfeed_stream_abstract
 {
@@ -30,7 +28,6 @@ class rex_yfeed_stream_rss extends rex_yfeed_stream_abstract
                 'type' => 'string',
             ],
         ];
-
     }
 
     public function fetch()
@@ -48,9 +45,8 @@ class rex_yfeed_stream_rss extends rex_yfeed_stream_abstract
         $parser->disableContentFiltering();
         $feed = $parser->execute();
 
-        /** @type Item $rssItem */
+        /** @var Item $rssItem */
         foreach ($feed->getItems() as $rssItem) {
-
             $item = new rex_yfeed_item($this->streamId, $rssItem->getId());
             $item->setTitle($rssItem->getTitle());
             $item->setContentRaw($rssItem->getContent());
@@ -68,11 +64,11 @@ class rex_yfeed_stream_rss extends rex_yfeed_stream_abstract
             $item->setRaw($rssItem);
 
             if ($item->changedByUser()) {
-                $this->countNotUpdatedChangedByUser++;
+                ++$this->countNotUpdatedChangedByUser;
             } elseif ($item->exists()) {
-                $this->countUpdated++;
+                ++$this->countUpdated;
             } else {
-                $this->countAdded++;
+                ++$this->countAdded;
             }
 
             $item->save();

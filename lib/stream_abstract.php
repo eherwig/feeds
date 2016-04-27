@@ -12,16 +12,13 @@
 
 abstract class rex_yfeed_stream_abstract
 {
-    protected
-        // Type parameter
-        $typeParams = [],
-
-        $streamId,
-        $etag,
-        $lastModified,
-        $countAdded = 0,
-        $countUpdated = 0,
-        $countNotUpdatedChangedByUser = 0;
+    protected $typeParams = [];
+    protected $streamId;
+    protected $etag;
+    protected $lastModified;
+    protected $countAdded = 0;
+    protected $countUpdated = 0;
+    protected $countNotUpdatedChangedByUser = 0;
 
     public function setTypeParams(array $params)
     {
@@ -57,7 +54,6 @@ abstract class rex_yfeed_stream_abstract
     {
         return $this->countNotUpdatedChangedByUser;
     }
-
 
     abstract public function getTypeName();
 

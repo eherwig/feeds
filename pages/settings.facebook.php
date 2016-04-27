@@ -41,11 +41,9 @@ $n['label'] = '<label for="facebook-app-secret">' . $this->i18n('facebook_app_se
 $n['field'] = '<input class="form-control" type="text" id="facebook-app-secret" name="settings[facebook_app_secret]" value="' . htmlspecialchars($this->getConfig('facebook_app_secret')) . '" />';
 $formElements[] = $n;
 
-
 $fragment = new \rex_fragment();
 $fragment->setVar('elements', $formElements, false);
 $content .= $fragment->parse('core/form/form.php');
-
 
 $formElements = [];
 $n = [];
@@ -66,7 +64,6 @@ $fragment->setVar('title', $this->i18n('facebook_settings'), false);
 $fragment->setVar('body', $content, false);
 $fragment->setVar('buttons', $buttons, false);
 $section = $fragment->parse('core/page/section.php');
-
 
 echo '
     <form action="' . \rex_url::currentBackendPage() . '" method="post">

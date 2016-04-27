@@ -13,7 +13,8 @@
 class rex_yfeed_helper
 {
     /**
-     * @param  int $timestamp
+     * @param int $timestamp
+     *
      * @return bool
      */
     public static function isValidTimeStamp($timestamp)

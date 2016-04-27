@@ -9,9 +9,9 @@ class rex_cronjob_yfeed extends rex_cronjob
         $error = 0;
         foreach ($feeds as $feed) {
             if ($feed->fetch()) {
-                $success++;
+                ++$success;
             } else {
-                $error++;
+                ++$error;
             }
         }
         $this->setMessage($success . ' feeds succeeded, ' . $error . ' failed');

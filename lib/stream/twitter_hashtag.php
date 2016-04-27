@@ -43,21 +43,20 @@ class rex_yfeed_stream_twitter_hashtag extends rex_yfeed_stream_abstract
                 'options' => [
                     'mixed' => rex_i18n::msg('yfeed_twitter_result_type_mixed'),
                     'recent' => rex_i18n::msg('yfeed_twitter_result_type_recent'),
-                    'popular' => rex_i18n::msg('yfeed_twitter_result_type_popular')],
+                    'popular' => rex_i18n::msg('yfeed_twitter_result_type_popular'), ],
                 'default' => 'mixed',
             ],
         ];
-
     }
 
     public function fetch()
     {
-        $credentials = array(
+        $credentials = [
             'consumer_key' => rex_config::get('yfeed', 'twitter_consumer_key'),
             'consumer_secret' => rex_config::get('yfeed', 'twitter_consumer_secret'),
             'oauth_token' => rex_config::get('yfeed', 'twitter_oauth_token'),
             'oauth_token_secret' => rex_config::get('yfeed', 'twitter_oauth_token_secret'),
-        );
+        ];
         $auth = new ApplicationOnlyAuth($credentials, new ObjectSerializer());
         $items = $auth->get('search/tweets', $this->typeParams);
         $items = $items->statuses;
@@ -68,7 +67,6 @@ class rex_yfeed_stream_twitter_hashtag extends rex_yfeed_stream_abstract
         exit();
         */
         foreach ($items as $twitterItem) {
-
             $item = new rex_yfeed_item($this->streamId, $twitterItem->id);
             $item->setContentRaw($twitterItem->text);
             $item->setContent(strip_tags($twitterItem->text));
@@ -84,15 +82,14 @@ class rex_yfeed_stream_twitter_hashtag extends rex_yfeed_stream_abstract
             $item->setRaw($twitterItem);
 
             if ($item->changedByUser()) {
-                $this->countNotUpdatedChangedByUser++;
+                ++$this->countNotUpdatedChangedByUser;
             } elseif ($item->exists()) {
-                $this->countUpdated++;
+                ++$this->countUpdated;
             } else {
-                $this->countAdded++;
+                ++$this->countAdded;
             }
 
             $item->save();
         }
-
     }
 }

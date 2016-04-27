@@ -14,14 +14,14 @@ class rex_yfeed_stream
 {
     private static $streams = [];
 
-
     /**
      * @param int $id
+     *
      * @return rex_yfeed_stream_abstract
      */
     public static function get($id)
     {
-        $id = (int)$id;
+        $id = (int) $id;
         $sql = rex_sql::factory();
         $sql->setQuery('SELECT * FROM ' . self::table() . ' WHERE `id` = :id LIMIT 1', ['id' => $id]);
 
@@ -51,7 +51,6 @@ class rex_yfeed_stream
 
         return $stream;
     }
-
 
     public static function table()
     {

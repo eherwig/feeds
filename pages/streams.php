@@ -21,7 +21,6 @@ if ('fetch' === $func) {
 }
 
 if ('' == $func) {
-
     $query = 'SELECT `id`, `namespace`, `type`, `title` FROM ' . rex_yfeed_stream::table() . ' ORDER BY `type`, `namespace`';
     $list = rex_list::factory($query);
     $list->addTableAttribute('class', 'table-striped');
@@ -29,7 +28,7 @@ if ('' == $func) {
     $tdIcon = '<i class="rex-icon fa-twitter"></i>';
     $thIcon = '<a href="' . $list->getUrl(['func' => 'add']) . '"' . rex::getAccesskey($this->i18n('add'), 'add') . '><i class="rex-icon rex-icon-add-article"></i></a>';
     $list->addColumn($thIcon, $tdIcon, 0, ['<th class="rex-table-icon">###VALUE###</th>', '<td class="rex-table-icon">###VALUE###</td>']);
-    $list->setColumnFormat($thIcon, 'custom', function($params) use ($thIcon) {
+    $list->setColumnFormat($thIcon, 'custom', function ($params) use ($thIcon) {
         /** @var rex_list $list */
         $list = $params['list'];
         $type = explode('_', $list->getValue('type'));
@@ -59,7 +58,7 @@ if ('' == $func) {
 
     $list->addColumn($this->i18n('function'), $this->i18n('edit'));
     $list->setColumnLayout($this->i18n('function'), ['<th class="rex-table-action" colspan="3">###VALUE###</th>', '<td class="rex-table-action">###VALUE###</td>']);
-    $list->setColumnParams($this->i18n('function'), array('func' => 'edit', 'id' => '###id###'));
+    $list->setColumnParams($this->i18n('function'), ['func' => 'edit', 'id' => '###id###']);
 
     $list->addColumn('delete', $this->i18n('delete'), -1, ['', '<td class="rex-table-action">###VALUE###</td>']);
     $list->setColumnParams('delete', ['func' => 'delete', 'id' => '###id###']);
@@ -76,13 +75,10 @@ if ('' == $func) {
     $content = $fragment->parse('core/page/section.php');
 
     echo $content;
-
 } else {
-
     $streams = rex_yfeed_stream::getSupportedStreams();
 
     $title = $func == 'edit' ? $this->i18n('stream_edit') : $this->i18n('stream_add');
-
 
     $form = rex_form::factory(rex_yfeed_stream::table(), '', 'id = ' . $id, 'post', false);
     $form->addParam('id', $id);
@@ -219,7 +215,6 @@ if ('' == $func) {
         }
     }
 
-
     $content = $form->get();
 
     $fragment = new rex_fragment();
@@ -229,7 +224,4 @@ if ('' == $func) {
     $content = $fragment->parse('core/page/section.php');
 
     echo $content;
-
-
-
 }

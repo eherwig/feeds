@@ -10,8 +10,6 @@
  * file that was distributed with this source code.
  */
 
-
-
 //if (rex_addon::get('cronjob')->isAvailable()) {
 //    rex_cronjob_manager::registerType('rex_cronjob_yfeed');
 //}

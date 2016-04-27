@@ -35,7 +35,7 @@ if ('' == $func) {
 
     $list->addColumn('', '', 0, ['<th class="rex-table-icon">###VALUE###</th>', '<td class="rex-table-icon">###VALUE###</td>']);
     $list->setColumnParams('', ['func' => 'edit', 'id' => '###id###']);
-    $list->setColumnFormat('', 'custom', function($params) {
+    $list->setColumnFormat('', 'custom', function ($params) {
         /** @var rex_list $list */
         $list = $params['list'];
         $type = explode('_', $list->getValue('s.type'));
@@ -63,7 +63,7 @@ if ('' == $func) {
     $list->setColumnLabel('type', $this->i18n('stream_type'));
 
     $list->setColumnLabel('title', $this->i18n('item_title'));
-    $list->setColumnFormat('title', 'custom', function($params) {
+    $list->setColumnFormat('title', 'custom', function ($params) {
         /** @var rex_list $list */
         $list = $params['list'];
         $title = $list->getValue('title');
@@ -73,7 +73,7 @@ if ('' == $func) {
 
     $list->addColumn($this->i18n('function'), $this->i18n('edit'));
     $list->setColumnLayout($this->i18n('function'), ['<th class="rex-table-action" colspan="3">###VALUE###</th>', '<td class="rex-table-action">###VALUE###</td>']);
-    $list->setColumnParams($this->i18n('function'), array('func' => 'edit', 'id' => '###id###'));
+    $list->setColumnParams($this->i18n('function'), ['func' => 'edit', 'id' => '###id###']);
 
     $content = $list->get();
 
@@ -83,9 +83,7 @@ if ('' == $func) {
     $content = $fragment->parse('core/page/section.php');
 
     echo $content;
-
 } else {
-
     $title = $func == 'edit' ? $this->i18n('item_edit') : $this->i18n('item_add');
 
     $form = rex_form::factory(rex_yfeed_item::table(), '', 'id = ' . $id, 'post', false);
@@ -135,5 +133,4 @@ if ('' == $func) {
     $content = $fragment->parse('core/page/section.php');
 
     echo $content;
-
 }
