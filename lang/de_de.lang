@@ -39,6 +39,9 @@ yfeed_stream_select_type = Typen auswählen
 yfeed_stream_title = Titel
 yfeed_stream_type = Typ
 yfeed_stream_url = URL
+yfeed_stream_status_activated = Aktiviert
+yfeed_stream_status_deactivated = Deaktiviert
+yfeed_stream_status_saved = Der Status wurde gespeichert.
 
 
 yfeed_cronjob = YFeed: Feeds abrufen

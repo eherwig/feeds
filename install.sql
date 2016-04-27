@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS `%TABLE_PREFIX%yfeed_stream` (
     `image` varchar(255) NOT NULL,
     `etag` varchar(255) NOT NULL,
     `last_modified` varchar(255) NOT NULL,
+    `status` tinyint(1) NOT NULL,
     `createuser` varchar(255) NOT NULL,
     `updateuser` varchar(255) NOT NULL,
     `createdate` datetime NOT NULL,

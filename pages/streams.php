@@ -13,6 +13,18 @@
 $func = rex_request('func', 'string');
 $id = rex_request('id', 'integer');
 
+if ($func == 'setstatus') {
+    $status = (rex_request('oldstatus', 'int') + 1) % 2;
+    rex_sql::factory()
+        ->setTable(rex_yfeed_stream::table())
+        ->setWhere('id = :id', ['id' => $id])
+        ->setValue('status', $status)
+        ->addGlobalUpdateFields()
+        ->update();
+    echo rex_view::success($this->i18n('stream_status_saved'));
+    $func = '';
+}
+
 if ('fetch' === $func) {
     $stream = rex_yfeed_stream::get($id);
     $stream->fetch();
@@ -30,7 +42,7 @@ if ('delete' === $func) {
 }
 
 if ('' == $func) {
-    $query = 'SELECT `id`, `namespace`, `type`, `title` FROM ' . rex_yfeed_stream::table() . ' ORDER BY `type`, `namespace`';
+    $query = 'SELECT `id`, `namespace`, `type`, `title`, `status` FROM ' . rex_yfeed_stream::table() . ' ORDER BY `type`, `namespace`';
     $list = rex_list::factory($query);
     $list->addTableAttribute('class', 'table-striped');
 
@@ -64,6 +76,20 @@ if ('' == $func) {
     $list->setColumnLabel('namespace', $this->i18n('stream_namespace'));
     $list->setColumnLabel('type', $this->i18n('stream_type'));
     $list->setColumnLabel('title', $this->i18n('stream_title'));
+
+    $list->setColumnLabel('status', $this->i18n('status'));
+    $list->setColumnParams('status', ['func' => 'setstatus', 'oldstatus' => '###status###', 'id' => '###id###']);
+    $list->setColumnLayout('status', ['<th class="rex-table-action">###VALUE###</th>', '<td class="rex-table-action">###VALUE###</td>']);
+    $list->setColumnFormat('status', 'custom', function ($params) {
+        /** @var rex_list $list */
+        $list = $params['list'];
+        if ($list->getValue('status') == 1) {
+            $str = $list->getColumnLink('status', '<span class="rex-online"><i class="rex-icon rex-icon-active-true"></i> ' . $this->i18n('stream_status_activated') . '</span>');
+        } else {
+            $str = $list->getColumnLink('status', '<span class="rex-offline"><i class="rex-icon rex-icon-active-false"></i> ' . $this->i18n('stream_status_deactivated') . '</span>');
+        }
+        return $str;
+    });
 
     $list->addColumn($this->i18n('function'), $this->i18n('edit'));
     $list->setColumnLayout($this->i18n('function'), ['<th class="rex-table-action" colspan="3">###VALUE###</th>', '<td class="rex-table-action">###VALUE###</td>']);
@@ -110,6 +136,16 @@ if ('' == $func) {
     $field = $form->addMediaField('image');
     $field->setLabel($this->i18n('stream_image'));
     $field->setTypes('jpg,jpeg,gif,png');
+
+    $field = $form->addSelectField('status');
+    $field->setLabel($this->i18n('status'));
+    $select = $field->getSelect();
+    $select->setSize(1);
+    $select->addOption($this->i18n('stream_status_activated'), 1);
+    $select->addOption($this->i18n('stream_status_deactivated'), 0);
+    if ($func == 'add') {
+        $select->setSelected(1);
+    }
 
     $form->addFieldset($this->i18n('stream_select_type'));
 
