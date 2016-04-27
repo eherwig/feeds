@@ -48,34 +48,34 @@ class rex_yfeed_stream_rss extends rex_yfeed_stream_abstract
         $parser->disableContentFiltering();
         $feed = $parser->execute();
 
-        /** @type Item $item */
-        foreach ($feed->getItems() as $item) {
+        /** @type Item $rssItem */
+        foreach ($feed->getItems() as $rssItem) {
 
-            $response = new rex_yfeed_response($this->streamId, $item->getId());
-            $response->setTitle($item->getTitle());
-            $response->setContentRaw($item->getContent());
+            $item = new rex_yfeed_item($this->streamId, $rssItem->getId());
+            $item->setTitle($rssItem->getTitle());
+            $item->setContentRaw($rssItem->getContent());
 
-            $parser->filterItemContent($feed, $item);
-            $response->setContent(strip_tags($item->getContent()));
+            $parser->filterItemContent($feed, $rssItem);
+            $item->setContent(strip_tags($rssItem->getContent()));
 
-            $response->setUrl($item->getUrl());
-            $response->setDate($item->getDate()->format('U'));
-            $response->setAuthor($item->getAuthor());
-            $response->setLanguage($item->getLanguage());
-            if ($item->getEnclosureUrl()) {
-                $response->setMedia($item->getEnclosureUrl());
+            $item->setUrl($rssItem->getUrl());
+            $item->setDate($rssItem->getDate()->format('U'));
+            $item->setAuthor($rssItem->getAuthor());
+            $item->setLanguage($rssItem->getLanguage());
+            if ($rssItem->getEnclosureUrl()) {
+                $item->setMedia($rssItem->getEnclosureUrl());
             }
-            $response->setRaw($item);
+            $item->setRaw($rssItem);
 
-            if ($response->changedByUser()) {
+            if ($item->changedByUser()) {
                 $this->countNotUpdatedChangedByUser++;
-            } elseif ($response->exists()) {
+            } elseif ($item->exists()) {
                 $this->countUpdated++;
             } else {
                 $this->countAdded++;
             }
 
-            $response->save();
+            $item->save();
         }
     }
 }

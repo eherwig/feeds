@@ -12,7 +12,7 @@
 
 
 
-class rex_yfeed_response
+class rex_yfeed_item
 {
     private
         $streamId,
@@ -67,7 +67,7 @@ class rex_yfeed_response
 
     public static function table()
     {
-        return rex::getTable('yfeed_response');
+        return rex::getTable('yfeed_item');
     }
 
 

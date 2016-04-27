@@ -13,20 +13,21 @@
 use TwitterOAuth\Auth\ApplicationOnlyAuth;
 use TwitterOAuth\Serializer\ObjectSerializer;
 
-class rex_yfeed_stream_twitter_user_timeline extends rex_yfeed_stream_abstract
+class rex_yfeed_stream_twitter_hashtag extends rex_yfeed_stream_abstract
 {
     public function getTypeName()
     {
-        return rex_i18n::msg('yfeed_twitter_user_timeline');
+        return rex_i18n::msg('yfeed_twitter_hashtag');
     }
 
     public function getTypeParams()
     {
         return [
             [
-                'label' => rex_i18n::msg('yfeed_twitter_screen_name'),
-                'name' => 'screen_name',
+                'label' => rex_i18n::msg('yfeed_twitter_hashtag_q'),
+                'name' => 'q',
                 'type' => 'string',
+                'notice' => rex_i18n::msg('yfeed_twitter_hashtag_with_prefix'),
             ],
             [
                 'label' => rex_i18n::msg('yfeed_twitter_count'),
@@ -36,11 +37,14 @@ class rex_yfeed_stream_twitter_user_timeline extends rex_yfeed_stream_abstract
                 'default' => 10,
             ],
             [
-                'label' => rex_i18n::msg('yfeed_twitter_exclude_replies'),
-                'name' => 'exclude_replies',
+                'label' => rex_i18n::msg('yfeed_twitter_result_type'),
+                'name' => 'result_type',
                 'type' => 'select',
-                'options' => ['1' => rex_i18n::msg('yes'), '0' => rex_i18n::msg('no')],
-                'default' => 1,
+                'options' => [
+                    'mixed' => rex_i18n::msg('yfeed_twitter_result_type_mixed'),
+                    'recent' => rex_i18n::msg('yfeed_twitter_result_type_recent'),
+                    'popular' => rex_i18n::msg('yfeed_twitter_result_type_popular')],
+                'default' => 'mixed',
             ],
         ];
 
@@ -55,38 +59,40 @@ class rex_yfeed_stream_twitter_user_timeline extends rex_yfeed_stream_abstract
             'oauth_token_secret' => rex_config::get('yfeed', 'twitter_oauth_token_secret'),
         );
         $auth = new ApplicationOnlyAuth($credentials, new ObjectSerializer());
-        $items = $auth->get('statuses/user_timeline', $this->typeParams);
+        $items = $auth->get('search/tweets', $this->typeParams);
+        $items = $items->statuses;
         /*
         echo '<pre>'; print_r($this->fields); echo '</pre><hr />';
         echo '<pre>'; print_r($auth->getHeaders()); echo '</pre>';
-        echo '<pre>'; print_r($response); echo '</pre><hr />';
+        echo '<pre>'; print_r($item); echo '</pre><hr />';
         exit();
         */
-        foreach ($items as $item) {
+        foreach ($items as $twitterItem) {
 
-            $response = new rex_yfeed_response($this->streamId, $item->id);
-            $response->setContentRaw($item->text);
-            $response->setContent(strip_tags($item->text));
+            $item = new rex_yfeed_item($this->streamId, $twitterItem->id);
+            $item->setContentRaw($twitterItem->text);
+            $item->setContent(strip_tags($twitterItem->text));
 
-            if (isset($item->entities->urls) && isset($item->entities->urls->url)) {
-                $response->setUrl($item->entities->urls->url);
+            if (isset($twitterItem->entities->urls) && isset($twitterItem->entities->urls->url)) {
+                $item->setUrl($twitterItem->entities->urls->url);
             }
-            $date = new DateTime($item->created_at);
-            $response->setDate($date->format('U'));
+            $date = new DateTime($twitterItem->created_at);
+            $item->setDate($date->format('U'));
 
-            $response->setAuthor($item->user->name);
-            $response->setLanguage($item->lang);
-            $response->setRaw($item);
+            $item->setAuthor($twitterItem->user->name);
+            $item->setLanguage($twitterItem->lang);
+            $item->setRaw($twitterItem);
 
-            if ($response->changedByUser()) {
+            if ($item->changedByUser()) {
                 $this->countNotUpdatedChangedByUser++;
-            } elseif ($response->exists()) {
+            } elseif ($item->exists()) {
                 $this->countUpdated++;
             } else {
                 $this->countAdded++;
             }
 
-            $response->save();
+            $item->save();
         }
+
     }
 }

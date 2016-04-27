@@ -43,7 +43,7 @@ class rex_yfeed_stream_facebook_user_feed extends rex_yfeed_stream_abstract
         //$token = $helper->getAccessToken();
         //echo '>>' . $token;
         try {
-            //$response = $auth->get('/me', $token);
+            //$item = $auth->get('/me', $token);
             $response = $auth->request('GET', '/me/feed');
         } catch(Facebook\Exceptions\FacebookResponseException $e) {
             // When Graph returns an error
@@ -55,38 +55,38 @@ class rex_yfeed_stream_facebook_user_feed extends rex_yfeed_stream_abstract
             exit;
         }
 
-        //$graphNode = $response->getGraphNode();
+        //$graphNode = $item->getGraphNode();
         /*
         echo '<pre>'; print_r($this->fields); echo '</pre><hr />';
         echo '<pre>'; print_r($auth->getHeaders()); echo '</pre>';
         */
-        echo '<pre>'; print_r($response); echo '</pre><hr />';
+        echo '<pre>'; print_r($item); echo '</pre><hr />';
         exit();
-        foreach ($items as $item) {
+        foreach ($items as $facebookItem) {
 
-            $response = new rex_yfeed_response($this->streamId, $item->id);
-            $response->setContentRaw($item->text);
-            $response->setContent(strip_tags($item->text));
+            $item = new rex_yfeed_item($this->streamId, $facebookItem->id);
+            $item->setContentRaw($facebookItem->text);
+            $item->setContent(strip_tags($facebookItem->text));
 
-            if (isset($item->entities->urls) && isset($item->entities->urls->url)) {
-                $response->setUrl($item->entities->urls->url);
+            if (isset($facebookItem->entities->urls) && isset($facebookItem->entities->urls->url)) {
+                $item->setUrl($facebookItem->entities->urls->url);
             }
-            $date = new DateTime($item->created_at);
-            $response->setDate($date->format('U'));
+            $date = new DateTime($facebookItem->created_at);
+            $item->setDate($date->format('U'));
 
-            $response->setAuthor($item->user->name);
-            $response->setLanguage($item->lang);
-            $response->setRaw($item);
+            $item->setAuthor($facebookItem->user->name);
+            $item->setLanguage($facebookItem->lang);
+            $item->setRaw($facebookItem);
 
-            if ($response->changedByUser()) {
+            if ($item->changedByUser()) {
                 $this->countNotUpdatedChangedByUser++;
-            } elseif ($response->exists()) {
+            } elseif ($item->exists()) {
                 $this->countUpdated++;
             } else {
                 $this->countAdded++;
             }
 
-            $response->save();
+            $item->save();
         }
     }
 }

@@ -6,18 +6,18 @@ yfeed_delete_question = Wirklich löschen?
 
 
 
-yfeed_response = Fundgrube
-yfeed_response_author = Autor
-yfeed_response_content = Inhalt
-yfeed_response_content_raw = Inhalt (unverarbeitet / ungefiltert)
-yfeed_response_date = Timestamp
-yfeed_response_edit = Eintrag bearbeiten
-yfeed_response_language = Sprache / Sprachkürzel
-yfeed_response_media = Medium
-yfeed_response_raw = Gesamte Daten als Json
-yfeed_response_title = Titel
-yfeed_response_url = Url
-yfeed_response_uid = Id
+yfeed_items = Einträge
+yfeed_item_author = Autor
+yfeed_item_content = Inhalt
+yfeed_item_content_raw = Inhalt (unverarbeitet / ungefiltert)
+yfeed_item_date = Timestamp
+yfeed_item_edit = Eintrag bearbeiten
+yfeed_item_language = Sprache / Sprachkürzel
+yfeed_item_media = Medium
+yfeed_item_raw = Gesamte Daten als Json
+yfeed_item_title = Titel
+yfeed_item_url = Url
+yfeed_item_uid = Id
 
 yfeed_settings = Einstellungen
 yfeed_settings_saved = Einstellungen wurden gespeichert.

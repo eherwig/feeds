@@ -16,7 +16,7 @@ $id = rex_request('id', 'integer');
 if ('fetch' === $func) {
     $stream = rex_yfeed_stream::get($id);
     $stream->fetch();
-    echo rex_view::success($this->i18n('yfeed_stream_fetched', $stream->getAddedCount(), $stream->getUpdateCount(), $stream->getChangedByUserCount()));
+    echo rex_view::success($this->i18n('stream_fetched', $stream->getAddedCount(), $stream->getUpdateCount(), $stream->getChangedByUserCount()));
     $func = '';
 }
 
@@ -30,7 +30,9 @@ if ('' == $func) {
     $thIcon = '<a href="' . $list->getUrl(['func' => 'add']) . '"' . rex::getAccesskey($this->i18n('add'), 'add') . '><i class="rex-icon rex-icon-add-article"></i></a>';
     $list->addColumn($thIcon, $tdIcon, 0, ['<th class="rex-table-icon">###VALUE###</th>', '<td class="rex-table-icon">###VALUE###</td>']);
     $list->setColumnFormat($thIcon, 'custom', function($params) use ($thIcon) {
-        $type = explode('_', $params['list']->getValue('type'));
+        /** @var rex_list $list */
+        $list = $params['list'];
+        $type = explode('_', $list->getValue('type'));
         $icon = 'fa-paper-plane-o';
         if (isset($type[0])) {
             switch ($type[0]) {
@@ -44,26 +46,26 @@ if ('' == $func) {
                     $icon = 'fa-facebook';
                     break;
             }
-            return $params['list']->getColumnLink($thIcon, '<i class="rex-icon ' . $icon . '"></i>');
+            return $list->getColumnLink($thIcon, '<i class="rex-icon ' . $icon . '"></i>');
         }
     });
     $list->setColumnParams($thIcon, ['func' => 'edit', 'id' => '###id###']);
 
     $list->removeColumn('id');
 
-    $list->setColumnLabel('namespace', $this->i18n('yfeed_stream_namespace'));
-    $list->setColumnLabel('type', $this->i18n('yfeed_stream_type'));
-    $list->setColumnLabel('title', $this->i18n('yfeed_stream_title'));
+    $list->setColumnLabel('namespace', $this->i18n('stream_namespace'));
+    $list->setColumnLabel('type', $this->i18n('stream_type'));
+    $list->setColumnLabel('title', $this->i18n('stream_title'));
 
     $list->addColumn($this->i18n('function'), $this->i18n('edit'));
     $list->setColumnLayout($this->i18n('function'), ['<th class="rex-table-action" colspan="3">###VALUE###</th>', '<td class="rex-table-action">###VALUE###</td>']);
     $list->setColumnParams($this->i18n('function'), array('func' => 'edit', 'id' => '###id###'));
 
-    $list->addColumn('delete', $this->i18n('yfeed_delete'), -1, ['', '<td class="rex-table-action">###VALUE###</td>']);
+    $list->addColumn('delete', $this->i18n('delete'), -1, ['', '<td class="rex-table-action">###VALUE###</td>']);
     $list->setColumnParams('delete', ['func' => 'delete', 'id' => '###id###']);
-    $list->addLinkAttribute('delete', 'onclick', "return confirm('" . $this->i18n('yfeed_stream_delete_question') . "');");
+    $list->addLinkAttribute('delete', 'onclick', "return confirm('" . $this->i18n('stream_delete_question') . "');");
 
-    $list->addColumn('fetch', $this->i18n('yfeed_stream_fetch'), -1, ['', '<td class="rex-table-action">###VALUE###</td>']);
+    $list->addColumn('fetch', $this->i18n('stream_fetch'), -1, ['', '<td class="rex-table-action">###VALUE###</td>']);
     $list->setColumnParams('fetch', ['func' => 'fetch', 'id' => '###id###']);
 
     $content = $list->get();
@@ -88,22 +90,23 @@ if ('' == $func) {
     $form->setEditMode($func == 'edit');
     $add = $func != 'edit';
 
-    $form->addFieldset($this->i18n('yfeed_stream_general'));
+    $form->addFieldset($this->i18n('stream_general'));
 
     $field = $form->addTextField('namespace');
-    $field->setLabel($this->i18n('yfeed_stream_namespace'));
-    $field->setNotice($this->i18n('yfeed_stream_namespace_notice'));
-    $field->getValidator()->add('notEmpty', $this->i18n('yfeed_stream_namespace_error'));
-    $field->getValidator()->add('match', $this->i18n('yfeed_stream_namespace_error'), '/^[a-z0-9_]*$/');
+    $field->setLabel($this->i18n('stream_namespace'));
+    $field->setNotice($this->i18n('stream_namespace_notice'));
+    $field->getValidator()
+        ->add('notEmpty', $this->i18n('stream_namespace_error'))
+        ->add('match', $this->i18n('stream_namespace_error'), '/^[a-z0-9_]*$/');
 
     $field = $form->addTextField('title');
-    $field->setLabel($this->i18n('yfeed_stream_title'));
+    $field->setLabel($this->i18n('stream_title'));
 
     $field = $form->addMediaField('image');
-    $field->setLabel($this->i18n('yfeed_stream_image'));
+    $field->setLabel($this->i18n('stream_image'));
     $field->setTypes('jpg,jpeg,gif,png');
 
-    $form->addFieldset($this->i18n('yfeed_stream_select_type'));
+    $form->addFieldset($this->i18n('stream_select_type'));
 
     $field = $form->addSelectField('type');
     $field->setPrefix('<div class="rex-select-style">');
@@ -120,7 +123,7 @@ if ('' == $func) {
         $("#' . $field->getAttribute('id') . '").change(function(){
             if(currentShown) currentShown.hide();
 
-            var streamParamsId = "#rex-rex_yfeed_stream_"+ jQuery(this).val();
+            var streamParamsId = "#rex-"+ jQuery(this).val();
             currentShown = $(streamParamsId);
             currentShown.show();
         }).change();
@@ -131,21 +134,24 @@ if ('' == $func) {
     $fieldContainer = $form->addContainerField('type_params');
     $fieldContainer->setAttribute('style', 'display: none');
     $fieldContainer->setSuffix($script);
+    $fieldContainer->setMultiple(false);
+    $fieldContainer->setActive($field->getValue());
 
-    foreach ($streams as $streamClass => $streamName) {
-        $streamInstance = new $streamClass();
+    foreach ($streams as $streamType => $streamClass) {
+        /** @var rex_yfeed_stream_abstract $stream */
+        $stream = new $streamClass();
 
-        $fieldSelect->addOption($streamInstance->getTypeName(), $streamName);
+        $fieldSelect->addOption($stream->getTypeName(), $streamType);
 
-        $streamParams = $streamInstance->getTypeParams();
-        $group = $streamClass;
+        $streamParams = $stream->getTypeParams();
+        $group = $streamType;
 
         if (empty($streamParams)) {
             continue;
         }
 
         foreach ($streamParams as $param) {
-            $name = $streamClass . '_' . $param['name'];
+            $name = $param['name'];
             $value = isset($param['default']) ? $param['default'] : null;
             $attributes = [];
             if (isset($param['attributes'])) {
@@ -172,6 +178,7 @@ if ('' == $func) {
                     break;
                 case 'select':
                     $type = $param['type'];
+                    /** @var rex_form_select_element $field */
                     $field = $fieldContainer->addGroupedField($group, $type, $name, $value, $attributes);
                     $field->setLabel($param['label']);
                     $field->setAttribute('id', "media_manager $name $type");

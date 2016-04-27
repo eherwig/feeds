@@ -15,19 +15,19 @@ $id = rex_request('id', 'integer');
 
 if ('' == $func) {
     $query = 'SELECT
-                r.id,
+                i.id,
                 s.namespace,
                 s.type,
-                (CASE WHEN (r.title IS NULL or r.title = "")
-                    THEN r.content
-                    ELSE r.title
+                (CASE WHEN (i.title IS NULL or i.title = "")
+                    THEN i.content
+                    ELSE i.title
                 END) as title,
-                r.url
+                i.url
             FROM
-                ' . rex_yfeed_response::table() . ' AS r
+                ' . rex_yfeed_item::table() . ' AS i
                 LEFT JOIN
                     ' . rex_yfeed_stream::table() . ' AS s
-                    ON  r.stream_id = s.id
+                    ON  i.stream_id = s.id
             ';
 
     $list = rex_list::factory($query);
@@ -36,7 +36,9 @@ if ('' == $func) {
     $list->addColumn('', '', 0, ['<th class="rex-table-icon">###VALUE###</th>', '<td class="rex-table-icon">###VALUE###</td>']);
     $list->setColumnParams('', ['func' => 'edit', 'id' => '###id###']);
     $list->setColumnFormat('', 'custom', function($params) {
-        $type = explode('_', $params['list']->getValue('s.type'));
+        /** @var rex_list $list */
+        $list = $params['list'];
+        $type = explode('_', $list->getValue('s.type'));
         $icon = 'fa-paper-plane-o';
         if (isset($type[0])) {
             switch ($type[0]) {
@@ -50,20 +52,22 @@ if ('' == $func) {
                     $icon = 'fa-facebook';
                     break;
             }
-            return $params['list']->getColumnLink('', '<i class="rex-icon ' . $icon . '"></i>');
+            return $list->getColumnLink('', '<i class="rex-icon ' . $icon . '"></i>');
         }
     });
 
     $list->removeColumn('id');
     $list->removeColumn('url');
 
-    $list->setColumnLabel('namespace', $this->i18n('yfeed_stream_namespace'));
-    $list->setColumnLabel('type', $this->i18n('yfeed_stream_type'));
+    $list->setColumnLabel('namespace', $this->i18n('stream_namespace'));
+    $list->setColumnLabel('type', $this->i18n('stream_type'));
 
-    $list->setColumnLabel('title', $this->i18n('yfeed_response_title'));
+    $list->setColumnLabel('title', $this->i18n('item_title'));
     $list->setColumnFormat('title', 'custom', function($params) {
-        $title = $params['list']->getValue('title');
-        $title .= ($params['list']->getValue('url') != '') ? '<br /><small><a href="' . $params['list']->getValue('url') . '" target="_blank">' . $params['list']->getValue('url') . '</a></small>' : '';
+        /** @var rex_list $list */
+        $list = $params['list'];
+        $title = $list->getValue('title');
+        $title .= ($list->getValue('url') != '') ? '<br /><small><a href="' . $list->getValue('url') . '" target="_blank">' . $list->getValue('url') . '</a></small>' : '';
         return $title;
     });
 
@@ -74,7 +78,7 @@ if ('' == $func) {
     $content = $list->get();
 
     $fragment = new rex_fragment();
-    $fragment->setVar('title', $this->i18n('response'));
+    $fragment->setVar('title', $this->i18n('items'));
     $fragment->setVar('content', $content, false);
     $content = $fragment->parse('core/page/section.php');
 
@@ -82,9 +86,9 @@ if ('' == $func) {
 
 } else {
 
-    $title = $func == 'edit' ? $this->i18n('response_edit') : $this->i18n('response_add');
+    $title = $func == 'edit' ? $this->i18n('item_edit') : $this->i18n('item_add');
 
-    $form = rex_form::factory(rex_yfeed_response::table(), '', 'id = ' . $id, 'post', false);
+    $form = rex_form::factory(rex_yfeed_item::table(), '', 'id = ' . $id, 'post', false);
     $form->addParam('id', $id);
     $form->setApplyUrl(rex_url::currentBackendPage());
     $form->setEditMode($func == 'edit');
@@ -93,34 +97,34 @@ if ('' == $func) {
     $field = $form->addHiddenField('changed_by_user', 1);
 
     $field = $form->addTextField('uid');
-    $field->setLabel($this->i18n('yfeed_response_uid'));
+    $field->setLabel($this->i18n('item_uid'));
 
     $field = $form->addTextField('title');
-    $field->setLabel($this->i18n('yfeed_response_title'));
+    $field->setLabel($this->i18n('item_title'));
 
-    $field = $form->addTextareaField('content');
-    $field->setLabel($this->i18n('yfeed_response_content'));
+    $field = $form->addTextAreaField('content');
+    $field->setLabel($this->i18n('item_content'));
 
-    $field = $form->addTextareaField('content_raw');
-    $field->setLabel($this->i18n('yfeed_response_content_raw'));
+    $field = $form->addTextAreaField('content_raw');
+    $field->setLabel($this->i18n('item_content_raw'));
 
     $field = $form->addTextField('url');
-    $field->setLabel($this->i18n('yfeed_response_url'));
+    $field->setLabel($this->i18n('item_url'));
 
     $field = $form->addReadOnlyField('date');
-    $field->setLabel($this->i18n('yfeed_response_date'));
+    $field->setLabel($this->i18n('item_date'));
 
     $field = $form->addTextField('author');
-    $field->setLabel($this->i18n('yfeed_response_author'));
+    $field->setLabel($this->i18n('item_author'));
 
     $field = $form->addTextField('language');
-    $field->setLabel($this->i18n('yfeed_response_language'));
+    $field->setLabel($this->i18n('item_language'));
 
-    $field = $form->addTextareaField('media');
-    $field->setLabel($this->i18n('yfeed_response_media'));
+    $field = $form->addTextAreaField('media');
+    $field->setLabel($this->i18n('item_media'));
 
-    $field = $form->addTextareaField('raw');
-    $field->setLabel($this->i18n('yfeed_response_raw'));
+    $field = $form->addTextAreaField('raw');
+    $field->setLabel($this->i18n('item_raw'));
 
     $content = $form->get();
 

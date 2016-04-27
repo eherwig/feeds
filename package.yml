@@ -11,8 +11,8 @@ page:
     subpages:
         streams:
             title: 'translate:streams'
-        responses:
-            title: 'translate:response'
+        items:
+            title: 'translate:items'
         settings:
             title: 'translate:settings'
             subpages:
