@@ -20,6 +20,15 @@ if ('fetch' === $func) {
     $func = '';
 }
 
+if ('delete' === $func) {
+    rex_sql::factory()
+        ->setTable(rex_yfeed_stream::table())
+        ->setWhere('id = ?', [$id])
+        ->delete();
+    echo rex_view::success($this->i18n('stream_deleted'));
+    $func = '';
+}
+
 if ('' == $func) {
     $query = 'SELECT `id`, `namespace`, `type`, `title` FROM ' . rex_yfeed_stream::table() . ' ORDER BY `type`, `namespace`';
     $list = rex_list::factory($query);
