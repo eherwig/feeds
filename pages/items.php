@@ -118,11 +118,9 @@ if ('' == $func) {
     $field = $form->addTextField('language');
     $field->setLabel($this->i18n('item_language'));
 
-    $field = $form->addTextAreaField('media');
-    $field->setLabel($this->i18n('item_media'));
-
-    $field = $form->addTextAreaField('raw');
-    $field->setLabel($this->i18n('item_raw'));
+    if ($media = $form->getSql()->getValue('media')) {
+        $form->addRawField('<p class="text-center"><img src="'.$media.'" style="max-height: 300px"/></p>');
+    }
 
     $content = $form->get();
 
