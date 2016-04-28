@@ -68,6 +68,7 @@ if ('' == $func) {
         /** @var rex_list $list */
         $list = $params['list'];
         $title = $list->getValue('title');
+        $title = rex_formatter::truncate($title, ['length' => 140]);
         $title .= ($list->getValue('url') != '') ? '<br /><small><a href="' . $list->getValue('url') . '" target="_blank">' . $list->getValue('url') . '</a></small>' : '';
         return $title;
     });
