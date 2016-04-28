@@ -240,7 +240,7 @@ if ('' == $func) {
                     if (isset($attributes['multiple'])) {
                         $select->setMultiple();
                     }
-                    $select->addOptions($param['options'], true);
+                    $select->addOptions($param['options']);
                     break;
                 case 'media':
                     $type = $param['type'];
