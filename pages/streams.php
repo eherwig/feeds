@@ -101,6 +101,7 @@ if ('' == $func) {
 
     $list->addColumn('fetch', $this->i18n('stream_fetch'), -1, ['', '<td class="rex-table-action">###VALUE###</td>']);
     $list->setColumnParams('fetch', ['func' => 'fetch', 'id' => '###id###']);
+    $list->addLinkAttribute('fetch', 'data-pjax', 'false');
 
     $content = $list->get();
 

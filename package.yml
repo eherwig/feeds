@@ -6,7 +6,7 @@ supportpage: www.redaxo.org/de/forum/
 page:
     title: 'translate:yfeed'
     perm: yfeed[]
-    pjax: false
+    pjax: true
     icon: rex-icon fa-rss
     subpages:
         streams:
