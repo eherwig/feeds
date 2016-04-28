@@ -28,6 +28,7 @@ if ('' == $func) {
                 LEFT JOIN
                     ' . rex_yfeed_stream::table() . ' AS s
                     ON  i.stream_id = s.id
+            ORDER BY i.date DESC, id DESC
             ';
 
     $list = rex_list::factory($query);
