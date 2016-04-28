@@ -163,11 +163,11 @@ if ('' == $func) {
     (function($) {
         var currentShown = null;
         $("#' . $field->getAttribute('id') . '").change(function(){
-            if(currentShown) currentShown.hide();
+            if(currentShown) currentShown.hide().find(":input").prop("disabled", true);
 
             var streamParamsId = "#rex-"+ jQuery(this).val();
             currentShown = $(streamParamsId);
-            currentShown.show();
+            currentShown.show().find(":input").prop("disabled", false);
         }).change();
     })(jQuery);
 
@@ -207,7 +207,8 @@ if ('' == $func) {
                     $type = 'text';
                     $field = $fieldContainer->addGroupedField($group, $type, $name, $value, $attributes);
                     $field->setLabel($param['label']);
-                    $field->setAttribute('id', "media_manager $name $type");
+                    $field->setAttribute('id', "yfeed $name $type");
+                    $field->setAttribute('disabled', 'true');
                     if (!empty($param['notice'])) {
                         $field->setNotice($param['notice']);
                     }
@@ -223,7 +224,8 @@ if ('' == $func) {
                     /** @var rex_form_select_element $field */
                     $field = $fieldContainer->addGroupedField($group, $type, $name, $value, $attributes);
                     $field->setLabel($param['label']);
-                    $field->setAttribute('id', "media_manager $name $type");
+                    $field->setAttribute('id', "yfeed $name $type");
+                    $field->setAttribute('disabled', 'true');
                     if (!empty($param['notice'])) {
                         $field->setNotice($param['notice']);
                     }
@@ -244,7 +246,8 @@ if ('' == $func) {
                     $type = $param['type'];
                     $field = $fieldContainer->addGroupedField($group, $type, $name, $value, $attributes);
                     $field->setLabel($param['label']);
-                    $field->setAttribute('id', "media_manager $name $type");
+                    $field->setAttribute('id', "yfeed $name $type");
+                    $field->setAttribute('disabled', 'true');
                     if (!empty($param['notice'])) {
                         $field->setNotice($param['notice']);
                     }
