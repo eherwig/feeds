@@ -10,7 +10,7 @@ yfeed_items = Einträge
 yfeed_item_author = Autor
 yfeed_item_content = Inhalt
 yfeed_item_content_raw = Inhalt (unverarbeitet / ungefiltert)
-yfeed_item_date = Timestamp
+yfeed_item_date = Datum
 yfeed_item_edit = Eintrag bearbeiten
 yfeed_item_language = Sprache / Sprachkürzel
 yfeed_item_media = Medium
@@ -78,4 +78,3 @@ yfeed_twitter_user_timeline = Twitter :: Tweets vom Benutzer
 yfeed_twitter_hashtag = Twitter :: Hashtag
 yfeed_twitter_hashtag_q = Hashtag
 yfeed_twitter_hashtag_with_prefix = Hashtag mit # eingeben
-

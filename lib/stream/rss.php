@@ -55,7 +55,7 @@ class rex_yfeed_stream_rss extends rex_yfeed_stream_abstract
             $item->setContent(strip_tags($rssItem->getContent()));
 
             $item->setUrl($rssItem->getUrl());
-            $item->setDate($rssItem->getDate()->format('U'));
+            $item->setDate($rssItem->getDate());
             $item->setAuthor($rssItem->getAuthor());
             $item->setLanguage($rssItem->getLanguage());
             if ($rssItem->getEnclosureUrl()) {

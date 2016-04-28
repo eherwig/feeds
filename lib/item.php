@@ -18,6 +18,7 @@ class rex_yfeed_item
     private $content;
     private $contentRaw;
     private $url;
+    /** @var DateTimeInterface */
     private $date;
     private $author;
     private $language;
@@ -86,11 +87,8 @@ class rex_yfeed_item
         $this->url = $value;
     }
 
-    public function setDate($value)
+    public function setDate(DateTimeInterface $value)
     {
-        if (!rex_yfeed_helper::isValidTimeStamp($value)) {
-            throw new rex_exception('Unexpected date format. The date must be a valid timestamp.');
-        }
         $this->date = $value;
     }
 
@@ -147,7 +145,7 @@ class rex_yfeed_item
             $sql->setValue('url', $this->url);
         }
         if ($this->date) {
-            $sql->setValue('date', $this->date);
+            $sql->setValue('date', $this->date->format('Y-m-d H:i:s'));
         }
         if ($this->author) {
             $sql->setValue('author', $this->author);

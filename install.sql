@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `%TABLE_PREFIX%yfeed_item` (
     `content` text NOT NULL,
     `content_raw` text NOT NULL,
     `url` varchar(255) NOT NULL,
-    `date` varchar(255) NOT NULL,
+    `date` datetime NOT NULL,
     `author` varchar(255) NOT NULL,
     `language` varchar(255) NOT NULL,
     `media` longtext NOT NULL,

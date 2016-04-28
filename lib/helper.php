@@ -13,29 +13,6 @@
 class rex_yfeed_helper
 {
     /**
-     * @param int $timestamp
-     *
-     * @return bool
-     */
-    public static function isValidTimeStamp($timestamp)
-    {
-        // if the code is run on a 32bit system, loosely check if the timestamp is a valid numeric
-        if (PHP_INT_SIZE == 4 && is_numeric($timestamp)) {
-            return true;
-        }
-        if (!is_numeric($timestamp)) {
-            return false;
-        }
-        if (intval($timestamp) != $timestamp) {
-            return false;
-        }
-        if (!($timestamp <= PHP_INT_MAX && $timestamp >= ~PHP_INT_MAX)) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
      * Generates the data uri for a remote resource
      *
      * @param string $url

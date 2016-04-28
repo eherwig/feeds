@@ -75,7 +75,7 @@ class rex_yfeed_stream_twitter_hashtag extends rex_yfeed_stream_abstract
                 $item->setUrl($twitterItem->entities->urls->url);
             }
             $date = new DateTime($twitterItem->created_at);
-            $item->setDate($date->format('U'));
+            $item->setDate($date);
 
             $item->setAuthor($twitterItem->user->name);
             $item->setLanguage($twitterItem->lang);
