@@ -10,16 +10,26 @@
  * file that was distributed with this source code.
  */
 
-abstract class rex_yfeed_stream_facebook extends rex_yfeed_stream_abstract
+class rex_yfeed_stream_facebook_feed extends rex_yfeed_stream_abstract
 {
+    public function getTypeName()
+    {
+        return rex_i18n::msg('yfeed_facebook_feed');
+    }
 
     public function getTypeParams()
     {
         return [
             [
+                'label' => rex_i18n::msg('yfeed_facebook_profile_id'),
+                'name' => 'profile_id',
+                'type' => 'string',
+            ],
+            [
                 'label' => rex_i18n::msg('yfeed_facebook_token'),
                 'name' => 'token',
                 'type' => 'string',
+                'notice' => rex_i18n::msg('yfeed_facebook_token_note')
             ],
             [
                 'label' => rex_i18n::msg('yfeed_facebook_result_type'),
@@ -47,7 +57,13 @@ abstract class rex_yfeed_stream_facebook extends rex_yfeed_stream_abstract
         $fb = $this->getFacebook();
 
         $fields = 'id,from,story,message,link,created_time,attachments';
-        $url = $this->getEndpoint().sprintf('?locale=de&fields=%s&limit=%d', $fields, $this->typeParams['count']);
+        $url = sprintf(
+            '/%s/%s?locale=de&fields=%s&limit=%d',
+            $this->typeParams['profile_id'],
+            $this->typeParams['result_type'],
+            $fields,
+            $this->typeParams['count']
+        );
         $items = $fb->get($url)->getGraphEdge();
 
         /** @var Facebook\GraphNodes\GraphNode $facebookItem */
@@ -94,12 +110,10 @@ abstract class rex_yfeed_stream_facebook extends rex_yfeed_stream_abstract
         }
     }
 
-    abstract protected function getEndpoint();
-
     /**
      * @return \Facebook\Facebook
      */
-    protected function getFacebook()
+    private function getFacebook()
     {
         static $facebook;
 
@@ -110,16 +124,20 @@ abstract class rex_yfeed_stream_facebook extends rex_yfeed_stream_abstract
                 'default_graph_version' => 'v2.6',
             ];
             $facebook = new Facebook\Facebook($credentials);
-            $this->checkAccessToken();
-            $facebook->setDefaultAccessToken($this->typeParams['token']);
+            if ($this->typeParams['token']) {
+                $this->checkAccessToken($facebook);
+                $facebook->setDefaultAccessToken($this->typeParams['token']);
+            } else {
+                $facebook->setDefaultAccessToken(rex_config::get('yfeed', 'facebook_app_id').'|'.rex_config::get('yfeed', 'facebook_app_secret'));
+            }
         }
 
         return $facebook;
     }
 
-    private function checkAccessToken()
+    private function checkAccessToken(Facebook\Facebook $facebook)
     {
-        $oauth = $this->getFacebook()->getOAuth2Client();
+        $oauth = $facebook->getOAuth2Client();
         $metaData = $oauth->debugToken($this->typeParams['token']);
 
         if ($metaData->getExpiresAt()->getTimestamp() > time() + 60 * 60 * 24 * 50) {
