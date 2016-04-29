@@ -29,7 +29,7 @@ class rex_yfeed_stream
             return null;
         }
 
-        return self::create($data);
+        return self::create($data[0]);
     }
 
     /**
