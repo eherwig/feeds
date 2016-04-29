@@ -20,3 +20,5 @@ page:
                     title: 'translate:twitter'
                 facebook:
                     title: 'translate:facebook'
+        faq:
+            title: 'translate:faq'

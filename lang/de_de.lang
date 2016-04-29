@@ -87,3 +87,5 @@ yfeed_twitter_user_timeline = Twitter :: Tweets vom Benutzer
 yfeed_twitter_hashtag = Twitter :: Hashtag
 yfeed_twitter_hashtag_q = Hashtag
 yfeed_twitter_hashtag_with_prefix = Hashtag mit # eingeben
+
+yfeed_faq = FAQ
