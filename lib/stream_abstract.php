@@ -14,6 +14,7 @@ abstract class rex_yfeed_stream_abstract
 {
     protected $typeParams = [];
     protected $streamId;
+    protected $title;
     protected $etag;
     protected $lastModified;
     protected $countAdded = 0;
@@ -28,6 +29,16 @@ abstract class rex_yfeed_stream_abstract
     public function setStreamId($value)
     {
         $this->streamId = $value;
+    }
+
+    public function setTitle($value)
+    {
+        $this->title = $value;
+    }
+
+    public function getTitle()
+    {
+        return $this->title;
     }
 
     public function setEtag($value)

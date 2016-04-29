@@ -17,19 +17,40 @@ class rex_yfeed_stream
     /**
      * @param int $id
      *
-     * @return rex_yfeed_stream_abstract
+     * @return rex_yfeed_stream_abstract|null
      */
     public static function get($id)
     {
         $id = (int) $id;
         $sql = rex_sql::factory();
-        $sql->setQuery('SELECT * FROM ' . self::table() . ' WHERE `id` = :id LIMIT 1', ['id' => $id]);
+        $data = $sql->getArray('SELECT * FROM ' . self::table() . ' WHERE `id` = :id LIMIT 1', ['id' => $id]);
 
-        if (!$sql->getRows()) {
+        if (!isset($data[0])) {
             return null;
         }
 
-        $data = $sql->getArray()[0];
+        return self::create($data);
+    }
+
+    /**
+     * @return rex_yfeed_stream_abstract[]
+     */
+    public static function getAllActivated()
+    {
+        $sql = rex_sql::factory();
+        $data = $sql->getArray('SELECT * FROM ' . self::table() . ' WHERE `status` = 1');
+
+        return array_map('rex_yfeed_stream::create', $data);
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return rex_yfeed_stream_abstract
+     * @throws rex_exception
+     */
+    public static function create(array $data)
+    {
         if (empty($data['type'])) {
             throw new rex_exception('Unexpected yfeed stream type');
         }
@@ -46,6 +67,7 @@ class rex_yfeed_stream
             $stream->setTypeParams(json_decode($data['type_params'], true));
         }
         $stream->setStreamId($data['id']);
+        $stream->setTitle($data['title']);
         $stream->setEtag($data['etag']);
         $stream->setLastModified($data['last_modified']);
 
