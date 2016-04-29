@@ -98,14 +98,7 @@ class rex_yfeed_stream_facebook_feed extends rex_yfeed_stream_abstract
 
             $item->setRaw($facebookItem);
 
-            if ($item->changedByUser()) {
-                ++$this->countNotUpdatedChangedByUser;
-            } elseif ($item->exists()) {
-                ++$this->countUpdated;
-            } else {
-                ++$this->countAdded;
-            }
-
+            $this->updateCount($item);
             $item->save();
         }
     }

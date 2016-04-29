@@ -80,15 +80,8 @@ class rex_yfeed_stream_twitter_hashtag extends rex_yfeed_stream_abstract
             $item->setAuthor($twitterItem->user->name);
             $item->setLanguage($twitterItem->lang);
             $item->setRaw($twitterItem);
-
-            if ($item->changedByUser()) {
-                ++$this->countNotUpdatedChangedByUser;
-            } elseif ($item->exists()) {
-                ++$this->countUpdated;
-            } else {
-                ++$this->countAdded;
-            }
-
+            
+            $this->updateCount($item);
             $item->save();
         }
     }

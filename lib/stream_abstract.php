@@ -60,4 +60,15 @@ abstract class rex_yfeed_stream_abstract
     abstract public function getTypeParams();
 
     abstract public function fetch();
+
+    protected function updateCount(rex_yfeed_item $item)
+    {
+        if ($item->changedByUser()) {
+            ++$this->countNotUpdatedChangedByUser;
+        } elseif ($item->exists()) {
+            ++$this->countUpdated;
+        } else {
+            ++$this->countAdded;
+        }
+    }
 }
