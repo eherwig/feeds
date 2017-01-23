@@ -160,17 +160,23 @@ class rex_yfeed_item
             $sql->setValue('raw', $this->raw);
         }
 
+        if (rex::getUser()) {
+            $user = rex::getUser()->getLogin();
+        } else {
+            $user = defined('REX_CRONJOB_SCRIPT') && REX_CRONJOB_SCRIPT ? 'cronjob_script' : 'frontend';
+        }
+
         if ($this->exists) {
             $where = '`id` = :id AND `uid` = :uid';
             $params = ['id' => $this->primaryId, 'uid' => $this->uid];
             $sql->setWhere($where, $params);
-            $sql->addGlobalUpdateFields();
+            $sql->addGlobalUpdateFields($user);
             $sql->update();
         } else {
             $sql->setValue('uid', $this->uid);
             $sql->setValue('stream_id', $this->streamId);
-            $sql->addGlobalCreateFields();
-            $sql->addGlobalUpdateFields();
+            $sql->addGlobalCreateFields($user);
+            $sql->addGlobalUpdateFields($user);
             $sql->insert();
         }
     }
