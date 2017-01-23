@@ -4,26 +4,24 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "69b67a7d8f881f8fb4ca9998a4ad5c10",
-    "content-hash": "3b3e25d069c7e01f4e27d737df6e7349",
+    "content-hash": "ce4324bebf744a278db940afd6df8caa",
     "packages": [
         {
-            "name": "facebook/php-sdk-v4",
-            "version": "5.1.2",
+            "name": "facebook/graph-sdk",
+            "version": "5.4.4",
             "source": {
                 "type": "git",
-                "url": "https://github.com/facebook/facebook-php-sdk-v4.git",
-                "reference": "2c42fb3002953355f12d3c6e8003a9fd5af563d9"
+                "url": "https://github.com/facebook/php-graph-sdk.git",
+                "reference": "5d0c4865e80e231d48a4571841bd018828fe58e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facebook/facebook-php-sdk-v4/zipball/2c42fb3002953355f12d3c6e8003a9fd5af563d9",
-                "reference": "2c42fb3002953355f12d3c6e8003a9fd5af563d9",
+                "url": "https://api.github.com/repos/facebook/php-graph-sdk/zipball/5d0c4865e80e231d48a4571841bd018828fe58e1",
+                "reference": "5d0c4865e80e231d48a4571841bd018828fe58e1",
                 "shasum": ""
             },
             "require": {
-                "ext-mbstring": "*",
-                "php": ">=5.4.0"
+                "php": "^5.4|^7.0"
             },
             "require-dev": {
                 "guzzlehttp/guzzle": "~5.0",
@@ -31,7 +29,8 @@
                 "phpunit/phpunit": "~4.0"
             },
             "suggest": {
-                "guzzlehttp/guzzle": "Allows for implementation of the Guzzle HTTP client"
+                "guzzlehttp/guzzle": "Allows for implementation of the Guzzle HTTP client",
+                "paragonie/random_compat": "Provides a better CSPRNG option in PHP 5"
             },
             "type": "library",
             "extra": {
@@ -42,7 +41,10 @@
             "autoload": {
                 "psr-4": {
                     "Facebook\\": "src/Facebook/"
-                }
+                },
+                "files": [
+                    "src/Facebook/polyfills.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -51,16 +53,16 @@
             "authors": [
                 {
                     "name": "Facebook",
-                    "homepage": "https://github.com/facebook/facebook-php-sdk-v4/contributors"
+                    "homepage": "https://github.com/facebook/php-graph-sdk/contributors"
                 }
             ],
             "description": "Facebook SDK for PHP",
-            "homepage": "https://github.com/facebook/facebook-php-sdk-v4",
+            "homepage": "https://github.com/facebook/php-graph-sdk",
             "keywords": [
                 "facebook",
                 "sdk"
             ],
-            "time": "2015-11-19 21:07:36"
+            "time": "2017-01-19T15:42:20+00:00"
         },
         {
             "name": "fguillot/picofeed",
@@ -108,20 +110,20 @@
             ],
             "description": "Modern library to handle RSS/Atom feeds",
             "homepage": "https://github.com/fguillot/picoFeed",
-            "time": "2016-02-11 19:52:02"
+            "time": "2016-02-11T19:52:02+00:00"
         },
         {
             "name": "ricardoper/twitteroauth",
-            "version": "v2.1.5",
+            "version": "v2.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ricardoper/TwitterOAuth.git",
-                "reference": "98cc0cbc58dc662c06a951456967ae0602fd3af4"
+                "reference": "cbdd43db781f30a4f291b15b90ab08a30108d5d6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ricardoper/TwitterOAuth/zipball/98cc0cbc58dc662c06a951456967ae0602fd3af4",
-                "reference": "98cc0cbc58dc662c06a951456967ae0602fd3af4",
+                "url": "https://api.github.com/repos/ricardoper/TwitterOAuth/zipball/cbdd43db781f30a4f291b15b90ab08a30108d5d6",
+                "reference": "cbdd43db781f30a4f291b15b90ab08a30108d5d6",
                 "shasum": ""
             },
             "require": {
@@ -156,7 +158,7 @@
                 "php",
                 "twitter"
             ],
-            "time": "2016-03-30 12:11:38"
+            "time": "2016-05-27T19:06:33+00:00"
         },
         {
             "name": "zendframework/zendxml",
@@ -201,7 +203,7 @@
                 "xml",
                 "zf2"
             ],
-            "time": "2016-02-04 21:02:08"
+            "time": "2016-02-04T21:02:08+00:00"
         }
     ],
     "packages-dev": [],
