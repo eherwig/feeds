@@ -2,6 +2,7 @@
     "require": {
         "fguillot/picofeed": "0.1.19",
         "ricardoper/TwitterOAuth": "^2.1.6",
-        "facebook/graph-sdk": "^5.4.4"
+        "facebook/graph-sdk": "^5.4.4",
+        "madcoda/php-youtube-api": "^1.2"
     }
 }

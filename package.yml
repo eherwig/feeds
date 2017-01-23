@@ -20,5 +20,7 @@ page:
                     title: 'translate:twitter'
                 facebook:
                     title: 'translate:facebook'
+                google:
+                    title: 'translate:google'
         faq:
             title: 'translate:faq'

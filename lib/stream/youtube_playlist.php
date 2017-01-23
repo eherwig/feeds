@@ -1,0 +1,74 @@
+<?php
+
+/**
+ * This file is part of the YFeed package.
+ *
+ * @author (c) Yakamara Media GmbH & Co. KG
+ * @author thomas.blum@redaxo.org
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+use Madcoda\Youtube\Youtube;
+
+class rex_yfeed_stream_youtube_playlist extends rex_yfeed_stream_abstract
+{
+    public function getTypeName()
+    {
+        return rex_i18n::msg('yfeed_youtube_playlist');
+    }
+
+    public function getTypeParams()
+    {
+        return [
+            [
+                'label' => rex_i18n::msg('yfeed_youtube_playlist_id'),
+                'name' => 'playlist_id',
+                'type' => 'string',
+            ],
+            [
+                'label' => rex_i18n::msg('yfeed_youtube_count'),
+                'name' => 'count',
+                'type' => 'select',
+                'options' => [5 => 5, 10 => 10, 15 => 15, 20 => 20, 30 => 30, 50 => 50, 75 => 75, 100 => 100],
+                'default' => 10,
+            ],
+        ];
+    }
+
+    public function fetch()
+    {
+        $argSeparator = ini_set('arg_separator.output', '&');
+
+        $youtube = new Youtube(['key' => rex_config::get('yfeed', 'google_key')]);
+
+        $videos = $youtube->getPlaylistItemsByPlaylistId($this->getPlaylistId($youtube), $this->typeParams['count']);
+
+        ini_set('arg_separator.output', $argSeparator);
+
+        foreach ($videos as $video) {
+            $item = new rex_yfeed_item($this->streamId, $video->contentDetails->videoId);
+
+            $item->setTitle($video->snippet->title);
+            $item->setContentRaw($video->snippet->description);
+            $item->setContent(strip_tags($video->snippet->description));
+
+            $item->setUrl('https://youtube.com/watch?v='.$video->contentDetails->videoId);
+            $item->setMedia($video->snippet->thumbnails->maxres->url);
+
+            $item->setDate(new DateTime($video->contentDetails->videoPublishedAt));
+            $item->setAuthor($video->snippet->channelTitle);
+
+            $item->setRaw($video);
+
+            $this->updateCount($item);
+            $item->save();
+        }
+    }
+
+    protected function getPlaylistId(Youtube $youtube)
+    {
+        return $this->typeParams['playlist_id'];
+    }
+}

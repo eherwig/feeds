@@ -88,4 +88,15 @@ yfeed_twitter_hashtag = Twitter :: Hashtag
 yfeed_twitter_hashtag_q = Hashtag
 yfeed_twitter_hashtag_with_prefix = Hashtag mit # eingeben
 
+yfeed_google = Google
+yfeed_google_settings = Einstellungen
+yfeed_google_key = Google Api-Key
+
+yfeed_youtube_channel = Youtube :: Channel
+yfeed_youtube_channel_id = Channel-ID
+yfeed_youtube_count = Anzahl der Einträge
+
+yfeed_youtube_playlist = Youtube :: Playlist
+yfeed_youtube_playlist_id = Playlist-ID
+
 yfeed_faq = FAQ
