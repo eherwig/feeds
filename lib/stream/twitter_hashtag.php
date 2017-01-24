@@ -58,14 +58,13 @@ class rex_yfeed_stream_twitter_hashtag extends rex_yfeed_stream_abstract
             'oauth_token_secret' => rex_config::get('yfeed', 'twitter_oauth_token_secret'),
         ];
         $auth = new ApplicationOnlyAuth($credentials, new ObjectSerializer());
-        $items = $auth->get('search/tweets', $this->typeParams);
+
+        $params = $this->typeParams;
+        $params['q'] .= ' -filter:retweets';
+
+        $items = $auth->get('search/tweets', $params);
         $items = $items->statuses;
-        /*
-        echo '<pre>'; print_r($this->fields); echo '</pre><hr />';
-        echo '<pre>'; print_r($auth->getHeaders()); echo '</pre>';
-        echo '<pre>'; print_r($item); echo '</pre><hr />';
-        exit();
-        */
+
         foreach ($items as $twitterItem) {
             $item = new rex_yfeed_item($this->streamId, $twitterItem->id);
             $item->setContentRaw($twitterItem->text);
