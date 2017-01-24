@@ -70,16 +70,13 @@ class rex_yfeed_stream_twitter_hashtag extends rex_yfeed_stream_abstract
             $item->setContentRaw($twitterItem->text);
             $item->setContent(strip_tags($twitterItem->text));
 
-            if (isset($twitterItem->entities->urls) && isset($twitterItem->entities->urls->url)) {
-                $item->setUrl($twitterItem->entities->urls->url);
-            }
-            $date = new DateTime($twitterItem->created_at);
-            $item->setDate($date);
+            $item->setUrl('https://twitter.com/statuses/'.$twitterItem->id);
+            $item->setDate(new DateTime($twitterItem->created_at));
 
             $item->setAuthor($twitterItem->user->name);
             $item->setLanguage($twitterItem->lang);
             $item->setRaw($twitterItem);
-            
+
             $this->updateCount($item);
             $item->save();
         }

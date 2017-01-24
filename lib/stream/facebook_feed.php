@@ -56,7 +56,7 @@ class rex_yfeed_stream_facebook_feed extends rex_yfeed_stream_abstract
     {
         $fb = $this->getFacebook();
 
-        $fields = 'id,from,story,message,link,created_time,attachments';
+        $fields = 'id,permalink_url,from,story,message,link,created_time,attachments';
         $url = sprintf(
             '/%s/%s?locale=de&fields=%s&limit=%d',
             $this->typeParams['profile_id'],
@@ -72,7 +72,7 @@ class rex_yfeed_stream_facebook_feed extends rex_yfeed_stream_abstract
             $item->setTitle($facebookItem->getField('story'));
             $item->setContentRaw($facebookItem->getField('message'));
             $item->setContent(strip_tags($facebookItem->getField('message')));
-            $item->setUrl($facebookItem->getField('link'));
+            $item->setUrl($facebookItem->getField('permalink_url'));
             $item->setDate($facebookItem->getField('created_time'));
 
             $from = $facebookItem->getField('from');

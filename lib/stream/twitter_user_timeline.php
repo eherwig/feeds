@@ -54,23 +54,16 @@ class rex_yfeed_stream_twitter_user_timeline extends rex_yfeed_stream_abstract
             'oauth_token_secret' => rex_config::get('yfeed', 'twitter_oauth_token_secret'),
         ];
         $auth = new ApplicationOnlyAuth($credentials, new ObjectSerializer());
+
         $items = $auth->get('statuses/user_timeline', $this->typeParams);
-        /*
-        echo '<pre>'; print_r($this->fields); echo '</pre><hr />';
-        echo '<pre>'; print_r($auth->getHeaders()); echo '</pre>';
-        echo '<pre>'; print_r($item); echo '</pre><hr />';
-        exit();
-        */
+
         foreach ($items as $twitterItem) {
             $item = new rex_yfeed_item($this->streamId, $twitterItem->id);
             $item->setContentRaw($twitterItem->text);
             $item->setContent(strip_tags($twitterItem->text));
 
-            if (isset($twitterItem->entities->urls) && isset($twitterItem->entities->urls->url)) {
-                $item->setUrl($twitterItem->entities->urls->url);
-            }
-            $date = new DateTime($twitterItem->created_at);
-            $item->setDate($date);
+            $item->setUrl('https://twitter.com/statuses/'.$twitterItem->id);
+            $item->setDate(new DateTime($twitterItem->created_at));
 
             $item->setAuthor($twitterItem->user->name);
             $item->setLanguage($twitterItem->lang);
