@@ -68,6 +68,9 @@ if ('' == $func) {
                 case 'youtube':
                     $icon = 'fa-youtube';
                     break;
+                case 'instagram':
+                    $icon = 'fa-instagram';
+                    break;
             }
             return $list->getColumnLink($thIcon, '<i class="rex-icon ' . $icon . '"></i>');
         }

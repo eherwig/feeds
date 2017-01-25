@@ -99,4 +99,16 @@ yfeed_youtube_count = Anzahl der Einträge
 yfeed_youtube_playlist = Youtube :: Playlist
 yfeed_youtube_playlist_id = Playlist-ID
 
+yfeed_instagram = Instagram
+yfeed_instagram_settings = Einstellungen
+yfeed_instagram_access_token = Access Token
+
+yfeed_instagram_tag = Instagram :: Tag
+yfeed_instagram_tag_name = Tagname
+yfeed_instagram_tag_without_prefix = Tag ohne # eingeben
+yfeed_instagram_count = Anzahl der Einträge
+
+yfeed_instagram_user = Instagram :: Benutzer
+yfeed_instagram_user_name = Benutzername
+
 yfeed_faq = FAQ

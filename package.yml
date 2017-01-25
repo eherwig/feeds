@@ -22,5 +22,7 @@ page:
                     title: 'translate:facebook'
                 google:
                     title: 'translate:google'
+                instagram:
+                    title: 'translate:instagram'
         faq:
             title: 'translate:faq'
