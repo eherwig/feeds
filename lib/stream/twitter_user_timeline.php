@@ -53,14 +53,17 @@ class rex_yfeed_stream_twitter_user_timeline extends rex_yfeed_stream_abstract
             'oauth_token' => rex_config::get('yfeed', 'twitter_oauth_token'),
             'oauth_token_secret' => rex_config::get('yfeed', 'twitter_oauth_token_secret'),
         ];
-        $auth = new ApplicationOnlyAuth($credentials, new ObjectSerializer());
 
-        $items = $auth->get('statuses/user_timeline', $this->typeParams);
+        $auth = new ApplicationOnlyAuth($credentials, new ObjectSerializer());
+        $params = $this->typeParams;
+        $params['tweet_mode'] = 'extended';
+
+        $items = $auth->get('statuses/user_timeline', $params);
 
         foreach ($items as $twitterItem) {
             $item = new rex_yfeed_item($this->streamId, $twitterItem->id);
-            $item->setContentRaw($twitterItem->text);
-            $item->setContent(strip_tags($twitterItem->text));
+            $item->setContentRaw($twitterItem->full_text);
+            $item->setContent(strip_tags($twitterItem->full_text));
 
             $item->setUrl('https://twitter.com/statuses/'.$twitterItem->id);
             $item->setDate(new DateTime($twitterItem->created_at));
@@ -68,6 +71,13 @@ class rex_yfeed_stream_twitter_user_timeline extends rex_yfeed_stream_abstract
             $item->setAuthor($twitterItem->user->name);
             $item->setLanguage($twitterItem->lang);
             $item->setRaw($twitterItem);
+
+            $media = $twitterItem->entities->media;
+            if (isset($media[0])) {
+                if ($media[0]->type == 'photo') {
+                    $item->setMedia($media[0]->media_url);
+                }
+            }
 
             $this->updateCount($item);
             $item->save();
