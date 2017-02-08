@@ -61,6 +61,8 @@ class rex_yfeed_stream_twitter_hashtag extends rex_yfeed_stream_abstract
 
         $params = $this->typeParams;
         $params['q'] .= ' -filter:retweets';
+        $params['q'] .= ' -filter:retweets';
+        $params['tweet_mode'] = 'extended';
 
         $items = $auth->get('search/tweets', $params);
         $items = $items->statuses;
@@ -76,6 +78,13 @@ class rex_yfeed_stream_twitter_hashtag extends rex_yfeed_stream_abstract
             $item->setAuthor($twitterItem->user->name);
             $item->setLanguage($twitterItem->lang);
             $item->setRaw($twitterItem);
+
+            $media = $twitterItem->entities->media;
+            if (isset($media[0])) {
+                if ($media[0]->type == 'photo') {
+                    $item->setMedia($media[0]->media_url);
+                }
+            }
 
             $this->updateCount($item);
             $item->save();
