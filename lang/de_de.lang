@@ -19,6 +19,10 @@ yfeed_item_title = Titel
 yfeed_item_url = Url
 yfeed_item_uid = Id
 
+yfeed_item_status_online = Online
+yfeed_item_status_offline = Offline
+yfeed_item_status_saved = Der Status wurde gespeichert.
+
 yfeed_settings = Einstellungen
 yfeed_settings_saved = Einstellungen wurden gespeichert.
 

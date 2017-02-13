@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS `%TABLE_PREFIX%yfeed_item` (
     `language` varchar(255) NOT NULL,
     `media` longtext NOT NULL,
     `raw` text NOT NULL,
+    `status` tinyint(1) NOT NULL DEFAULT 1,
     `changed_by_user` tinyint(1) NOT NULL,
     `createuser` varchar(255) NOT NULL,
     `updateuser` varchar(255) NOT NULL,

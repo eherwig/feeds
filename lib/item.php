@@ -112,6 +112,16 @@ class rex_yfeed_item
         $this->raw = json_encode((array) $value);
     }
 
+    public function setOnline($online)
+    {
+        $this->status = (bool) $online;
+    }
+
+    public function isOnline()
+    {
+        return $this->status;
+    }
+
     public function exists()
     {
         return $this->exists;
