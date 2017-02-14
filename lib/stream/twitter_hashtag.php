@@ -69,8 +69,8 @@ class rex_yfeed_stream_twitter_hashtag extends rex_yfeed_stream_abstract
 
         foreach ($items as $twitterItem) {
             $item = new rex_yfeed_item($this->streamId, $twitterItem->id_str);
-            $item->setContentRaw($twitterItem->text);
-            $item->setContent(strip_tags($twitterItem->text));
+            $item->setContentRaw($twitterItem->full_text);
+            $item->setContent(strip_tags($twitterItem->full_text));
 
             $item->setUrl('https://twitter.com/statuses/'.$twitterItem->id_str);
             $item->setDate(new DateTime($twitterItem->created_at));
