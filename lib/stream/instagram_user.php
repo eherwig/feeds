@@ -13,7 +13,7 @@
 use Instagram\Instagram;
 use Instagram\Media;
 
-class rex_yfeed_stream_instagram_user extends rex_yfeed_stream_abstract
+class rex_yfeed_stream_instagram_user extends rex_yfeed_stream_instagram_abstract
 {
     public function getTypeName()
     {
@@ -24,7 +24,7 @@ class rex_yfeed_stream_instagram_user extends rex_yfeed_stream_abstract
     {
         return [
             [
-                'label' => rex_i18n::msg('yfeed_instagram_user_name'),
+                'label' => rex_i18n::msg('yfeed_instagram_user_id'),
                 'name' => 'user',
                 'type' => 'string',
             ],
@@ -38,29 +38,15 @@ class rex_yfeed_stream_instagram_user extends rex_yfeed_stream_abstract
         ];
     }
 
-    public function fetch()
+    protected function fetchItemsFromOfficialApi(Instagram $instagram)
     {
-        $instagram = new Instagram(rex_config::get('yfeed', 'instagram_access_token'));
+        $user = $instagram->getUser($this->typeParams['user']);
 
-        $user = $instagram->getUserByUsername($this->typeParams['user']);
+        return $user->getMedia(['count' => $this->typeParams['count']]);
+    }
 
-        $data = $user->getMedia(['count' => $this->typeParams['count']]);
-
-        /** @var Media $instagramItem */
-        foreach ($data as $instagramItem) {
-            $item = new rex_yfeed_item($this->streamId, $instagramItem->getId());
-            $item->setTitle($instagramItem->getCaption());
-
-            $item->setUrl($instagramItem->getLink());
-            $item->setDate(new DateTime($instagramItem->getCreatedTime('Y-m-d H:i:s')));
-
-            $item->setMedia($instagramItem->getStandardResImage()->url);
-
-            $item->setAuthor($instagramItem->getUser()->getFullName());
-            $item->setRaw($instagramItem);
-
-            $this->updateCount($item);
-            $item->save();
-        }
+    protected function fetchItemsFromFrontendApi()
+    {
+        return Bolandish\Instagram::getMediaByUserID($this->typeParams['user'], $this->typeParams['count']);
     }
 }

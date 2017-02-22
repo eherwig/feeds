@@ -4,6 +4,7 @@
         "ricardoper/TwitterOAuth": "^2.1.6",
         "facebook/graph-sdk": "^5.4.4",
         "madcoda/php-youtube-api": "^1.2",
-        "php-instagram-api/php-instagram-api": "dev-master"
+        "php-instagram-api/php-instagram-api": "dev-master",
+        "bolandish/instagram-grabber": "^1.0.13"
     }
 }

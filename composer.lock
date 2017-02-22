@@ -4,8 +4,38 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f6b79c88e130d243692c3e51a2234a8a",
+    "content-hash": "c7ee726f39a52db0d96f47d76e2c170a",
     "packages": [
+        {
+            "name": "bolandish/instagram-grabber",
+            "version": "1.0.13",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Bolandish/PHP-Instagram-Grabber.git",
+                "reference": "7d926f6e3557976e194b71c4a023ef30f6d93fc9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Bolandish/PHP-Instagram-Grabber/zipball/7d926f6e3557976e194b71c4a023ef30f6d93fc9",
+                "reference": "7d926f6e3557976e194b71c4a023ef30f6d93fc9",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Bolandish\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Thomas Bolander",
+                    "email": "privat@thomasbolander.dk"
+                }
+            ],
+            "description": "A workaround for the new Instagram policy to get images by hashtag and user id. No need for accesstoken",
+            "time": "2017-01-10T11:55:02+00:00"
+        },
         {
             "name": "facebook/graph-sdk",
             "version": "5.4.4",
