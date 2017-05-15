@@ -9,6 +9,7 @@ Version 1.1.0 – XX.XX.2017
 - Youtube-Unterstützung
 - Instagram-Unterstützung
 - Bei Twitter wird auch das Bild ausgelesen, falls vorhanden
+- Media-Manager-Effekt zur Auslieferung (und Weiterbearbeitung) der Bilder über den Media Manager
 
 ### Bugfixes
 
