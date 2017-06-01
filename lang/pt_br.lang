@@ -1,0 +1,118 @@
+yfeed = YFeed
+yfeed_add = Adicionar
+yfeed_edit = Editar
+yfeed_delete = Deletar
+yfeed_delete_question = deseja realmente deletar?
+
+
+
+yfeed_items = Entradas
+yfeed_item_author = Autor
+yfeed_item_content = Conteúdo
+yfeed_item_content_raw = Conteúdo (não processado /  não filtrado)
+yfeed_item_date = Data
+yfeed_item_edit = Editar entrada
+yfeed_item_language = Idioma / abreviação do idioma
+yfeed_item_media = Mídia
+yfeed_item_raw = Todos os dados como JSON
+yfeed_item_title = Títulos
+yfeed_item_url = URL
+yfeed_item_uid = Id
+
+yfeed_item_status_online = Online
+yfeed_item_status_offline = Offline
+yfeed_item_status_saved = Status foi salvo.
+
+yfeed_settings = Configurações
+yfeed_settings_saved = Configurações foram salvas.
+
+yfeed_streams = Streams
+yfeed_stream_add = Adicionar stream
+yfeed_stream_edit = Editar stream
+yfeed_stream_delete = Deletar stream
+yfeed_stream_delete_question = Deletar stream com todas as entradas correspondentes?
+yfeed_stream_deleted = Stream foi deletado
+yfeed_stream_fetch = Recuperar stream
+yfeed_stream_fetched = O stream foi recuperado e as entradas foram salvas  ({0} adicionadas; {1} atualizadas;  {2} intocadas pois editadas por um usuário).
+yfeed_stream_general = Geral
+yfeed_stream_image = Imagem
+yfeed_stream_namespace = Namespace
+yfeed_stream_namespace_error = Namespace não pode estar vazio e só pode conter letras minúsculas e sublinhados.
+yfeed_stream_namespace_notice = Insira um nome exclusivo. A consulta SQL pode ser filtrada usando o namespace.
+yfeed_stream_select_type = Especificar tipos
+yfeed_stream_title = Título
+yfeed_stream_type = Tipo
+yfeed_stream_url = URL
+yfeed_stream_status_activated = Ativado
+yfeed_stream_status_deactivated = Desativado
+yfeed_stream_status_saved = Status salvo
+
+
+yfeed_cronjob = YFeed: recuperar feeds
+
+
+yfeed_facebook = Facebooks
+yfeed_facebook_app_id = Id do aplicativo
+yfeed_facebook_app_secret = App Secret
+yfeed_facebook_app_title = Título do aplicativo
+yfeed_facebook_app_title_note = Opcional
+yfeed_facebook_settings = Aplicativo Facebooks
+yfeed_facebook_feed = Feed do Facebooks
+yfeed_facebook_profile_id = Id do usuário ou Id da página
+yfeed_facebook_token = Acessar token
+yfeed_facebook_token_note = Opcional (requerido para entradas privadas)
+yfeed_facebook_count = Número de entradas
+yfeed_facebook_result_type = Resultado
+yfeed_facebook_result_type_feed = Todas as entradas
+yfeed_facebook_result_type_posts = Somente as entradas próprias
+yfeed_facebook_result_type_tagged = Somente entradas de outros
+
+yfeed_rss = RSS
+yfeed_rss_feed = Feed RSS
+yfeed_rss_url = URL
+
+yfeed_twitter = Twitter
+yfeed_twitter_consumer_key = Twitter API key (Consumer Key)
+yfeed_twitter_consumer_secret = Twitter API secret (Consumer Secret)
+yfeed_twitter_count = Número de tweets
+yfeed_twitter_entries = Entradas
+yfeed_twitter_exclude_replies = Excluir respostas
+yfeed_twitter_oauth_token = Twitter Access token
+yfeed_twitter_oauth_token_secret =  Twitter Access token secret
+yfeed_twitter_result_type = Resultado
+yfeed_twitter_result_type_mixed = Obter os tweets mais recentes e populares
+yfeed_twitter_result_type_recent = Obter somente os tweets mais recentes
+yfeed_twitter_result_type_popular = Obter somente os tweets mais populares
+yfeed_twitter_screen_name = Nome de usuário
+yfeed_twitter_settings = Configurações
+
+yfeed_twitter_user_timeline = Twitter:: Tweets do usuário
+
+yfeed_twitter_hashtag =  Twitter :: Hashtag
+yfeed_twitter_hashtag_q =  Hashtag
+yfeed_twitter_hashtag_with_prefix = Insira hashtags com  #
+
+yfeed_google = Google
+yfeed_google_settings = Configurações
+yfeed_google_key = Configurações API-Key
+
+yfeed_youtube_channel = Youtube :: Canal
+yfeed_youtube_channel_id = Id do Canal
+yfeed_youtube_count = Número de entradas
+
+yfeed_youtube_playlist =  Youtube :: Playlist
+yfeed_youtube_playlist_id = Id da Playlist
+
+yfeed_instagram = Instagram
+yfeed_instagram_settings = Configurações
+yfeed_instagram_access_token = Acessar Token
+
+yfeed_instagram_tag =  Instagram :: Tag
+yfeed_instagram_tag_name = Nome da Tag
+yfeed_instagram_tag_without_prefix = Insira os nomes das Tags sem #
+yfeed_instagram_count = Número de entradas
+
+yfeed_instagram_user =  Instagram :: usuário
+yfeed_instagram_user_id = Id do usuário
+
+yfeed_faq = FAQ
