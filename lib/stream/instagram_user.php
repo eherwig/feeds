@@ -11,7 +11,7 @@
  */
 
 use Instagram\Instagram;
-use Instagram\Media;
+use InstagramScraper\Instagram as InstagramScraper;
 
 class rex_yfeed_stream_instagram_user extends rex_yfeed_stream_instagram_abstract
 {
@@ -24,7 +24,7 @@ class rex_yfeed_stream_instagram_user extends rex_yfeed_stream_instagram_abstrac
     {
         return [
             [
-                'label' => rex_i18n::msg('yfeed_instagram_user_id'),
+                'label' => rex_i18n::msg('yfeed_instagram_username'),
                 'name' => 'user',
                 'type' => 'string',
             ],
@@ -40,13 +40,17 @@ class rex_yfeed_stream_instagram_user extends rex_yfeed_stream_instagram_abstrac
 
     protected function fetchItemsFromOfficialApi(Instagram $instagram)
     {
-        $user = $instagram->getUser($this->typeParams['user']);
+        if (preg_match('/^\d+$', $this->typeParams['user'])) {
+            $user = $instagram->getUser($this->typeParams['user']);
+        } else {
+            $user = $instagram->getUserByUsername($this->typeParams['user']);
+        }
 
         return $user->getMedia(['count' => $this->typeParams['count']]);
     }
 
-    protected function fetchItemsFromFrontendApi()
+    protected function fetchItemsFromFrontendApi(InstagramScraper $instagram)
     {
-        return Bolandish\Instagram::getMediaByUserID($this->typeParams['user'], $this->typeParams['count']);
+        return $instagram::getMedias($this->typeParams['user'], $this->typeParams['count']);
     }
 }

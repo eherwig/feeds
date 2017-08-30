@@ -11,7 +11,7 @@
  */
 
 use Instagram\Instagram;
-use Instagram\Media;
+use InstagramScraper\Instagram as InstagramScraper;
 
 class rex_yfeed_stream_instagram_tag extends rex_yfeed_stream_instagram_abstract
 {
@@ -44,8 +44,8 @@ class rex_yfeed_stream_instagram_tag extends rex_yfeed_stream_instagram_abstract
         return $instagram->getTagMedia($this->typeParams['tag'], ['count' => $this->typeParams['count']]);
     }
 
-    protected function fetchItemsFromFrontendApi()
+    protected function fetchItemsFromFrontendApi(InstagramScraper $instagram)
     {
-        return Bolandish\Instagram::getMediaByHashtag($this->typeParams['tag'], $this->typeParams['count']);
+        return $instagram->getMediasByTag($this->typeParams['tag'], $this->typeParams['count']);
     }
 }

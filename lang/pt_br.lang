@@ -113,6 +113,6 @@ yfeed_instagram_tag_without_prefix = Insira os nomes das Tags sem #
 yfeed_instagram_count = Número de entradas
 
 yfeed_instagram_user =  Instagram :: usuário
-yfeed_instagram_user_id = Id do usuário
+yfeed_instagram_username = Nome de usuário
 
 yfeed_faq = FAQ

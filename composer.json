@@ -5,6 +5,6 @@
         "facebook/graph-sdk": "^5.4.4",
         "madcoda/php-youtube-api": "^1.2",
         "php-instagram-api/php-instagram-api": "dev-master",
-        "bolandish/instagram-grabber": "^1.0.13"
+        "raiym/instagram-php-scraper": "^0.6.1"
     }
 }

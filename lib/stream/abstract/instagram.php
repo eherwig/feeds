@@ -12,6 +12,8 @@
 
 use Instagram\Instagram;
 use Instagram\Media;
+use InstagramScraper\Instagram as InstagramScraper;
+use InstagramScraper\Model\Media as ScapedMedia;
 
 abstract class rex_yfeed_stream_instagram_abstract extends rex_yfeed_stream_abstract
 {
@@ -36,9 +38,11 @@ abstract class rex_yfeed_stream_instagram_abstract extends rex_yfeed_stream_abst
     abstract protected function fetchItemsFromOfficialApi(Instagram $instagram);
 
     /**
-     * @return mixed
+     * @param InstagramScraper $instagram
+     *
+     * @return ScapedMedia[]
      */
-    abstract protected function fetchItemsFromFrontendApi();
+    abstract protected function fetchItemsFromFrontendApi(InstagramScraper $instagram);
 
     private function fetchOfficialApi($accessToken)
     {
@@ -64,20 +68,32 @@ abstract class rex_yfeed_stream_instagram_abstract extends rex_yfeed_stream_abst
 
     private function fetchFrontendApi()
     {
-        $instagramItems = $this->fetchItemsFromFrontendApi();
+        $instagram = new InstagramScraper();
+        $instagramItems = $this->fetchItemsFromFrontendApi($instagram);
+
+        $owners = [];
 
         foreach ($instagramItems as $instagramItem) {
             $item = new rex_yfeed_item($this->streamId, $instagramItem->id);
             $item->setTitle(isset($instagramItem->caption) ? $instagramItem->caption : null);
 
-            $item->setUrl('https://www.instagram.com/p/'.$instagramItem->code.'/');
-            $item->setDate(new DateTime('@'.$instagramItem->date));
+            $item->setUrl($instagramItem->link);
+            $item->setDate(new DateTime('@'.$instagramItem->createdTime));
 
-            if (!$instagramItem->is_video) {
-                $item->setMedia($instagramItem->display_src);
+            $item->setMedia($instagramItem->imageStandardResolutionUrl);
+
+            if (isset($instagramItem->owner->fullName)) {
+                $item->setAuthor($instagramItem->owner->fullName);
+            } elseif (isset($owners[$instagramItem->ownerId])) {
+                $item->setAuthor($owners[$instagramItem->ownerId]);
+            } else {
+                $itemWithAuthor = $instagram->getMediaById($instagramItem->id);
+                if (isset($itemWithAuthor->owner->fullName)) {
+                    $item->setAuthor($itemWithAuthor->owner->fullName);
+                    $owners[$instagramItem->ownerId] = $itemWithAuthor->owner->fullName;
+                }
             }
 
-            $item->setAuthor($instagramItem->owner->full_name);
             $item->setRaw($instagramItem);
 
             $this->updateCount($item);
