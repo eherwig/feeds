@@ -6,7 +6,7 @@ Version 1.1.2 – 07.09.2017
 
 ### Bugfixes
 
-* Der Abruf von Instagram-Tags (ohne Access-Token) schlug auf 32-Bit-Systemen fehlt
+* Der Abruf von Instagram-Tags (ohne Access-Token) schlug auf 32-Bit-Systemen fehl
 
 
 Version 1.1.1 – 07.09.2017
