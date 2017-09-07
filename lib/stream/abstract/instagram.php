@@ -82,16 +82,20 @@ abstract class rex_yfeed_stream_instagram_abstract extends rex_yfeed_stream_abst
 
             $item->setMedia($instagramItem->imageStandardResolutionUrl);
 
+            if (!isset($instagramItem->owner->fullName)) {
+                if (isset($owners[$instagramItem->ownerId])) {
+                    $instagramItem->owner = $owners[$instagramItem->ownerId];
+                } else {
+                    $itemWithAuthor = $instagram->getMediaByUrl($instagramItem->link);
+                    if (isset($itemWithAuthor->owner->fullName)) {
+                        $instagramItem->owner = $itemWithAuthor->owner;
+                        $owners[$instagramItem->ownerId] = $itemWithAuthor->owner;
+                    }
+                }
+            }
+
             if (isset($instagramItem->owner->fullName)) {
                 $item->setAuthor($instagramItem->owner->fullName);
-            } elseif (isset($owners[$instagramItem->ownerId])) {
-                $item->setAuthor($owners[$instagramItem->ownerId]);
-            } else {
-                $itemWithAuthor = $instagram->getMediaByUrl($instagramItem->link);
-                if (isset($itemWithAuthor->owner->fullName)) {
-                    $item->setAuthor($itemWithAuthor->owner->fullName);
-                    $owners[$instagramItem->ownerId] = $itemWithAuthor->owner->fullName;
-                }
             }
 
             $item->setRaw($instagramItem);
