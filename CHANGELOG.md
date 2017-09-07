@@ -1,6 +1,15 @@
 Changelog
 =========
 
+Version 1.1.1 – 07.09.2017
+--------------------------
+
+### Bugfixes
+
+* Der Abruf über die inoffizielle Instragram-Schnittstelle (ohne Access-Token) funktionierte nicht mehr. 
+  ACHTUNG: Beim Abruf eines Users-Feeds muss nun der Benutzername statt der Benutzer-ID hinterlegt werden
+
+
 Version 1.1.0 – 15.05.2017
 --------------------------
 
