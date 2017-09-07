@@ -87,7 +87,7 @@ abstract class rex_yfeed_stream_instagram_abstract extends rex_yfeed_stream_abst
             } elseif (isset($owners[$instagramItem->ownerId])) {
                 $item->setAuthor($owners[$instagramItem->ownerId]);
             } else {
-                $itemWithAuthor = $instagram->getMediaById($instagramItem->id);
+                $itemWithAuthor = $instagram->getMediaByUrl($instagramItem->link);
                 if (isset($itemWithAuthor->owner->fullName)) {
                     $item->setAuthor($itemWithAuthor->owner->fullName);
                     $owners[$instagramItem->ownerId] = $itemWithAuthor->owner->fullName;
