@@ -1,6 +1,19 @@
 Changelog
 =========
 
+Version 1.2 – 08.11.2017
+------------------------
+
+### Neu
+
+* Sprechender Name für Media-Manager-Effekt
+
+### Bugfixes
+
+* Instagram-Benutzerfeed funktionierte nicht mehr über die offizielle API (Access Token hinterlegt)
+* Media-Manager-Effekt: Caching hat nicht gegriffen
+
+
 Version 1.1.2 – 07.09.2017
 --------------------------
 
