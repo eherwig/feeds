@@ -48,4 +48,9 @@ class rex_effect_yfeed extends rex_effect_abstract
         $media->setHeader('Content-Type', 'image/'.$match[1]);
         $media->refreshImageDimensions();
     }
+
+    public function getName()
+    {
+        return rex_i18n::msg('yfeed_media_manager_effect');
+    }
 }
