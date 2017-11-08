@@ -114,6 +114,7 @@ yfeed_instagram_tag_without_prefix = Tag ohne # eingeben
 yfeed_instagram_count = Anzahl der Einträge
 
 yfeed_instagram_user = Instagram :: Benutzer
-yfeed_instagram_username = Benutzername
+yfeed_instagram_username = Benutzername / Benutzer-ID
+yfeed_instagram_username_notice = Bei Nutzung der offiziellen API (Access Token hinterlegt) muss die Benutzer-ID genutzt werden, ansonsten der Benutzername.
 
 yfeed_faq = FAQ

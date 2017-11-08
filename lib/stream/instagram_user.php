@@ -27,6 +27,7 @@ class rex_yfeed_stream_instagram_user extends rex_yfeed_stream_instagram_abstrac
                 'label' => rex_i18n::msg('yfeed_instagram_username'),
                 'name' => 'user',
                 'type' => 'string',
+                'notice' => rex_i18n::msg('yfeed_instagram_username_notice'),
             ],
             [
                 'label' => rex_i18n::msg('yfeed_instagram_count'),
