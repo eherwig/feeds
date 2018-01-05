@@ -74,29 +74,30 @@ abstract class rex_yfeed_stream_instagram_abstract extends rex_yfeed_stream_abst
         $owners = [];
 
         foreach ($instagramItems as $instagramItem) {
-            $item = new rex_yfeed_item($this->streamId, $instagramItem->id);
-            $item->setTitle(isset($instagramItem->caption) ? $instagramItem->caption : null);
+            $item = new rex_yfeed_item($this->streamId, $instagramItem->getId());
+            $item->setTitle($instagramItem->getCaption() ?: null);
 
-            $item->setUrl($instagramItem->link);
-            $item->setDate(new DateTime('@'.$instagramItem->createdTime));
+            $item->setUrl($instagramItem->getLink());
+            $item->setDate(new DateTime('@'.$instagramItem->getCreatedTime()));
 
-            $item->setMedia($instagramItem->imageStandardResolutionUrl);
+            $item->setMedia($instagramItem->getImageStandardResolutionUrl());
 
-            if (!isset($instagramItem->owner->fullName)) {
-                if (isset($owners[$instagramItem->ownerId])) {
-                    $instagramItem->owner = $owners[$instagramItem->ownerId];
+            $owner = $instagramItem->getOwner();
+            if (!$owner->getFullName()) {
+                if (isset($owners[$instagramItem->getOwnerId()])) {
+                    $owner = $owners[$instagramItem->getOwnerId()];
+                    $instagramItem['owner'] = $owner;
                 } else {
-                    $itemWithAuthor = $instagram->getMediaByUrl($instagramItem->link);
-                    if (isset($itemWithAuthor->owner->fullName)) {
-                        $instagramItem->owner = $itemWithAuthor->owner;
-                        $owners[$instagramItem->ownerId] = $itemWithAuthor->owner;
+                    $itemWithAuthor = $instagram->getMediaByUrl($instagramItem->getLink());
+                    $owner = $itemWithAuthor->getOwner();
+                    if ($owner->getFullName()) {
+                        $instagramItem['owner'] = $owner;
+                        $owners[$instagramItem->getOwnerId()] = $owner;
                     }
                 }
             }
 
-            if (isset($instagramItem->owner->fullName)) {
-                $item->setAuthor($instagramItem->owner->fullName);
-            }
+            $item->setAuthor($owner->getFullName() ?: null);
 
             $item->setRaw($instagramItem);
 

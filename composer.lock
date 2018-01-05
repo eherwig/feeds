@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "2b125cf551cfef65d5ff20941aa82f77",
+    "content-hash": "39ef268245af694eb9ea84b83ed6f4ed",
     "packages": [
         {
             "name": "facebook/graph-sdk",
@@ -251,16 +251,16 @@
         },
         {
             "name": "phpfastcache/phpfastcache",
-            "version": "5.0.17",
+            "version": "5.0.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPSocialNetwork/phpfastcache.git",
-                "reference": "dc0375d84b434c1e03db59ae3b70f480b8305e12"
+                "reference": "dae7c1edfb7b6d0a69e96e801eb77fd0e7aa4ce4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPSocialNetwork/phpfastcache/zipball/dc0375d84b434c1e03db59ae3b70f480b8305e12",
-                "reference": "dc0375d84b434c1e03db59ae3b70f480b8305e12",
+                "url": "https://api.github.com/repos/PHPSocialNetwork/phpfastcache/zipball/dae7c1edfb7b6d0a69e96e801eb77fd0e7aa4ce4",
+                "reference": "dae7c1edfb7b6d0a69e96e801eb77fd0e7aa4ce4",
                 "shasum": ""
             },
             "require": {
@@ -333,7 +333,7 @@
                 "zend memory cache",
                 "zend server"
             ],
-            "time": "2017-07-30T22:30:44+00:00"
+            "time": "2017-11-10T22:32:57+00:00"
         },
         {
             "name": "phpfastcache/phpssdb",
@@ -483,16 +483,16 @@
         },
         {
             "name": "raiym/instagram-php-scraper",
-            "version": "v0.6.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/postaddictme/instagram-php-scraper.git",
-                "reference": "02c334fceda8ad21f1d9c7145e907a34000761cf"
+                "url": "https://github.com/theianjohnson/instagram-php-scraper.git",
+                "reference": "f9f3212692b40528b15b03e8c3d907a4e3b73810"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/postaddictme/instagram-php-scraper/zipball/02c334fceda8ad21f1d9c7145e907a34000761cf",
-                "reference": "02c334fceda8ad21f1d9c7145e907a34000761cf",
+                "url": "https://api.github.com/repos/theianjohnson/instagram-php-scraper/zipball/f9f3212692b40528b15b03e8c3d907a4e3b73810",
+                "reference": "f9f3212692b40528b15b03e8c3d907a4e3b73810",
                 "shasum": ""
             },
             "require": {
@@ -509,7 +509,6 @@
                     "InstagramScraper": "src"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -525,7 +524,11 @@
                 "instagram",
                 "scraper"
             ],
-            "time": "2017-07-12T08:03:17+00:00"
+            "support": {
+                "email": "r.kapishev@gmail.com",
+                "source": "https://github.com/theianjohnson/instagram-php-scraper/tree/master"
+            },
+            "time": "2018-01-04T17:35:53+00:00"
         },
         {
             "name": "ricardoper/twitteroauth",
@@ -622,10 +625,18 @@
         }
     ],
     "packages-dev": [],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "0.8.8",
+            "alias_normalized": "0.8.8.0",
+            "version": "9999999-dev",
+            "package": "raiym/instagram-php-scraper"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "php-instagram-api/php-instagram-api": 20
+        "php-instagram-api/php-instagram-api": 20,
+        "raiym/instagram-php-scraper": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
