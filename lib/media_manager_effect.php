@@ -16,9 +16,11 @@ class rex_effect_yfeed extends rex_effect_abstract
     {
         $filename = rex_media_manager::getMediaFile();
 
-        if (!sscanf($filename, '%d.yfeed', $id)) {
+        if (!preg_match('/^(\d+)\.yfeed$/', $filename, $match)) {
             return;
         }
+
+        $id = $match[1];
 
         $sql = rex_sql::factory()
             ->setTable(rex_yfeed_item::table())
