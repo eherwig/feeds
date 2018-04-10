@@ -6,13 +6,6 @@
         "madcoda/php-youtube-api": "^1.2",
         "vimeo/vimeo-api": "^1.2.3",
         "php-instagram-api/php-instagram-api": "dev-master",
-        "raiym/instagram-php-scraper": "dev-master as 0.8.8"
-    },
-
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/theianjohnson/instagram-php-scraper"
-        }
-    ]
+        "raiym/instagram-php-scraper": "^0.8"
+    }
 }

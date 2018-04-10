@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "39ef268245af694eb9ea84b83ed6f4ed",
+    "content-hash": "d6373e372cc77420c5d1fd04b0e37d47",
     "packages": [
         {
             "name": "facebook/graph-sdk",
-            "version": "5.6.1",
+            "version": "5.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/facebook/php-graph-sdk.git",
-                "reference": "2f9639c15ae043911f40ffe44080b32bac2c5280"
+                "reference": "030f8c5b9b1a6c09e71719fd638b66ea4daa2f10"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facebook/php-graph-sdk/zipball/2f9639c15ae043911f40ffe44080b32bac2c5280",
-                "reference": "2f9639c15ae043911f40ffe44080b32bac2c5280",
+                "url": "https://api.github.com/repos/facebook/php-graph-sdk/zipball/030f8c5b9b1a6c09e71719fd638b66ea4daa2f10",
+                "reference": "030f8c5b9b1a6c09e71719fd638b66ea4daa2f10",
                 "shasum": ""
             },
             "require": {
@@ -62,7 +62,7 @@
                 "facebook",
                 "sdk"
             ],
-            "time": "2017-08-16T17:28:07+00:00"
+            "time": "2018-02-14T23:24:51+00:00"
         },
         {
             "name": "fguillot/picofeed",
@@ -110,6 +110,7 @@
             ],
             "description": "Modern library to handle RSS/Atom feeds",
             "homepage": "https://github.com/fguillot/picoFeed",
+            "abandoned": true,
             "time": "2016-02-11T19:52:02+00:00"
         },
         {
@@ -251,16 +252,16 @@
         },
         {
             "name": "phpfastcache/phpfastcache",
-            "version": "5.0.19",
+            "version": "5.0.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPSocialNetwork/phpfastcache.git",
-                "reference": "dae7c1edfb7b6d0a69e96e801eb77fd0e7aa4ce4"
+                "reference": "e546671f4374e2a421c074b5c24c732c6ec58aae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPSocialNetwork/phpfastcache/zipball/dae7c1edfb7b6d0a69e96e801eb77fd0e7aa4ce4",
-                "reference": "dae7c1edfb7b6d0a69e96e801eb77fd0e7aa4ce4",
+                "url": "https://api.github.com/repos/PHPSocialNetwork/phpfastcache/zipball/e546671f4374e2a421c074b5c24c732c6ec58aae",
+                "reference": "e546671f4374e2a421c074b5c24c732c6ec58aae",
                 "shasum": ""
             },
             "require": {
@@ -333,7 +334,7 @@
                 "zend memory cache",
                 "zend server"
             ],
-            "time": "2017-11-10T22:32:57+00:00"
+            "time": "2018-03-01T22:13:40+00:00"
         },
         {
             "name": "phpfastcache/phpssdb",
@@ -483,16 +484,16 @@
         },
         {
             "name": "raiym/instagram-php-scraper",
-            "version": "dev-master",
+            "version": "v0.8.17",
             "source": {
                 "type": "git",
-                "url": "https://github.com/theianjohnson/instagram-php-scraper.git",
-                "reference": "f9f3212692b40528b15b03e8c3d907a4e3b73810"
+                "url": "https://github.com/postaddictme/instagram-php-scraper.git",
+                "reference": "587af7aa1ce771f3f12219ef48ef03783798a260"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/theianjohnson/instagram-php-scraper/zipball/f9f3212692b40528b15b03e8c3d907a4e3b73810",
-                "reference": "f9f3212692b40528b15b03e8c3d907a4e3b73810",
+                "url": "https://api.github.com/repos/postaddictme/instagram-php-scraper/zipball/587af7aa1ce771f3f12219ef48ef03783798a260",
+                "reference": "587af7aa1ce771f3f12219ef48ef03783798a260",
                 "shasum": ""
             },
             "require": {
@@ -509,6 +510,7 @@
                     "InstagramScraper": "src"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -524,11 +526,7 @@
                 "instagram",
                 "scraper"
             ],
-            "support": {
-                "email": "r.kapishev@gmail.com",
-                "source": "https://github.com/theianjohnson/instagram-php-scraper/tree/master"
-            },
-            "time": "2018-01-04T17:35:53+00:00"
+            "time": "2018-03-23T09:03:23+00:00"
         },
         {
             "name": "ricardoper/twitteroauth",
@@ -579,6 +577,52 @@
             "time": "2016-05-27T19:06:33+00:00"
         },
         {
+            "name": "vimeo/vimeo-api",
+            "version": "1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vimeo/vimeo.php.git",
+                "reference": "46820e2d777362849137c1eb14f5cdb657c289ea"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vimeo/vimeo.php/zipball/46820e2d777362849137c1eb14f5cdb657c289ea",
+                "reference": "46820e2d777362849137c1eb14f5cdb657c289ea",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Vimeo\\": "src/Vimeo"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Vimeo",
+                    "homepage": "http://vimeo.com"
+                }
+            ],
+            "description": "Official PHP library for the Vimeo API.",
+            "homepage": "https://github.com/vimeo/vimeo.php",
+            "keywords": [
+                "video",
+                "vimeo"
+            ],
+            "time": "2017-10-25T15:11:51+00:00"
+        },
+        {
             "name": "zendframework/zendxml",
             "version": "1.0.2",
             "source": {
@@ -625,18 +669,10 @@
         }
     ],
     "packages-dev": [],
-    "aliases": [
-        {
-            "alias": "0.8.8",
-            "alias_normalized": "0.8.8.0",
-            "version": "9999999-dev",
-            "package": "raiym/instagram-php-scraper"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "php-instagram-api/php-instagram-api": 20,
-        "raiym/instagram-php-scraper": 20
+        "php-instagram-api/php-instagram-api": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
