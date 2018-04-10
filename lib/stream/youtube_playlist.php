@@ -55,7 +55,14 @@ class rex_yfeed_stream_youtube_playlist extends rex_yfeed_stream_abstract
             $item->setContent(strip_tags($video->snippet->description));
 
             $item->setUrl('https://youtube.com/watch?v='.$video->contentDetails->videoId);
-            $item->setMedia($video->snippet->thumbnails->maxres->url);
+
+            foreach (['maxres', 'standard', 'high', 'medium', 'default'] as $thumbnail) {
+                if (isset($video->snippet->thumbnails->$thumbnail->url)) {
+                    $item->setMedia($video->snippet->thumbnails->$thumbnail->url);
+
+                    break;
+                }
+            }
 
             $item->setDate(new DateTime($video->contentDetails->videoPublishedAt));
             $item->setAuthor($video->snippet->channelTitle);
