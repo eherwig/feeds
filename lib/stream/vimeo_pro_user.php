@@ -14,7 +14,7 @@ use Vimeo\Vimeo;
 
 class rex_yfeed_stream_vimeo_pro_user extends rex_yfeed_stream_abstract
 {
-  public function getTypeName()
+    public function getTypeName()
     {
         return rex_i18n::msg('yfeed_vimeo_pro_user');
     }
@@ -28,14 +28,14 @@ class rex_yfeed_stream_vimeo_pro_user extends rex_yfeed_stream_abstract
                 'type' => 'string',
             ],
             [
-            	'label' => rex_i18n::msg('yfeed_vimeo_access_token'),
-            	'name' => 'access_token',
-            	'type' => 'string',
+                'label' => rex_i18n::msg('yfeed_vimeo_access_token'),
+                'name' => 'access_token',
+                'type' => 'string',
             ],
             [
-            	'label' => rex_i18n::msg('yfeed_vimeo_client_secret'),
-            	'name' => 'client_secret',
-            	'type' => 'string',
+                'label' => rex_i18n::msg('yfeed_vimeo_client_secret'),
+                'name' => 'client_secret',
+                'type' => 'string',
             ],
         ];
     }
@@ -44,48 +44,48 @@ class rex_yfeed_stream_vimeo_pro_user extends rex_yfeed_stream_abstract
     {
         $argSeparator = ini_set('arg_separator.output', '&');
 
-    	$vimeo = new Vimeo($this->getVimeoClientID(), $this->getVimeoClientSecret());
-	if (!empty($this->getVimeoAccessToken())) {
-		$vimeo->setToken($this->getVimeoAccessToken());
-		$videos = $vimeo->request('/me/videos?per_page=100');
-		$videos = $videos['body'];
-		//dump($videos);  Total Anzahl wegen Paging (max 100 per Page) wenn mehr als 100 -> Page 2 Request + append an array realisieren		    
-		$videos = $videos['data'];
-	}
+        $vimeo = new Vimeo($this->getVimeoClientID(), $this->getVimeoClientSecret());
+        if (!empty($this->getVimeoAccessToken())) {
+            $vimeo->setToken($this->getVimeoAccessToken());
+            $videos = $vimeo->request('/me/videos?per_page=100');
+            $videos = $videos['body'];
+            //dump($videos);  Total Anzahl wegen Paging (max 100 per Page) wenn mehr als 100 -> Page 2 Request + append an array realisieren
+            $videos = $videos['data'];
+        }
         ini_set('arg_separator.output', $argSeparator);
 
         foreach ($videos as $video) {
-        	$uri = $video['uri'];
-		$uri = str_replace("/videos/","",$uri);
-        	$item = new rex_yfeed_item($this->streamId, $uri);
-        	
-        	$item->setTitle($video['name']);
-        		
-		$item->setContentRaw($video['description']);
-		$item->setContent($video['description']);
-				
-		$item->setUrl($video['link']);
-				
-		//$item->setMedia($video->snippet->thumbnails->maxres->url);
+            $uri = $video['uri'];
+            $uri = str_replace("/videos/", "", $uri);
+            $item = new rex_yfeed_item($this->streamId, $uri);
+            
+            $item->setTitle($video['name']);
+                
+            $item->setContentRaw($video['description']);
+            $item->setContent($video['description']);
+                
+            $item->setUrl($video['link']);
+                
+            //$item->setMedia($video->snippet->thumbnails->maxres->url);
 
-        	$item->setDate(new DateTime($video['created_time']));
-        		
-        	//$item->setAuthor($video->snippet->channelTitle);
-        	$item->setRaw($video);
-        	$this->updateCount($item);
-        	$item->save();
+            $item->setDate(new DateTime($video['created_time']));
+                
+            //$item->setAuthor($video->snippet->channelTitle);
+            $item->setRaw($video);
+            $this->updateCount($item);
+            $item->save();
         }
     }
     protected function getVimeoClientID()
     {
-       return $this->typeParams['client_id'];
+        return $this->typeParams['client_id'];
     }
-	protected function getVimeoAccessToken()
+    protected function getVimeoAccessToken()
     {
-       return $this->typeParams['access_token'];
+        return $this->typeParams['access_token'];
     }
-	protected function getVimeoClientSecret()
+    protected function getVimeoClientSecret()
     {
-       return $this->typeParams['client_secret'];
+        return $this->typeParams['client_secret'];
     }
 }
