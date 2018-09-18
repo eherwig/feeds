@@ -29,6 +29,7 @@ class rex_yfeed_item
     private $debug = false;
     private $changedByUser;
     private $exists;
+    private $status;
 
     public function __construct($streamId, $uid)
     {
@@ -67,6 +68,118 @@ class rex_yfeed_item
         return rex::getTable('yfeed_item');
     }
 
+	/**
+	 * Read object stored in database
+	 * @param rex_yfeed_item $rex_yfeed_item
+	 */
+    public static function get($id)
+    {
+		$rex_yfeed_item = new rex_yfeed_item(0, 0);
+		$rex_yfeed_item->primaryId = $id;
+
+        $sql = rex_sql::factory();
+        $sql->setQuery('SELECT * FROM ' . self::table() . ' WHERE `id` = ' . $id);
+
+        if ($sql->getRows()) {
+            $rex_yfeed_item->changedByUser = $sql->getValue('changed_by_user') == '1' ? TRUE : FALSE;
+			$rex_yfeed_item->exists = $sql->getValue('changed_by_user') == '1' ? FALSE : TRUE;
+			$rex_yfeed_item->streamId = $sql->getValue('stream_id');
+			$rex_yfeed_item->uid = $sql->getValue('uid');
+    		$rex_yfeed_item->title = $sql->getValue('title');
+			$rex_yfeed_item->content = $sql->getValue('content');
+			$rex_yfeed_item->contentRaw = $sql->getValue('content_raw');
+			$rex_yfeed_item->url = $sql->getValue('url');
+			$rex_yfeed_item->date = $sql->getValue('date');
+			$rex_yfeed_item->author = $sql->getValue('author');
+			$rex_yfeed_item->language = $sql->getValue('language');
+			$rex_yfeed_item->media = $sql->getValue('media');
+			$rex_yfeed_item->raw = $sql->getValue('raw');
+			$rex_yfeed_item->status = $sql->getValue('changed_by_user') == '1' ? TRUE : FALSE;
+        }
+		return $rex_yfeed_item;
+    }
+
+	/**
+	 * Get item title
+	 * @return string title
+	 */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+	/**
+	 * Get raw content
+	 * @return string Raw content
+	 */
+    public function getContentRaw()
+    {
+        return $this->contentRaw;
+    }
+
+	/**
+	 * Get content
+	 * @return strig Content
+	 */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+	/**
+	 * Get URL
+	 * @return string URL
+	 */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+	/**
+	 * Get date (format: Y-m-d H:i:s)
+	 * @return DateTimeInterface Date
+	 */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+	/**
+	 * Get author
+	 * @return string Authors name
+	 */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+	/**
+	 * Get language
+	 * @return string Language
+	 */
+    public function getLanguage()
+    {
+        return $this->language;
+    }
+
+	/**
+	 * Get base64 encoded media 
+	 * @return string Media
+	 */
+    public function getMedia()
+    {
+        return $this->media;
+    }
+
+	/**
+	 * Get raw data.
+	 * @return string JSON encoded raw data
+	 */
+    public function getRaw()
+    {
+        return $this->raw;
+    }
+    
     public function setTitle($value)
     {
         $this->title = $value;
