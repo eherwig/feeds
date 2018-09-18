@@ -36,6 +36,11 @@ abstract class rex_yfeed_stream_abstract
         $this->title = $value;
     }
 
+    public function getStreamId()
+    {
+        return $this->streamId;
+    }
+
     public function getTitle()
     {
         return $this->title;
