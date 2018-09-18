@@ -36,6 +36,24 @@ abstract class rex_yfeed_stream_abstract
         $this->title = $value;
     }
 
+	/**
+	 * Get in YFeed database stored items belonging to this stream orderd by date.
+	 * @param int $number Number of items to be returned
+	 * @return \rex_yfeed_item[] Array with item objects
+	 */
+    public function getPreloadedItems($number = 5)
+    {
+		$items = [];
+		$result = rex_sql::factory();
+		$result->setQuery('SELECT stream_id, uid FROM '. rex::getTablePrefix() .'yfeed_item ORDER BY updatedate LIMIT 0, '. $number .';');
+
+		for ($i = 0; $i < $result->getRows(); $i++) {
+			$items[] = new rex_yfeed_item($result->getValue('stream_id'), $result->getValue('uid'));
+			$result->next();
+		}
+		return $items;
+    }
+    
     public function getStreamId()
     {
         return $this->streamId;
