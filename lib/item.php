@@ -119,13 +119,22 @@ class rex_yfeed_item
 
 	/**
 	 * Get content
-	 * @return strig Content
+	 * @return string Content
 	 */
 	public function getContent()
 	{
 		return $this->content;
 	}
-
+	
+	/**
+	 * Get database Id
+	 * @return int Id
+	 */
+    public function getId()
+    {
+        return $this->primaryId;
+    }
+	
 	/**
 	 * Get URL
 	 * @return string URL
