@@ -45,7 +45,7 @@ abstract class rex_yfeed_stream_abstract
 	{
 		$items = [];
 		$result = rex_sql::factory();
-		$result->setQuery('SELECT id FROM '. rex::getTablePrefix() .'yfeed_item ORDER BY updatedate LIMIT 0, '. $number .';');
+		$result->setQuery('SELECT id FROM '. rex::getTablePrefix() .'yfeed_item ORDER BY updatedate DESC LIMIT 0, '. $number .';');
 
 		for ($i = 0; $i < $result->getRows(); $i++) {
 			$items[] = rex_yfeed_item::get($result->getValue('id'));
