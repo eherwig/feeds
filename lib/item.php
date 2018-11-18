@@ -78,6 +78,7 @@ class rex_yfeed_item
 	/**
 	 * Read object stored in database
 	 * @param rex_yfeed_item $rex_yfeed_item
+	 * @return rex_yfeed_item YFeed item or null if not found
 	 */
 	public static function get($id)
 	{
@@ -102,8 +103,11 @@ class rex_yfeed_item
 			$rex_yfeed_item->media = $sql->getValue('media');
 			$rex_yfeed_item->raw = $sql->getValue('raw');
 			$rex_yfeed_item->status = $sql->getValue('changed_by_user') == '1' ? TRUE : FALSE;
+			return $rex_yfeed_item;
 		}
-		return $rex_yfeed_item;
+		else {
+			return null;
+		}
 	}
 
 	/**
