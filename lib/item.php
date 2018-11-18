@@ -31,36 +31,43 @@ class rex_yfeed_item
     private $exists;
     private $status;
 
-    public function __construct($streamId, $uid)
+    /**
+     * Constructor. If paramters are omitted, empty object is created.
+     * @param $streamId Stream ID
+     * @param $uid UID
+     */
+    public function __construct($streamId = FALSE, $uid = FALSE)
     {
-        $this->primaryId = 0;
-        $this->streamId = (int) $streamId;
-        $this->uid = $uid;
-        $this->exists = false;
-        $this->changedByUser = false;
+        if($streamId !== FALSE && $uid !== FALSE) {
+			$this->primaryId = 0;
+			$this->streamId = (int) $streamId;
+			$this->uid = $uid;
+			$this->exists = false;
+			$this->changedByUser = false;
 
-        $sql = rex_sql::factory();
-        $sql->setQuery('
-            SELECT      `id`,
-                        `changed_by_user`
-            FROM        ' . self::table() . '
-            WHERE       `stream_id` = :stream_id
-                AND     `uid` = :uid
-            LIMIT       1',
-            [
-                'stream_id' => $this->streamId,
-                'uid' => $this->uid,
-            ]
-        );
+			$sql = rex_sql::factory();
+			$sql->setQuery('
+				SELECT      `id`,
+					`changed_by_user`
+				FROM        ' . self::table() . '
+				WHERE       `stream_id` = :stream_id
+				AND     `uid` = :uid
+				LIMIT       1',
+				[
+				'stream_id' => $this->streamId,
+				'uid' => $this->uid,
+				]
+			);
 
-        if ($sql->getRows()) {
-            if ($sql->getValue('changed_by_user') == '1') {
-                $this->changedByUser = true;
-            } else {
-                $this->primaryId = $sql->getValue('id');
-                $this->exists = true;
-            }
-        }
+			if ($sql->getRows()) {
+				if ($sql->getValue('changed_by_user') == '1') {
+					$this->changedByUser = true;
+				} else {
+					$this->primaryId = $sql->getValue('id');
+					$this->exists = true;
+				}
+			}
+		}
     }
 
     public static function table()
@@ -74,7 +81,7 @@ class rex_yfeed_item
 	 */
 	public static function get($id)
 	{
-		$rex_yfeed_item = new rex_yfeed_item(0, 0);
+		$rex_yfeed_item = new rex_yfeed_item();
 		$rex_yfeed_item->primaryId = $id;
 
 		$sql = rex_sql::factory();
