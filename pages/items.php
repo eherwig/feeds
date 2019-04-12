@@ -132,6 +132,11 @@ if ('' == $func) {
     $field = $form->addTextField('uid');
     $field->setLabel($this->i18n('item_uid'));
 
+    if ($media = $form->getSql()->getValue('type')) {
+        $field = $form->addTextField('type');
+        $field->setLabel($this->i18n('item_type'));
+    }
+
     $field = $form->addTextField('title');
     $field->setLabel($this->i18n('item_title'));
 
@@ -160,6 +165,10 @@ if ('' == $func) {
     $select->addOption($this->i18n('item_status_online'), 1);
     $select->addOption($this->i18n('item_status_offline'), 0);
 
+    if ($media = $form->getSql()->getValue('mediasource')) {
+        $field = $form->addTextField('mediasource');
+        $field->setLabel($this->i18n('item_mediasource'));
+    }
     if ($media = $form->getSql()->getValue('media')) {
         $form->addRawField('<p class="text-center"><img src="'.$media.'" style="max-height: 300px"/></p>');
     }
