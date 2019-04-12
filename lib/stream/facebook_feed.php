@@ -49,13 +49,6 @@ class rex_yfeed_stream_facebook_feed extends rex_yfeed_stream_abstract
                 'options' => [5 => 5, 10 => 10, 15 => 15, 20 => 20, 30 => 30, 50 => 50, 75 => 75, 100 => 100],
                 'default' => 10,
             ],
-            [
-                'label' => rex_i18n::msg('yfeed_facebook_api_version'),
-                'name' => 'api_version',
-                'type' => 'select',
-                'options' => ["v3.2" => "3.2", "v3.1" => "3.1", "v3.0" => "3.0", "v2.12" => "2.12"],
-                'default' => "v3.2",
-            ],
         ];
     }
 
@@ -63,7 +56,7 @@ class rex_yfeed_stream_facebook_feed extends rex_yfeed_stream_abstract
     {
         $fb = $this->getFacebook();
 
-        $fields = 'id,permalink_url,from,story,message,link,created_time,attachments';
+        $fields = 'id,permalink_url,from,story,message,link,created_time,attachments,type';
         $url = sprintf(
             '/%s/%s?locale=de&fields=%s&limit=%d',
             $this->typeParams['profile_id'],
@@ -82,23 +75,70 @@ class rex_yfeed_stream_facebook_feed extends rex_yfeed_stream_abstract
             $item->setUrl($facebookItem->getField('permalink_url'));
             $item->setDate($facebookItem->getField('created_time'));
 
+            $item->setType($facebookItem->getField('type'));
+
             $from = $facebookItem->getField('from');
             if ($from && $name = $from->getField('name')) {
                 $item->setAuthor($name);
             }
 
             $attachments = $facebookItem->getField('attachments');
+
             if ($attachments) {
-                /** @var Facebook\GraphNodes\GraphNode $attachment */
-                foreach ($attachments as $attachment) {
-                    if ('photo' !== $attachment->getField('type') || !$media = $attachment->getField('media')) {
-                        continue;
-                    }
-                    /** @var Facebook\GraphNodes\GraphNode $image */
-                    $image = $media->getField('image');
-                    if ($image) {
-                        $item->setMedia($image->getField('src'));
+
+                $isAlbum = false;
+                // fetch subattachments
+                foreach ($attachments as $key => $attachment) {
+                    if ($attachment->getField('type') === 'album') {
+                        $isAlbum = true;
+                        $subAttachments = $attachment->getField('subattachments');
                         break;
+                    }
+                }
+                
+                $attachments = isset($subAttachments) ? $subAttachments : $attachments;
+
+                /** @var Facebook\GraphNodes\GraphNode $attachment */
+                foreach ($attachments as $key => $attachment) {
+
+                    switch ($facebookItem->getField('type')) {
+                        case "photo":
+                                if ($isAlbum) {
+                                    //get only the first image from album
+                                    if ($key != 0) {
+                                        continue;
+                                    }
+                                }
+
+                                if ('photo' !== $attachment->getField('type') || !$media = $attachment->getField('media')) {
+                                    continue;
+                                }
+
+                                /** @var Facebook\GraphNodes\GraphNode $image */
+                                $image = $media->getField('image');
+                                if ($image) {
+                                    $item->setMedia($image->getField('src'));
+                                    break;
+                                }
+                            break;
+                        case "video":
+
+                            if (!$media = $attachment->getField('media')) {
+                                continue;
+                            }
+
+                            $mediasource = $media->getField('source');
+                            if ($mediasource) {
+                                $item->setMediaSource($media->getField('source'));
+                            }
+
+                            $image = $media->getField('image');
+                            if ($image) {
+                                $item->setMedia($image->getField('src'));
+                                break;
+                            }
+
+                            break;
                     }
                 }
             }
@@ -121,7 +161,7 @@ class rex_yfeed_stream_facebook_feed extends rex_yfeed_stream_abstract
             $credentials = [
                 'app_id' => rex_config::get('yfeed', 'facebook_app_id'),
                 'app_secret' => rex_config::get('yfeed', 'facebook_app_secret'),
-                'default_graph_version' => $this->typeParams['api_version'],
+                'default_graph_version' => 'v2.12',
             ];
             $facebook = new Facebook\Facebook($credentials);
             if ($this->typeParams['token']) {
