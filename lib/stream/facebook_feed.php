@@ -146,6 +146,19 @@ class rex_yfeed_stream_facebook_feed extends rex_yfeed_stream_abstract
                             }
 
                             break;
+                         case "event":
+
+                            if (!$media = $attachment->getField('media')) {
+                                continue;
+                            }
+
+                            $image = $media->getField('image');
+                            if ($image) {
+                                $item->setMedia($image->getField('src'));
+                                break;
+                            }
+
+                            break;
                     }
                 }
             }
