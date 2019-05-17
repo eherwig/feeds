@@ -73,7 +73,7 @@ if ('' == $func) {
                     $icon = 'fa-instagram';
                     break;
             }
-            return $list->getColumnLink('', '<i class="rex-icon ' . $icon . '"></i>');
+            return $list->getColumnLink('', '<i class="rex-icon ' . $icon . (($list->getValue('status')) ? '' : ' text-muted') . '"></i>');
         }
     });
 
@@ -88,7 +88,7 @@ if ('' == $func) {
         $namespace = $list->getValue('namespace');
         $type = $list->getValue('type');
         $out = $namespace . '<br /><small>' . $type . '</small>';
-        $out = ($list->getValue('status')) ? '<p>' . $out . '</p>' : '<p style="opacity:.4">' . $out . '</p>';
+        $out = '<span class="type' . (($list->getValue('status')) ? '' : ' text-muted' ) . '">' . $out . '</span>';
         return $out;
     });
 
@@ -99,7 +99,7 @@ if ('' == $func) {
         $title = $list->getValue('title');
         $title = rex_formatter::truncate($title, ['length' => 140]);
         $title .= ($list->getValue('url') != '') ? '<br /><small><a href="' . $list->getValue('url') . '" target="_blank">' . $list->getValue('url') . '</a></small>' : '';
-        $title = ($list->getValue('status')) ? '<p>' . $title . '</p>' : '<p style="opacity:.4">' . $title . '</p>';
+        $title = '<div style="word-wrap:break-word; max-width:310px; max-width:40vw;"><span class="title' . (($list->getValue('status')) ? '' : ' text-muted' ) . '">' . $title . '</span></div>';
         return $title;
     });
     
@@ -108,7 +108,7 @@ if ('' == $func) {
         /** @var rex_list $list */
         $list = $params['list'];
         $media = $list->getValue('media');
-        $media = ($media != '') ? '<div style="width:60px; height:60px; overflow:hidden; background: #333 url(\'' . $media . '\') center center no-repeat; background-size:contain; border: 1px solid #000' . ((!$list->getValue('status')) ? '; opacity:.4' : '') . '">&nbsp;</div>' : '';
+        $media = ($media != '') ? '<div class="img-thumbnail"><div style="width:60px; height:60px; overflow:hidden; background: #333 url(\'' . $media . '\') no-repeat; background-size:contain;' . ((!$list->getValue('status')) ? '; opacity:.4' : '') . '">&nbsp;</div></div>' : '';
         return $media;
     });
 
@@ -127,7 +127,7 @@ if ('' == $func) {
     });
 
     $list->addColumn($this->i18n('function'), $this->i18n('edit'));
-    $list->setColumnLayout($this->i18n('function'), ['<th class="rex-table-action" colspan="3">###VALUE###</th>', '<td class="rex-table-action">###VALUE###</td>']);
+    $list->setColumnLayout($this->i18n('function'), ['<th class="rex-table-action">###VALUE###</th>', '<td class="rex-table-action">###VALUE###</td>']);
     $list->setColumnParams($this->i18n('function'), ['func' => 'edit', 'id' => '###id###']);
 
     $content = $list->get();
