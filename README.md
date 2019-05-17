@@ -40,8 +40,7 @@ Jetzt werden YFeed-Streams regelmäßig dann abgerufen, wenn die Website aufgeru
 
 Um ein Feed auszugeben, können die Inhalte in einem Modul oder Template per SQL abgerufen werden, z.B.:
 
-```
-<?php
+```php
     $stream_id = 1;
     $media_manager_type = 'd2u_helper_yfeed_small';
 	$stream = rex_yfeed_stream::get($stream_id);
@@ -52,7 +51,7 @@ Um ein Feed auszugeben, können die Inhalte in einem Modul oder Template per SQL
         print '<img src="index.php?rex_media_type='. $media_manager_type .'&rex_media_file='. $item->getId() .'.yfeed"  alt="'. $item->getTitle() .'" title="'. $item->getTitle() .'">'; 
 		print '</a>';
     }
-?>```
+
 
 ## YFeed erweitern
 
