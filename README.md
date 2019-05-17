@@ -62,7 +62,7 @@ Um YFeed zu erweitern, kann man sich die Logik der von Haus aus mitgelieferten F
 
 * In `/redaxo/src/addons/yfeed/lib/stream/twitter_user_timeline.php` wird die Logik für den Import der Tweets eines Users hinterlegt.
 
-Diese lassen sich kopieren und bspw. im `project`-Addon anpassen. Zum Einhängen der Einstellungsseite in YFeed muss dann in der `package.yml` die Einstellungsseite registriert werden.
+Diese lassen sich kopieren und bspw. im `project`-Addon anpassen. In der `boot.php` des Projekt-Addons hinzufügen: `rex_yfeed_stream::addStream("rex_yfeed_stream_meine_klasse";`. Zum Einhängen der Einstellungsseite in YFeed muss dann in der `package.yml` die Einstellungsseite registriert werden.
 
 ## Facebook-Feeds
 
