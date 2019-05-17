@@ -41,19 +41,18 @@ Jetzt werden YFeed-Streams regelmäßig dann abgerufen, wenn die Website aufgeru
 Um ein Feed auszugeben, können die Inhalte in einem Modul oder Template per SQL abgerufen werden, z.B.:
 
 ```
-$stream_id = 1; // ID des Streams in YFeed
+<?php
+    $stream_id = 1;
+    $media_manager_type = 'd2u_helper_yfeed_small';
+	$stream = rex_yfeed_stream::get($stream_id);
+	$items = $stream->getPreloadedItems(); // Standard gibt 5 Einträge zurück, sonst gewünschte Anzahl übergeben
 
-$yfeed_items = rex_sql::factory()->getArray('SELECT * FROM rex_yfeed_item WHERE stream_id = :stream_id ORDER BY date DESC LIMIT 10', [":stream_id" => $stream_id]);
-
-# dump($yfeed_items); // Zum Debuggen ansehen
-
-foreach ($yfeed_items as $item) {
-    echo strftime("%d. %B %Y", strtotime($item['date']));
-    echo $item['content'];
-    echo $item['url'];
-    # echo $item['raw']; // weitere Details zum Beitrag im JSON-Format  
-}
-```
+    foreach($items as $item) {
+		print '<a href="'. $item->getUrl() .'" title="'. $stream->getTitle() .'">';
+        print '<img src="index.php?rex_media_type='. $media_manager_type .'&rex_media_file='. $item->getId() .'.yfeed"  alt="'. $item->getTitle() .'" title="'. $item->getTitle() .'">'; 
+		print '</a>';
+    }
+?>```
 
 ## YFeed erweitern
 
