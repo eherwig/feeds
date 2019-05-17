@@ -89,6 +89,17 @@ class rex_yfeed_stream_facebook_feed extends rex_yfeed_stream_abstract
 
             $attachments = $facebookItem->getField('attachments');
             if ($attachments) {
+                // fetch subattachments
+                unset($subAttachments);
+                foreach ($attachments as $attachment) {
+                    if ($attachment->getField('type') === 'album') {
+                        $subAttachments = $attachment->getField('subattachments');
+                        break;
+                    }
+                }
+
+                $attachments = isset($subAttachments) ? $subAttachments : $attachments;
+                
                 /** @var Facebook\GraphNodes\GraphNode $attachment */
                 foreach ($attachments as $attachment) {
                     if ('photo' !== $attachment->getField('type') || !$media = $attachment->getField('media')) {
