@@ -31,37 +31,45 @@ class rex_yfeed_item
     private $debug = false;
     private $changedByUser;
     private $exists;
+    private $status;
 
-    public function __construct($streamId, $uid)
+    /**
+     * Constructor. If paramters are omitted, empty object is created.
+     * @param $streamId Stream ID
+     * @param $uid UID
+     */
+    public function __construct($streamId = FALSE, $uid = FALSE)
     {
-        $this->primaryId = 0;
-        $this->streamId = (int) $streamId;
-        $this->uid = $uid;
-        $this->exists = false;
-        $this->changedByUser = false;
+        if($streamId !== FALSE && $uid !== FALSE) {
+			$this->primaryId = 0;
+			$this->streamId = (int) $streamId;
+			$this->uid = $uid;
+			$this->exists = false;
+			$this->changedByUser = false;
 
-        $sql = rex_sql::factory();
-        $sql->setQuery('
-            SELECT      `id`,
-                        `changed_by_user`
-            FROM        ' . self::table() . '
-            WHERE       `stream_id` = :stream_id
-                AND     `uid` = :uid
-            LIMIT       1',
-            [
-                'stream_id' => $this->streamId,
-                'uid' => $this->uid,
-            ]
-        );
+			$sql = rex_sql::factory();
+			$sql->setQuery('
+				SELECT      `id`,
+					`changed_by_user`
+				FROM        ' . self::table() . '
+				WHERE       `stream_id` = :stream_id
+				AND     `uid` = :uid
+				LIMIT       1',
+				[
+				'stream_id' => $this->streamId,
+				'uid' => $this->uid,
+				]
+			);
 
-        if ($sql->getRows()) {
-            if ($sql->getValue('changed_by_user') == '1') {
-                $this->changedByUser = true;
-            } else {
-                $this->primaryId = $sql->getValue('id');
-                $this->exists = true;
-            }
-        }
+			if ($sql->getRows()) {
+				if ($sql->getValue('changed_by_user') == '1') {
+					$this->changedByUser = true;
+				} else {
+					$this->primaryId = $sql->getValue('id');
+					$this->exists = true;
+				}
+			}
+		}
     }
 
     public static function table()
@@ -69,6 +77,131 @@ class rex_yfeed_item
         return rex::getTable('yfeed_item');
     }
 
+	/**
+	 * Read object stored in database
+	 * @param rex_yfeed_item $rex_yfeed_item
+	 * @return rex_yfeed_item YFeed item or null if not found
+	 */
+	public static function get($id)
+	{
+		$rex_yfeed_item = new rex_yfeed_item();
+		$rex_yfeed_item->primaryId = $id;
+
+		$sql = rex_sql::factory();
+		$sql->setQuery('SELECT * FROM ' . self::table() . ' WHERE `id` = ' . $id);
+
+		if ($sql->getRows()) {
+			$rex_yfeed_item->changedByUser = $sql->getValue('changed_by_user') == '1' ? TRUE : FALSE;
+			$rex_yfeed_item->exists = $sql->getValue('changed_by_user') == '1' ? FALSE : TRUE;
+			$rex_yfeed_item->streamId = $sql->getValue('stream_id');
+			$rex_yfeed_item->uid = $sql->getValue('uid');
+			$rex_yfeed_item->title = $sql->getValue('title');
+			$rex_yfeed_item->content = $sql->getValue('content');
+			$rex_yfeed_item->contentRaw = $sql->getValue('content_raw');
+			$rex_yfeed_item->url = $sql->getValue('url');
+			$rex_yfeed_item->date = $sql->getValue('date');
+			$rex_yfeed_item->author = $sql->getValue('author');
+			$rex_yfeed_item->language = $sql->getValue('language');
+			$rex_yfeed_item->media = $sql->getValue('media');
+			$rex_yfeed_item->raw = $sql->getValue('raw');
+			$rex_yfeed_item->status = $sql->getValue('changed_by_user') == '1' ? TRUE : FALSE;
+			return $rex_yfeed_item;
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Get item title
+	 * @return string title
+	 */
+	public function getTitle()
+	{
+		return $this->title;
+	}
+
+	/**
+	 * Get raw content
+	 * @return string Raw content
+	 */
+	public function getContentRaw()
+	{
+		return $this->contentRaw;
+	}
+
+	/**
+	 * Get content
+	 * @return string Content
+	 */
+	public function getContent()
+	{
+		return $this->content;
+	}
+	
+	/**
+	 * Get database Id
+	 * @return int Id
+	 */
+    public function getId()
+    {
+        return $this->primaryId;
+    }
+	
+	/**
+	 * Get URL
+	 * @return string URL
+	 */
+	public function getUrl()
+	{
+		return $this->url;
+	}
+
+	/**
+	 * Get date (format: Y-m-d H:i:s)
+	 * @return DateTimeInterface Date
+	 */
+	public function getDate()
+	{
+		return $this->date;
+	}
+
+	/**
+	 * Get author
+	 * @return string Authors name
+	 */
+	public function getAuthor()
+	{
+		return $this->author;
+	}
+
+	/**
+	 * Get language
+	 * @return string Language
+	 */
+	public function getLanguage()
+	{
+		return $this->language;
+	}
+
+	/**
+	 * Get base64 encoded media 
+	 * @return string Media
+	 */
+	public function getMedia()
+	{
+		return $this->media;
+	}
+
+	/**
+	 * Get raw data.
+	 * @return string JSON encoded raw data
+	 */
+	public function getRaw()
+	{
+		return $this->raw;
+	}
+    
     public function setTitle($value)
     {
         $this->title = $value;

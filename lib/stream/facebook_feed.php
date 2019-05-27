@@ -92,7 +92,6 @@ class rex_yfeed_stream_facebook_feed extends rex_yfeed_stream_abstract
             $attachments = $facebookItem->getField('attachments');
 
             if ($attachments) {
-
                 $isAlbum = false;
                 // fetch subattachments
                 foreach ($attachments as $key => $attachment) {
@@ -100,6 +99,8 @@ class rex_yfeed_stream_facebook_feed extends rex_yfeed_stream_abstract
                         $isAlbum = true;
                         $subAttachments = $attachment->getField('subattachments');
                         break;
+                    } else {
+                        unset($subAttachments);
                     }
                 }
                 

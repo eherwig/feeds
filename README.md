@@ -40,19 +40,16 @@ Jetzt werden YFeed-Streams regelmäßig dann abgerufen, wenn die Website aufgeru
 
 Um ein Feed auszugeben, können die Inhalte in einem Modul oder Template per SQL abgerufen werden, z.B.:
 
-```
-$stream_id = 1; // ID des Streams in YFeed
-
-$yfeed_items = rex_sql::factory()->getArray('SELECT * FROM rex_yfeed_item WHERE stream_id = :stream_id ORDER BY date DESC LIMIT 10', [":stream_id" => $stream_id]);
-
-# dump($yfeed_items); // Zum Debuggen ansehen
-
-foreach ($yfeed_items as $item) {
-    echo strftime("%d. %B %Y", strtotime($item['date']));
-    echo $item['content'];
-    echo $item['url'];
-    # echo $item['raw']; // weitere Details zum Beitrag im JSON-Format  
-}
+```php
+$stream_id = 1;
+$media_manager_type = 'd2u_helper_yfeed_small';
+$stream = rex_yfeed_stream::get($stream_id);
+$items = $stream->getPreloadedItems(); // Standard gibt 5 Einträge zurück, sonst gewünschte Anzahl übergeben
+    foreach($items as $item) {
+		print '<a href="'. $item->getUrl() .'" title="'. $stream->getTitle() .'">';
+        print '<img src="index.php?rex_media_type='. $media_manager_type .'&rex_media_file='. $item->getId() .'.yfeed"  alt="'. $item->getTitle() .'" title="'. $item->getTitle() .'">'; 
+        print '</a>';
+    }
 ```
 
 ## YFeed erweitern
@@ -63,7 +60,7 @@ Um YFeed zu erweitern, kann man sich die Logik der von Haus aus mitgelieferten F
 
 * In `/redaxo/src/addons/yfeed/lib/stream/twitter_user_timeline.php` wird die Logik für den Import der Tweets eines Users hinterlegt.
 
-Diese lassen sich kopieren und bspw. im `project`-Addon anpassen. Zum Einhängen der Einstellungsseite in YFeed muss dann in der `package.yml` die Einstellungsseite registriert werden.
+Diese lassen sich kopieren und bspw. im `project`-Addon anpassen. In der `boot.php` des Projekt-Addons hinzufügen: `rex_yfeed_stream::addStream("rex_yfeed_stream_meine_klasse";`. Zum Einhängen der Einstellungsseite in YFeed muss dann in der `package.yml` die Einstellungsseite registriert werden.
 
 ## Facebook-Feeds
 
