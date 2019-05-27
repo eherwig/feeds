@@ -15,6 +15,7 @@ class rex_yfeed_item
     private $streamId;
     private $uid;
     private $title;
+    private $type;
     private $content;
     private $contentRaw;
     private $url;
@@ -23,6 +24,7 @@ class rex_yfeed_item
     private $author;
     private $language;
     private $media;
+    private $mediasource;
     private $raw;
 
     private $primaryId;
@@ -205,6 +207,11 @@ class rex_yfeed_item
         $this->title = $value;
     }
 
+    public function setType($value)
+    {
+        $this->type = $value;
+    }
+
     public function setContentRaw($value)
     {
         $this->contentRaw = $value;
@@ -238,6 +245,11 @@ class rex_yfeed_item
     public function setMedia($url)
     {
         $this->media = rex_yfeed_helper::getDataUri($url);
+    }
+
+    public function setMediaSource($value)
+    {
+        $this->mediasource = $value;
     }
 
     public function setRaw($value)
@@ -278,6 +290,9 @@ class rex_yfeed_item
         if ($this->title) {
             $sql->setValue('title', $this->title);
         }
+        if ($this->type) {
+            $sql->setValue('type', $this->type);
+        }
         if ($this->content) {
             $sql->setValue('content', $this->content);
         }
@@ -298,6 +313,9 @@ class rex_yfeed_item
         }
         if ($this->media) {
             $sql->setValue('media', $this->media);
+        }
+        if ($this->mediasource) {
+            $sql->setValue('mediasource', $this->mediasource);
         }
         if ($this->raw) {
             $sql->setValue('raw', $this->raw);

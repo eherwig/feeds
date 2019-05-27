@@ -18,6 +18,8 @@ yfeed_item_raw = Gesamte Daten als Json
 yfeed_item_title = Titel
 yfeed_item_url = Url
 yfeed_item_uid = Id
+yfeed_item_type = Facebook Type
+yfeed_item_mediasource = MediaSource
 
 yfeed_item_status_online = Online
 yfeed_item_status_offline = Offline
