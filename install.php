@@ -20,15 +20,13 @@ rex_sql_table::get(rex::getTable('feeds_stream'))
     ->ensureColumn(new rex_sql_column('updatedate', 'datetime'))
     ->ensure();
 
-$fk = new rex_sql_foreign_key("stream_id", rex::getTable('feeds_stream'), ["stream_id" => "id"], $onUpdate = rex_sql_foreign_key::CASCADE , $onDelete = rex_sql_foreign_key::CASCADE );
-
 rex_sql_table::get(rex::getTable('feeds_item'))
     ->ensurePrimaryIdColumn()
     ->ensureColumn(new rex_sql_column('stream_id', 'int(10) unsigned'))
     ->ensureColumn(new rex_sql_column('uid', 'varchar(255)'))
     ->ensureColumn(new rex_sql_column('type', 'varchar(255)'))
     ->ensureColumn(new rex_sql_column('title', 'varchar(255)'))
-    ->ensureColumn(new rex_sql_column('content', 'text'))
+    ->ensureColumn(new rex_sql_column('content', 'text', true))
     ->ensureColumn(new rex_sql_column('content_raw', 'text'))
     ->ensureColumn(new rex_sql_column('url', 'varchar(255)'))
     ->ensureColumn(new rex_sql_column('date', 'datetime'))
@@ -37,13 +35,14 @@ rex_sql_table::get(rex::getTable('feeds_item'))
     ->ensureColumn(new rex_sql_column('media', 'longtext'))
     ->ensureColumn(new rex_sql_column('mediasource', 'text'))
     ->ensureColumn(new rex_sql_column('raw', 'text'))
-    ->ensureColumn(new rex_sql_column('status', 'tinyint(1)', false, 1))
+    ->ensureColumn(new rex_sql_column('status', 'tinyint(1)', false, '1'))
     ->ensureColumn(new rex_sql_column('changed_by_user', 'tinyint(1)'))
     ->ensureColumn(new rex_sql_column('createuser', 'varchar(255)'))
     ->ensureColumn(new rex_sql_column('updateuser', 'varchar(255)'))
     ->ensureColumn(new rex_sql_column('createdate', 'datetime'))
     ->ensureColumn(new rex_sql_column('updatedate', 'datetime'))
-    ->ensureForeignKey($fk)
+    ->ensureIndex(new rex_sql_index('stream_id', ['stream_id']))
+    ->ensureForeignKey(new rex_sql_foreign_key('stream_id', rex::getTable('feeds_stream'), ['stream_id' => 'id'], rex_sql_foreign_key::CASCADE, rex_sql_foreign_key::CASCADE))
     ->ensure();
 
 
