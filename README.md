@@ -43,7 +43,7 @@ Um ein Feed auszugeben, können die Inhalte in einem Modul oder Template per SQL
 ```php
 $stream_id = 1;
 $media_manager_type = 'my_mediatype';
-$stream = rex_Feeds_stream::get($stream_id);
+$stream = rex_feeds_stream::get($stream_id);
 $items = $stream->getPreloadedItems(); // Standard gibt 5 Einträge zurück, sonst gewünschte Anzahl übergeben
     foreach($items as $item) {
 		print '<a href="'. $item->getUrl() .'" title="'. $stream->getTitle() .'">';
