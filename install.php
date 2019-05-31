@@ -6,13 +6,7 @@
 
 $addon = rex_addon::get('feeds');
 
-// Check if YFeed is installed, geenrate new tables based on YFeed.
-
-
-
-$addon = rex_addon::get('feeds');
-
-// Check if YFeed is installed, geenrate new tables based on YFeed.
+// Get Datra from YFeed.
 
 if (rex_addon::get('yfeed')->isAvailable() && !$addon->hasConfig('yfeed_migration')) {
 
@@ -53,7 +47,7 @@ if (rex_addon::get('yfeed')->isAvailable() && !$addon->hasConfig('yfeed_migratio
         {
              $addon->setConfig('twitter_oauth_token_secret', $yfeed->getConfig('twitter_oauth_token_secret'));
         }
-
+// Check if YFeed is installed, geenrate new tables based on YFeed.
 if (rex_addon::get('yfeed')->isAvailable() && !$this->hasConfig('yfeed_migration')) {
  $sql = rex_sql::factory();
  $sql->setQuery('CREATE TABLE IF NOT EXISTS ' . rex::getTable('feeds_stream') . ' LIKE ' . rex::getTable('yfeed_stream'));  
