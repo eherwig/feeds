@@ -15,11 +15,11 @@ class rex_effect_feeds extends rex_effect_abstract
     public function execute()
     {
         $filename = rex_media_manager::getMediaFile();
-
-        if (!preg_match('/^(\d+)\.feeds$/', $filename, $match)) {
+        // allow old .yfeed files
+        if (preg_match('/^(\d+)\.feeds$/', $filename, $match) || preg_match('/^(\d+)\.yfeed$/', $filename, $match) ) {}
+        else { 
             return;
         }
-
         $id = $match[1];
 
         $sql = rex_sql::factory()
@@ -30,7 +30,7 @@ class rex_effect_feeds extends rex_effect_abstract
         if (!$sql->getRows()) {
             return;
         }
-
+        
         $data = $sql->getValue('media');
 
         if (!$data || !preg_match('@^data:image/(.*?);base64,(.+)$@', $data, $match)) {
