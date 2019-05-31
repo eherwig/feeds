@@ -4,6 +4,15 @@
  * feeds.
 */
 
+if (rex_addon::get('yfeed')->isAvailable() && !$this->hasConfig('yfeed_migration')) {
+ $sql = rex_sql::factory();
+ $sql->setQuery('CREATE TABLE IF NOT EXISTS ' . rex::getTablePrefix() . 'feeds_stream LIKE ' . rex::getTablePrefix() . 'yfeed_stream');  
+ $sql->setQuery('INSERT ' . rex::getTablePrefix() . 'feeds_stream SELECT * FROM ' . rex::getTablePrefix() . 'yfeed_stream') ; 
+ $sql->setQuery('CREATE TABLE IF NOT EXISTS ' . rex::getTablePrefix() . 'feeds_item LIKE ' . rex::getTablePrefix() . 'yfeed_item');  
+ $sql->setQuery('INSERT ' . rex::getTablePrefix() . 'feeds_item SELECT * FROM ' . rex::getTablePrefix() . 'yfeed_item') ; 
+ $this->setConfig('yfeed_migration','1');   
+}
+
 rex_sql_table::get(rex::getTable('feeds_stream'))
     ->ensurePrimaryIdColumn()
     ->ensureColumn(new rex_sql_column('namespace', 'varchar(255)'))
