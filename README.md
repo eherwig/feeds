@@ -55,7 +55,7 @@ $items = $stream->getPreloadedItems(); // Standard gibt 5 Einträge zurück, son
 ### Bilder ausgeben
 
 Damit Bilder in der Form `/index.php?rex_media_type=media_type&rex_media_file=421.yfeed`
-ausgegeben werden können muss das Bild über den Medienmanager-Effekt von Feeds eingelesen werden. Diesen sollte man direkt am Anfang vor allen anderen Effekten setzen.  
+ausgegeben werden können, muss das Bild über den Medienmanager-Effekt von Feeds eingelesen werden. Diesen sollte man direkt am Anfang vor allen anderen Effekten setzen.  
 
 ## Feeds erweitern
 
