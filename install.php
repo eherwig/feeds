@@ -8,6 +8,52 @@ $addon = rex_addon::get('feeds');
 
 // Check if YFeed is installed, geenrate new tables based on YFeed.
 
+
+
+$addon = rex_addon::get('feeds');
+
+// Check if YFeed is installed, geenrate new tables based on YFeed.
+
+if (rex_addon::get('yfeed')->isAvailable() && !$addon->hasConfig('yfeed_migration')) {
+
+    $yfeed = rex_addon::get('yfeed');
+
+// READ YForm Config and set as new 
+    if ($yfeed->hasConfig('facebook_app_id'))
+        {
+         $addon->setConfig('facebook_app_id', $yfeed->getConfig('facebook_app_id'));
+        }
+    if ($yfeed->hasConfig('facebook_app_title'))
+        {
+         $addon->setConfig('facebook_app_title', $yfeed->getConfig('facebook_app_title'));
+        }
+    if ($yfeed->hasConfig('facebook_app_secret'))
+        {
+         $addon->setConfig('facebook_app_secret', $yfeed->getConfig('facebook_app_secret'));
+        }
+    if ($yfeed->hasConfig('google_key'))
+        {
+         $addon->setConfig('google_key', $yfeed->getConfig('google_key'));
+        }
+
+    if ($yfeed->hasConfig('twitter_consumer_key'))
+        {
+         $addon->setConfig('twitter_consumer_key', $yfeed->getConfig('twitter_consumer_key'));
+        }
+    if ($yfeed->hasConfig('twitter_consumer_secret'))
+        {
+           $addon->setConfig('twitter_consumer_secret', $yfeed->getConfig('twitter_consumer_secret'));
+        }
+
+    if ($yfeed->hasConfig('twitter_oauth_token'))
+        {
+            $addon->setConfig('twitter_oauth_token', $yfeed->getConfig('twitter_oauth_token'));
+        }
+   if ($yfeed->hasConfig('twitter_oauth_token_secret'))
+        {
+             $addon->setConfig('twitter_oauth_token_secret', $yfeed->getConfig('twitter_oauth_token_secret'));
+        }
+
 if (rex_addon::get('yfeed')->isAvailable() && !$this->hasConfig('yfeed_migration')) {
  $sql = rex_sql::factory();
  $sql->setQuery('CREATE TABLE IF NOT EXISTS ' . rex::getTable('feeds_stream') . ' LIKE ' . rex::getTable('yfeed_stream'));  
