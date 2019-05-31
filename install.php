@@ -4,14 +4,19 @@
  * feeds.
 */
 
+$addon = rex_addon::get('feeds');
+
+// Check if YFeed is installed, geenrate new tables based on YFeed.
+
 if (rex_addon::get('yfeed')->isAvailable() && !$this->hasConfig('yfeed_migration')) {
  $sql = rex_sql::factory();
- $sql->setQuery('CREATE TABLE IF NOT EXISTS ' . rex::getTablePrefix() . 'feeds_stream LIKE ' . rex::getTablePrefix() . 'yfeed_stream');  
- $sql->setQuery('INSERT ' . rex::getTablePrefix() . 'feeds_stream SELECT * FROM ' . rex::getTablePrefix() . 'yfeed_stream') ; 
- $sql->setQuery('CREATE TABLE IF NOT EXISTS ' . rex::getTablePrefix() . 'feeds_item LIKE ' . rex::getTablePrefix() . 'yfeed_item');  
- $sql->setQuery('INSERT ' . rex::getTablePrefix() . 'feeds_item SELECT * FROM ' . rex::getTablePrefix() . 'yfeed_item') ; 
- $this->setConfig('yfeed_migration','1');   
+ $sql->setQuery('CREATE TABLE IF NOT EXISTS ' . rex::getTable('feeds_stream') . ' LIKE ' . rex::getTable('yfeed_stream'));  
+ $sql->setQuery('INSERT ' .  rex::getTable('feeds_stream') . ' SELECT * FROM ' . rex::getTable('yfeed_stream')); 
+ $sql->setQuery('CREATE TABLE IF NOT EXISTS '  .  rex::getTable('feeds_item') . ' LIKE ' . rex::getTable('yfeed_item'));  
+ $sql->setQuery('INSERT '  .  rex::getTable('feeds_item') . ' SELECT * FROM ' . rex::getTable('yfeed_item')); 
+ $addon->setConfig('yfeed_migration','1');   
 }
+
 
 rex_sql_table::get(rex::getTable('feeds_stream'))
     ->ensurePrimaryIdColumn()
