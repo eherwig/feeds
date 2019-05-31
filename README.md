@@ -47,10 +47,15 @@ $stream = rex_feeds_stream::get($stream_id);
 $items = $stream->getPreloadedItems(); // Standard gibt 5 Einträge zurück, sonst gewünschte Anzahl übergeben
     foreach($items as $item) {
 		print '<a href="'. $item->getUrl() .'" title="'. $stream->getTitle() .'">';
-        print '<img src="index.php?rex_media_type='. $media_manager_type .'&rex_media_file='. $item->getId() .'.Feeds"  alt="'. $item->getTitle() .'" title="'. $item->getTitle() .'">'; 
+        print '<img src="index.php?rex_media_type='. $media_manager_type .'&rex_media_file='. $item->getId() .'.feeds"  alt="'. $item->getTitle() .'" title="'. $item->getTitle() .'">'; 
         print '</a>';
     }
 ```
+
+### Bilder ausgeben
+
+Damit Bilder in der Form `/index.php?rex_media_type=media_type&rex_media_file=421.yfeed`
+ausgegeben werden können muss das Bild über den Medienmanager-Effekt von Feeds eingelesen werden. Diesen sollte man direkt am Anfang vor allen anderen Effekten setzen.  
 
 ## Feeds erweitern
 
