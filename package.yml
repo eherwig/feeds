@@ -30,3 +30,12 @@ page:
             pjax: false
             subPath: README.md
             itemclass: pull-right 
+
+requires:
+    redaxo: '^5.7' 
+    php:
+        version: '>=7.1'
+
+conflicts:
+    packages:
+        yfeed: '<1.3.0'
