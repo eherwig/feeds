@@ -6,17 +6,17 @@
 
 $addon = rex_addon::get('feeds');
 
-// Get Datra from YFeed.
+// Check if YFeed is installed, geenrate new tables based on YFeed.
 
 if (rex_addon::get('yfeed')->isAvailable() && !$addon->hasConfig('yfeed_migration')) {
-
+    
     $yfeed = rex_addon::get('yfeed');
-
-// READ YForm Config and set as new 
-    if ($yfeed->hasConfig('facebook_app_id'))
+    
+        if ($yfeed->hasConfig('facebook_app_id'))
         {
          $addon->setConfig('facebook_app_id', $yfeed->getConfig('facebook_app_id'));
         }
+
     if ($yfeed->hasConfig('facebook_app_title'))
         {
          $addon->setConfig('facebook_app_title', $yfeed->getConfig('facebook_app_title'));
@@ -47,8 +47,6 @@ if (rex_addon::get('yfeed')->isAvailable() && !$addon->hasConfig('yfeed_migratio
         {
              $addon->setConfig('twitter_oauth_token_secret', $yfeed->getConfig('twitter_oauth_token_secret'));
         }
-// Check if YFeed is installed, generate new tables based on YFeed.
-if (rex_addon::get('yfeed')->isAvailable() && !$this->hasConfig('yfeed_migration')) {
  $sql = rex_sql::factory();
  $sql->setQuery('CREATE TABLE IF NOT EXISTS ' . rex::getTable('feeds_stream') . ' LIKE ' . rex::getTable('yfeed_stream'));  
  $sql->setQuery('INSERT ' .  rex::getTable('feeds_stream') . ' SELECT * FROM ' . rex::getTable('yfeed_stream')); 
@@ -104,4 +102,5 @@ rex_sql_table::get(rex::getTable('feeds_item'))
 $c = rex_sql::factory();
 $c->setQuery('ALTER TABLE `' . rex::getTable('feeds_item') . '` CHANGE `content` `content` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci');
 
-?>
+
+
