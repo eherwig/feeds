@@ -15,15 +15,16 @@ Ein REDAXO5-AddOn zum Abruf externer Streams.
 1. Im REDAXO-Backend unter `Installer` abrufen und 
 2. anschließend unter `Hauptmenü` > `AddOns` installieren.
 
-## Migration von YFeed
+### YFeed-Migration
 
 - Es sollte YFeed 1.3.0 installiert, sein damit eine Migration erfolgen kann. YFeed ggf. daher vorab aktualisieren. 
 - Feeds importiert die Tabellen und Konfiguration von YFeed während der Installation. 
 - Die neu angelegten Tabellen lauten jetzt: TABLEPREFIX_`feeds_item` und TABLEPREFIX_`feeds_stream`, der Abruf in Modulen, AddOns oder Classes müssen daher angepasst werden. 
 - Der Aufruf der Bilder mit der Endung .yfeed wird weiterhin untersützt. 
 
+## Verwendung
 
-## Einen neuen Feed einrichten
+### Einen neuen Feed einrichten
 
 1. Im REDAXO-Backend `AddOns` > `Feeds` aufrufen,
 2. dort auf das `+`-Symbol klicken,
@@ -32,7 +33,7 @@ Ein REDAXO5-AddOn zum Abruf externer Streams.
 
 > **Hinweis:** Ggf. müssen zusätzlich in den Einstellungen von YForm Zugangsdaten (bspw. API-Schlüssel) hinterlegt werden, bspw. bei Facebook, Twitter oder YouTube.
 
-## Feed aktualisieren
+### Feed aktualisieren
 
 Die Feeds können manuell unter `AddOns` > `Feeds` abgerufen werden, oder in regelmäßigen Intervallen über einen Cronjob abgerufen werden:
 
@@ -45,7 +46,7 @@ Die Feeds können manuell unter `AddOns` > `Feeds` abgerufen werden, oder in reg
 
 Jetzt werden Feeds-Streams regelmäßig dann abgerufen, wenn die Website aufgerufen wird. [Weitere Infos zu REDAXO-Cronjobs](https://www.redaxo.org/doku/master/cronjobs).
 
-## Feed ausgeben
+### Feed ausgeben
 
 Um ein Feed auszugeben, können die Inhalte in einem Modul oder Template per SQL abgerufen werden, z.B.:
 
@@ -75,8 +76,6 @@ Um Feeds zu erweitern, kann man sich die Logik der von Haus aus mitgelieferten F
 * In `/redaxo/src/addons/feeds/lib/stream/twitter_user_timeline.php` wird die Logik für den Import der Tweets eines Users hinterlegt.
 
 Diese lassen sich kopieren und bspw. im `project`-Addon anpassen. In der `boot.php` des Projekt-Addons hinzufügen: `rex_feeds_stream::addStream("rex_Feeds_stream_meine_klasse";`. Zum Einhängen der Einstellungsseite in Feeds muss dann in der `package.yml` die Einstellungsseite registriert werden.
-
-## Facebook-Feeds
 
 ### Wann brauche ich ein Access Token für Facebook?
 
@@ -112,3 +111,4 @@ https://developers.facebook.com/tools/accesstoken
 Hier sieht man, ob man einen langlebigen API-Schlüssel hat und kann ihn sich von dort kopieren
 
 https://developers.facebook.com/tools/explorer/?classic=0
+
