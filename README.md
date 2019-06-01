@@ -101,4 +101,14 @@ Stand 2019: Ist der Nutzer, der den Access-Token generiert, Administrator der Fa
     `https://graph.facebook.com/me/accounts?access_token=[[[access_token2]]]`
 7.  Gibt es hier keine Fehlermeldung, kann der nun generierte, neue "unsterbliche" Zugangsschlüssel kann dann in den Einstellungen für den Facebook-Stream eingesetzt werden. Er wird nur noch dann ungültig, wenn bspw. das Passwort des Facebook-Accounts geändert wird, Admin-Rechte für die Facebook-Page entzogen werden oder die App gelöscht wird.
 
-> **Tipp:** Jeder Token kann [auf der Facebook Developer Debug-Seite](https://developers.facebook.com/tools/debug/accesstoken/) überprüft werden, welche Gültigkeitsdauer vorhanden ist.
+### Tipps: 
+
+Jeder Token kann [auf der Facebook Developer Debug-Seite](https://developers.facebook.com/tools/debug/accesstoken/) überprüft werden, welche Gültigkeitsdauer vorhanden ist.
+
+Hier löst man Tokens aus und Berechtigungen setzen 
+
+https://developers.facebook.com/tools/accesstoken
+
+Hier sieht man, ob man einen langlebigen API-Schlüssel hat und kann ihn sich von dort kopieren
+
+https://developers.facebook.com/tools/explorer/?classic=0
