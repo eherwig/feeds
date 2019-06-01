@@ -9,8 +9,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-use PicoFeed\Parser\Item;
+
+use GuzzleHttp\Psr7\HandlerStack;
+use GuzzleHttp\Psr7\Request;
 use PicoFeed\Reader\Reader;
+use PicoFeed\Processor;
 
 class rex_feeds_stream_rss extends rex_feeds_stream_abstract
 {
@@ -42,7 +45,6 @@ class rex_feeds_stream_rss extends rex_feeds_stream_abstract
             $resource->getContent(),
             $resource->getEncoding()
         );
-        $parser->disableContentFiltering();
         $feed = $parser->execute();
 
         /** @var Item $rssItem */
@@ -50,8 +52,6 @@ class rex_feeds_stream_rss extends rex_feeds_stream_abstract
             $item = new rex_feeds_item($this->streamId, $rssItem->getId());
             $item->setTitle($rssItem->getTitle());
             $item->setContentRaw($rssItem->getContent());
-
-            $parser->filterItemContent($feed, $rssItem);
             $item->setContent(strip_tags($rssItem->getContent()));
 
             $item->setUrl($rssItem->getUrl());
@@ -68,3 +68,4 @@ class rex_feeds_stream_rss extends rex_feeds_stream_abstract
         }
     }
 }
+
