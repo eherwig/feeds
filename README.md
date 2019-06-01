@@ -14,6 +14,14 @@ Ein REDAXO5-AddOn zum Abruf externer Streams.
 1. Im REDAXO-Backend unter `Installer` abrufen und 
 2. anschließend unter `Hauptmenü` > `AddOns` installieren.
 
+## Migration von YFeed
+
+- Es sollte YFeed 1.3.0 installiert, sein damit eine Migration erfolgen kann. YFeed ggf. daher vorab aktualisieren. 
+- Feeds importiert die Tabellen und Konfiguration von YFeed während der Installation. 
+- Die neu angelegten Tabellen lauten jetzt: TABLEPREFIX_`feeds_item` und TABLEPREFIX_`feeds_stream`, der Abruf in Modulen, AddOns oder Classes müssen daher angepasst werden. 
+- Der Aufruf der Bilder mit der Endung .yfeed wird weiterhin untersützt. 
+
+
 ## Einen neuen Feed einrichten
 
 1. Im REDAXO-Backend `AddOns` > `Feeds` aufrufen,
@@ -54,8 +62,8 @@ $items = $stream->getPreloadedItems(); // Standard gibt 5 Einträge zurück, son
 
 ### Bilder ausgeben
 
-Damit Bilder in der Form `/index.php?rex_media_type=media_type&rex_media_file=421.yfeed`
-ausgegeben werden können, muss das Bild über den Medienmanager-Effekt von Feeds eingelesen werden. Diesen sollte man direkt am Anfang vor allen anderen Effekten setzen.  
+Damit Bilder in der Form `/index.php?rex_media_type=media_type&rex_media_file=421.feed`
+ausgegeben werden können, muss das Bild über den Media-Manager-Effekt von Feeds eingelesen werden. Diesen sollte man direkt am Anfang vor allen anderen Effekten setzen.  
 
 ## Feeds erweitern
 
