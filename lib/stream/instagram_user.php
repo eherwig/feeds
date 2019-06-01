@@ -33,7 +33,7 @@ class rex_feeds_stream_instagram_user extends rex_feeds_stream_instagram_abstrac
                 'label' => rex_i18n::msg('feeds_instagram_count'),
                 'name' => 'count',
                 'type' => 'select',
-                'options' => [5 => 5, 10 => 10, 15 => 15, 20 => 20, 30 => 30, 50 => 50, 75 => 75, 100 => 100],
+                'options' => [5 => 5, 10 => 10, 15 => 15, 20 => 20],
                 'default' => 10,
             ],
         ];
