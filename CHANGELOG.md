@@ -16,6 +16,7 @@ Version 1.0.0 – XX.XX.2019
 - Methoden zum Auslesen hinzugefügt @TobiasKrais 
 - Facebook Anpassungen - Video & Album @gegerino 
 - English, Svensk, castellano translation @ytraduko-bot
+- utfmb4 in Titel und Content
 
 
 ## YFeed
