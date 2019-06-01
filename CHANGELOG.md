@@ -3,6 +3,20 @@ Changelog
 
 ## Feeds
 
+Version 1.0.0 – XX.XX.2019
+--------------------------
+
+- Renamed YFeed to Feeds @skerbis 
+- Migration YFeed to Feeds @skerbis 
+- PicoFeed neue Quelle, verwendet jetzt Guzzle @skerbis  
+- Feed einhängen via Project-Addon @alexplusde
+- Weitere Doku-Verbesserungen @alexplusde
+- Facebook Graph API-Version auswählbar machen @alexplusde   
+- Einträge Übersicht mit Bilder + Offline Indikator @VIEWSION 
+- Methoden zum Auslesen hinzugefügt @TobiasKrais 
+- Facebook Anpassungen - Video & Album @gegerino 
+- English, Svensk, castellano translation @ytraduko-bot
+
 
 ## YFeed
 
