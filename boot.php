@@ -10,6 +10,8 @@
  * file that was distributed with this source code.
  */
 
+require "vendor/autoload.php"; 
+    
 if (rex_addon::get('cronjob')->isAvailable()) {
     rex_cronjob_manager::registerType(rex_cronjob_feeds::class);
 }
