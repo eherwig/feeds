@@ -10,8 +10,6 @@
  * file that was distributed with this source code.
  */
 
-use GuzzleHttp\Psr7\HandlerStack;
-use GuzzleHttp\Psr7\Request;
 use PicoFeed\Reader\Reader;
 use PicoFeed\Processor;
 
