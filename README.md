@@ -2,7 +2,9 @@
 
 Ein REDAXO5-AddOn zum Abruf externer Streams, vormals YFeed.
 
-## Features
+## Allgemein
+
+### Features
 
 * Abruf von Facebook-, Twitter-, YouTube-, Vimeo- und RSS-Streams.
 * Dauerhaftes Speichern der Beiträge in einer Datenbank-Tabelle
@@ -10,7 +12,7 @@ Ein REDAXO5-AddOn zum Abruf externer Streams, vormals YFeed.
 * Erweiterung um eigene Feed-Typen möglich, z.B. Google My Business o.a.
 * Feeds können in Watson gesucht werden `feed suchbegriff`
 
-## Installation
+### Installation
 
 1. Im REDAXO-Backend unter `Installer` abrufen und 
 2. anschließend unter `Hauptmenü` > `AddOns` installieren.
