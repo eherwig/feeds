@@ -3,7 +3,7 @@ Changelog
 
 ## Feeds
 
-Version 1.0.0 – XX.XX.2019
+Version 2.0.0 – 02.06.2019
 --------------------------
 
 - Renamed YFeed to Feeds @skerbis 
