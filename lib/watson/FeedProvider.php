@@ -1,9 +1,9 @@
 <?php
 
 /**
- * This file is part of the Watson package.
+ * This file is part of the Feeds package.
  *
- * @author (c) Thomas Blum <thomas@addoff.de>
+ * @author FriendsOfREDAXO
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
