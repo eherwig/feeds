@@ -62,7 +62,7 @@ Jetzt werden Feeds-Streams regelmäßig dann abgerufen, wenn die Website aufgeru
 
 ### Feed ausgeben
 
-Um ein Feed auszugeben, können die Inhalte in einem Modul oder Template per SQL abgerufen werden, z.B.:
+Um ein Feed auszugeben, können die Inhalte in einem Modul oder Template per SQL oder mit nachfolgender Methode abgerufen werden, z.B.:
 
 ```php
 $stream_id = 1;
