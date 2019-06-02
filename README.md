@@ -31,7 +31,7 @@ Ein REDAXO5-AddOn zum Abruf externer Streams.
 3. den Anweisungen der Stream-Einstellungen folgen und
 4. anschließend speichern.
 
-> **Hinweis:** Ggf. müssen zusätzlich in den Einstellungen von YForm Zugangsdaten (bspw. API-Schlüssel) hinterlegt werden, bspw. bei Facebook, Twitter oder YouTube.
+> **Hinweis:** Ggf. müssen zusätzlich in den Einstellungen von Feeds Zugangsdaten (bspw. API-Schlüssel) hinterlegt werden, bspw. bei Facebook, Twitter oder YouTube.
 
 ### Feed aktualisieren
 
