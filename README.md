@@ -1,6 +1,6 @@
 # Feeds
 
-Ein REDAXO5-AddOn zum Abruf externer Streams.
+Ein REDAXO5-AddOn zum Abruf externer Streams, vormals YForm.
 
 ## Features
 
