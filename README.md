@@ -22,7 +22,19 @@ Ein REDAXO5-AddOn zum Abruf externer Streams, vormals YFeed.
 - Es sollte YFeed 1.3.0 installiert, sein damit eine Migration erfolgen kann. YFeed ggf. daher vorab aktualisieren. 
 - Feeds importiert die Tabellen und Konfiguration von YFeed während der Installation. 
 - Die neu angelegten Tabellen lauten jetzt: TABLEPREFIX_`feeds_item` und TABLEPREFIX_`feeds_stream`, der Abruf in Modulen, AddOns oder Classes müssen daher angepasst werden. 
-- Der Aufruf der Bilder mit der Endung .yfeed wird weiterhin untersützt. 
+- Der Aufruf der Bilder mit der Endung .yfeed wird weiterhin untersützt.
+
+### Lizenz
+
+AddOn, siehe [LICENSE](https://github.com/FriendsOfREDAXO/feeds/blob/master/LICENCE.md)
+
+Vendoren, siehe Vendors-Ordner des AddOns
+
+
+### Autoren
+
+* [Friends Of REDAXO](https://github.com/FriendsOfREDAXO) 
+* [Contributors](https://github.com/FriendsOfREDAXO/feeds/graphs/contributors)
 
 ## Verwendung
 
@@ -113,4 +125,7 @@ https://developers.facebook.com/tools/accesstoken
 Hier sieht man, ob man einen langlebigen API-Schlüssel hat und kann ihn sich von dort kopieren
 
 https://developers.facebook.com/tools/explorer/?classic=0
+
+
+
 
