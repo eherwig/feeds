@@ -91,6 +91,8 @@ Um Feeds zu erweitern, kann man sich die Logik der von Haus aus mitgelieferten F
 
 Diese lassen sich kopieren und bspw. im `project`-Addon anpassen. In der `boot.php` des Projekt-Addons hinzufügen: `rex_feeds_stream::addStream("rex_Feeds_stream_meine_klasse";`. Zum Einhängen der Einstellungsseite in Feeds muss dann in der `package.yml` die Einstellungsseite registriert werden.
 
+## Facebook
+
 ### Wann brauche ich ein Access Token für Facebook?
 
 Stand 2017: Bei Facebook Pages wird kein Access-Token benötigt, falls nur die öffentlich einsehbaren Einträge eingelesen werden sollen. Für Einräge mit eingeschränkter Sichtbarkeit wird ein User-Access Token oder Page-Access Token benötigt. Für Facebook User-Feeds wird ein User-Access-Token mit der Berechtigung `user_posts` benötigt.
@@ -114,7 +116,7 @@ Stand 2019: Ist der Nutzer, der den Access-Token generiert, Administrator der Fa
     `https://graph.facebook.com/me/accounts?access_token=[[[access_token2]]]`
 7.  Gibt es hier keine Fehlermeldung, kann der nun generierte, neue "unsterbliche" Zugangsschlüssel kann dann in den Einstellungen für den Facebook-Stream eingesetzt werden. Er wird nur noch dann ungültig, wenn bspw. das Passwort des Facebook-Accounts geändert wird, Admin-Rechte für die Facebook-Page entzogen werden oder die App gelöscht wird.
 
-### Tipps: 
+## Tipps: 
 
 Jeder Token kann [auf der Facebook Developer Debug-Seite](https://developers.facebook.com/tools/debug/accesstoken/) überprüft werden, welche Gültigkeitsdauer vorhanden ist.
 
