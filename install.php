@@ -98,14 +98,10 @@ rex_sql_table::get(rex::getTable('feeds_item'))
     ->ensureColumn(new rex_sql_column('createdate', 'datetime'))
     ->ensureColumn(new rex_sql_column('updatedate', 'datetime'))
     ->ensureIndex(new rex_sql_index('stream_id', ['stream_id']))
-    ->ensureForeignKey(new rex_sql_foreign_key('feeds_stream_id', rex::getTable('feeds_stream'), ['stream_id' => 'id'], rex_sql_foreign_key::CASCADE, rex_sql_foreign_key::CASCADE))
-    ->ensure();
+    ->ensureForeignKey(new rex_sql_foreign_key('feeds_item_feeds_fk', rex::getTable('feeds_item'), ['stream_id' => 'id'], rex_sql_foreign_key::CASCADE, rex_sql_foreign_key::CASCADE));
 
 
 //CHANGE content to utf8mb4_unicode_ci to display Emoticons
 $c = rex_sql::factory();
 $c->setQuery('ALTER TABLE `' . rex::getTable('feeds_item') . '` CHANGE `content` `content` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci');
 $c->setQuery('ALTER TABLE `' . rex::getTable('feeds_item') . '` CHANGE `title` `title` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci');
-
-
-
