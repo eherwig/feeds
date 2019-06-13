@@ -3,6 +3,11 @@ Changelog
 
 ## Feeds
 
+Version 2.0.1 – 13.06.2019
+--------------------------
+Fix for: https://github.com/FriendsOfREDAXO/feeds/issues/102
+and https://github.com/FriendsOfREDAXO/feeds/issues/104
+
 Version 2.0.0 – 02.06.2019
 --------------------------
 
