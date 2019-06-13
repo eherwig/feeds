@@ -98,7 +98,7 @@ rex_sql_table::get(rex::getTable('feeds_item'))
     ->ensureColumn(new rex_sql_column('createdate', 'datetime'))
     ->ensureColumn(new rex_sql_column('updatedate', 'datetime'))
     ->ensureIndex(new rex_sql_index('stream_id', ['stream_id']))
-    ->ensureForeignKey(new rex_sql_foreign_key('stream_id', rex::getTable('feeds_stream'), ['stream_id' => 'id'], rex_sql_foreign_key::CASCADE, rex_sql_foreign_key::CASCADE))
+    ->ensureForeignKey(new rex_sql_foreign_key('feeds_stream_id', rex::getTable('feeds_stream'), ['stream_id' => 'id'], rex_sql_foreign_key::CASCADE, rex_sql_foreign_key::CASCADE))
     ->ensure();
 
 
