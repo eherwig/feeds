@@ -3,10 +3,11 @@ Changelog
 
 ## Feeds
 
-Version 2.0.1 – 13.06.2019
+Version 2.0.2 – 19.06.2019
 --------------------------
 Fix for: https://github.com/FriendsOfREDAXO/feeds/issues/102
 and https://github.com/FriendsOfREDAXO/feeds/issues/104
+and https://github.com/FriendsOfREDAXO/feeds/issues/107
 
 Version 2.0.0 – 02.06.2019
 --------------------------
@@ -95,3 +96,4 @@ Version 1.1.0 – 15.05.2017
 - Bei Twitter-Hashtags werden Retweets ignoriert
 - Bei Twitter wurde die Original-ID teilweise nicht richtig gespeichert
 - Bei Twitter wurden die Texte nicht immer vollständig eingelesen
+
