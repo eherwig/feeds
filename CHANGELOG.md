@@ -6,6 +6,7 @@ Changelog
 Version 2.1.0 – XX.XX.2019
 --------------------------
 - Vimeo all videos @danspringer
+- Svensk översättning @interweave-media
 
 Version 2.0.2 – 19.06.2019
 --------------------------
