@@ -3,10 +3,11 @@ Changelog
 
 ## Feeds
 
-Version 2.1.0 – XX.XX.2019
+Version 2.1.0 – 20.08.2019
 --------------------------
 - Vimeo all videos @danspringer
 - Svensk översättning @interweave-media
+- Traducción en castellano @nandes2062!
 
 Version 2.0.2 – 19.06.2019
 --------------------------
