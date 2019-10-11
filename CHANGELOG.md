@@ -3,6 +3,12 @@ Changelog
 
 ## Feeds
 
+Version 2.2.0 - 11.10.2019
+--------------------------
+- Instagram get stream via User 'self' & access_token @ixtension
+- Added some documentation
+
+
 Version 2.1.0 – 20.08.2019
 --------------------------
 - Vimeo all videos @danspringer
