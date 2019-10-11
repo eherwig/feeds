@@ -161,4 +161,8 @@ Zum Auslesen des Streams werden User-ID, Access Token und ein Client Secret ben�
 Alle Infos dazu unter: https://developer.vimeo.com/api/authentication
 
 
+## Feeds und YForm
+
+Die Stream-Tabelle lässt sich im YForm-Tablemanager importieren. Dadurch ist es möglich eine eigene Oberfläche für die Redakteure bereitzustellen. 
+
 
