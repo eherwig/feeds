@@ -2,9 +2,7 @@
 
 Ein REDAXO5-AddOn zum Abruf externer Streams, vormals YFeed.
 
-## Allgemein
-
-### Features
+## Features
 
 * Abruf von Facebook-, Twitter-, YouTube-, Vimeo- und RSS-Streams.
 * Dauerhaftes Speichern der Beiträge in einer Datenbank-Tabelle
@@ -12,26 +10,26 @@ Ein REDAXO5-AddOn zum Abruf externer Streams, vormals YFeed.
 * Erweiterung um eigene Feed-Typen möglich, z.B. Google My Business o.a.
 * Feeds können in Watson gesucht werden `feed suchbegriff`
 
-### Installation
+## Installation
 
 1. Im REDAXO-Backend unter `Installer` abrufen und 
 2. anschließend unter `Hauptmenü` > `AddOns` installieren.
 
-### YFeed-Migration
+## YFeed-Migration
 
 - Es sollte YFeed 1.3.0 installiert, sein damit eine Migration erfolgen kann. YFeed ggf. daher vorab aktualisieren. 
 - Feeds importiert die Tabellen und Konfiguration von YFeed während der Installation. 
 - Die neu angelegten Tabellen lauten jetzt: TABLEPREFIX_`feeds_item` und TABLEPREFIX_`feeds_stream`, der Abruf in Modulen, AddOns oder Classes muss daher angepasst werden. 
 - Der Aufruf der Bilder mit der Endung .yfeed wird weiterhin unterstützt.
 
-### Lizenz
+## Lizenz
 
 AddOn, siehe [LICENSE](https://github.com/FriendsOfREDAXO/feeds/blob/master/LICENCE.md)
 
 Vendoren, siehe Vendors-Ordner des AddOns
 
 
-### Autoren
+## Autoren
 
 * [Friends Of REDAXO](https://github.com/FriendsOfREDAXO) 
 * [Contributors](https://github.com/FriendsOfREDAXO/feeds/graphs/contributors)
@@ -128,6 +126,39 @@ Hier sieht man, ob man einen langlebigen API-Schlüssel hat und kann ihn sich vo
 
 https://developers.facebook.com/tools/explorer/?classic=0
 
+## Instagram 
+
+Eigenen Access-Token anfordern, entweder über:
+
+http://www.stephan-romhart.de/artikel/instagram-feed-anleitung-code-access-token-api-einbindung-php
+
+Oder alternativ:  Einen access-token im 'public-content' scope generieren lassen, in dem man einer entsprechenden App Zugriff aufs eigene Profil gestattet: https://instagram.pixelunion.net/
+
+Dann gibt man einfach UserID oder UserName ein und fügt noch unter Einstellungen den Accesstoken ein.
+
+
+## Twitter
+
+Infos zur Erstellung des Access-Tokens gibt es hier: https://developer.twitter.com/en/docs/basics/authentication/guides/access-tokens
+
+
+### Tipp
+
+> Die API verlangt normalerweise zwingend eine UserID (Dezimalzahl) beim Typ Instagram-Benuter für Feed-Anfragen via access_token. Ist keine UserID (Dezimalzahl) angegeben wird diese durch API-Anfrage ermittelt und dann erst zur eigentlichen Feed-Anfrage weitergegangen. (Was fehlschlägt, wegen fehlendem ‚public_content‘-scope bzw. SandBox-Mode)
+Glorreiche Ausnahme ist ***'self'***, diese Anfrage wird mit "UserName" druchgewunken.
+Instagram lässt einem zumindest die Berechtigung, mit entsprechenden access_token, den eigenen Stream (des access-token-Inhabers) auszulesen. 
+
+
+## RSS Feed
+
+Gebe einfach die URL zum Feed ein. ;-) 
+
+
+## Vimeo Pro
+
+Zum Auslesen des Streams werden User-ID, Access Token und ein Client Secret benötigt. 
+
+Alle Infos dazu unter: https://developer.vimeo.com/api/authentication
 
 
 
