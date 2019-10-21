@@ -2,6 +2,8 @@
 
 Ein REDAXO5-AddOn zum Abruf externer Streams, vormals YFeed.
 
+![Screenshot](https://raw.githubusercontent.com/FriendsOfREDAXO/feeds/assets/screenshot.png)
+
 ## Features
 
 * Abruf von Facebook-, Twitter-, YouTube-, Vimeo- und RSS-Streams.
