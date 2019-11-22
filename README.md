@@ -30,11 +30,15 @@ AddOn, siehe [LICENSE](https://github.com/FriendsOfREDAXO/feeds/blob/master/LICE
 
 Vendoren, siehe Vendors-Ordner des AddOns
 
-
 ## Autoren
 
 * [Friends Of REDAXO](https://github.com/FriendsOfREDAXO) 
 * [Contributors](https://github.com/FriendsOfREDAXO/feeds/graphs/contributors)
+
+**Projekt-Lead**
+
+[Alexander Walther](https://github.com/alexplusde)
+
 
 ## Verwendung
 
