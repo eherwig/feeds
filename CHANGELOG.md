@@ -3,6 +3,10 @@ Changelog
 
 ## Feeds
 
+Version 3.0 - XX.XX.2019
+--------------------------
+- Google+ removed
+
 Version 2.2.0 - 11.10.2019
 --------------------------
 - Instagram get stream via User 'self' & access_token @ixtension
