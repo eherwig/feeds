@@ -71,6 +71,9 @@ if ('' == $func) {
                 case 'instagram':
                     $icon = 'fa-instagram';
                     break;
+                case 'google':
+                    $icon = 'fa-google';
+                    break;
             }
             return $list->getColumnLink('', '<i class="rex-icon ' . $icon . (($list->getValue('status')) ? '' : ' text-muted') . '"></i>');
         }
@@ -87,7 +90,7 @@ if ('' == $func) {
         $namespace = $list->getValue('namespace');
         $type = $list->getValue('type');
         $out = $namespace . '<br /><small>' . $type . '</small>';
-        $out = '<span class="type' . (($list->getValue('status')) ? '' : ' text-muted' ) . '">' . $out . '</span>';
+        $out = '<span class="type' . (($list->getValue('status')) ? '' : ' text-muted') . '">' . $out . '</span>';
         return $out;
     });
 
@@ -98,7 +101,7 @@ if ('' == $func) {
         $title = $list->getValue('title');
         $title = rex_formatter::truncate($title, ['length' => 140]);
         $title .= ($list->getValue('url') != '') ? '<br /><small><a href="' . $list->getValue('url') . '" target="_blank">' . $list->getValue('url') . '</a></small>' : '';
-        $title = '<div style="word-wrap:break-word; max-width:310px; max-width:40vw;"><span class="title' . (($list->getValue('status')) ? '' : ' text-muted' ) . '">' . $title . '</span></div>';
+        $title = '<div style="word-wrap:break-word; max-width:310px; max-width:40vw;"><span class="title' . (($list->getValue('status')) ? '' : ' text-muted') . '">' . $title . '</span></div>';
         return $title;
     });
     
