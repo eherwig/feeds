@@ -71,10 +71,12 @@ class rex_feeds_stream_twitter_user_timeline extends rex_feeds_stream_abstract
             $item->setLanguage($twitterItem->lang);
             $item->setRaw($twitterItem);
 
-            $media = $twitterItem->entities->media;
-            if (isset($media[0])) {
-                if ($media[0]->type == 'photo') {
-                    $item->setMedia($media[0]->media_url);
+            if (isset($twitterItem->entities->media)) {
+                $media = $twitterItem->entities->media;
+                if (isset($media[0])) {
+                    if ($media[0]->type == 'photo') {
+                        $item->setMedia($media[0]->media_url_https);
+                    }
                 }
             }
 
