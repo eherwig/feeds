@@ -96,10 +96,6 @@ feeds_twitter_hashtag = Twitter :: Hashtag
 feeds_twitter_hashtag_q = Hashtag
 feeds_twitter_hashtag_with_prefix = Hashtag mit # eingeben
 
-feeds_google = Google
-feeds_google_settings = Einstellungen
-feeds_google_key = Google Api-Key
-
 feeds_youtube_channel = Youtube :: Channel
 feeds_youtube_channel_id = Channel-ID
 feeds_youtube_count = Anzahl der Einträge
