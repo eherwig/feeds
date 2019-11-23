@@ -6,6 +6,10 @@ Changelog
 Version 3.0 - XX.XX.2019
 --------------------------
 - Google+ removed
+- new Google Places stream
+- new Facebook Events stream
+- improved Twitter streams
+- improved docs
 
 Version 2.2.0 - 11.10.2019
 --------------------------
