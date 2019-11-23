@@ -71,6 +71,12 @@ feeds_facebook_result_type_feed = Alle Einträge
 feeds_facebook_result_type_posts = Nur eigene Einträge
 feeds_facebook_result_type_tagged = Nur fremde Einträge
 
+feeds_facebook_events = Facebook-Veranstaltungen
+feeds_facebook_events_page_name =  Name der Facebook-Seite
+feeds_facebook_events_page_name_notice = So, wie er in der URL der Facebook-Seite geschrieben wird, z.B. <code>REDAXO</code>
+feeds_facebook_events_access_token = Access-Token
+feeds_facebook_events_access_token_notice = Hinweise zum Facebook-Access-Token in der Hilfe zu Feeds beachten.
+
 feeds_rss = RSS
 feeds_rss_feed = RSS Feed
 feeds_rss_url = Url
