@@ -75,7 +75,7 @@ class rex_feeds_stream_google_places extends rex_feeds_stream_abstract
                     $item->setUrl($place_details->url);
                     $item->setDate(new DateTime());
             
-                    $item->setAuthor("Google");
+                    $item->setAuthor("Google Places");
                     $item->setLanguage("de");
                     $item->setRaw(serialize($place_details));
             
