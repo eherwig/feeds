@@ -126,8 +126,8 @@ feeds_places_api_key = API-Schlüssel
 feeds_places_api_key_notice = Google Developer API-Schlüssel: https://developers.google.com/places/web-service/details
 feeds_places_id = Place ID
 feeds_places_id_notice = Google Place ID: https://developers.google.com/places/place-id
-feeds_places_photos: Fotos
-feeds_places_photos_notice: Dem Standort zugehörige Fotos herunterladen
-feeds_places_reviews: Rezensionen
-feeds_places_reviews_notice: Zusätzlich schriftliche Bewertungen (Reviews) abrufen?
+feeds_places_photos = Fotos
+feeds_places_photos_notice = Dem Standort zugehörige Fotos herunterladen?
+feeds_places_reviews = Rezensionen
+feeds_places_reviews_notice = Zusätzlich schriftliche Bewertungen (Reviews) eintragen?
 feeds_help = Hilfe
