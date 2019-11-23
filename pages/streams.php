@@ -153,6 +153,16 @@ if ('' == $func) {
         $select->setSelected(1);
     }
 
+    $field = $form->addSelectField('default_status');
+    $field->setLabel($this->i18n('item_default_status'));
+    $select = $field->getSelect();
+    $select->setSize(1);
+    $select->addOption($this->i18n('item_default_status_online'), 1);
+    $select->addOption($this->i18n('item_default_status_offline'), 0);
+    if ($func == 'add') {
+        $select->setSelected(1);
+    }
+
     $form->addFieldset($this->i18n('stream_select_type'));
 
     $field = $form->addSelectField('type');
@@ -176,7 +186,8 @@ if ('' == $func) {
         }).change();
     })(jQuery);
 
-    //--></script>';
+    //-->
+</script>';
 
     $fieldContainer = $form->addContainerField('type_params');
     $fieldContainer->setAttribute('style', 'display: none');
@@ -206,66 +217,67 @@ if ('' == $func) {
             }
 
             switch ($param['type']) {
-                case 'int':
-                case 'float':
-                case 'string':
-                    $type = 'text';
-                    $field = $fieldContainer->addGroupedField($group, $type, $name, $value, $attributes);
-                    $field->setLabel($param['label']);
-                    $field->setAttribute('id', "feeds $name $type");
-                    $field->setAttribute('disabled', 'true');
-                    if (!empty($param['notice'])) {
-                        $field->setNotice($param['notice']);
-                    }
-                    if (!empty($param['prefix'])) {
-                        $field->setPrefix($param['prefix']);
-                    }
-                    if (!empty($param['suffix'])) {
-                        $field->setSuffix($param['suffix']);
-                    }
-                    break;
-                case 'select':
-                    $type = $param['type'];
-                    /** @var rex_form_select_element $field */
-                    $field = $fieldContainer->addGroupedField($group, $type, $name, $value, $attributes);
-                    $field->setLabel($param['label']);
-                    $field->setAttribute('id', "feeds $name $type");
-                    $field->setAttribute('disabled', 'true');
-                    if (!empty($param['notice'])) {
-                        $field->setNotice($param['notice']);
-                    }
-                    if (!empty($param['prefix'])) {
-                        $field->setPrefix($param['prefix']);
-                    }
-                    if (!empty($param['suffix'])) {
-                        $field->setSuffix($param['suffix']);
-                    }
+case 'int':
+case 'float':
+case 'string':
+$type = 'text';
+$field = $fieldContainer->addGroupedField($group, $type, $name, $value, $attributes);
+$field->setLabel($param['label']);
+$field->setAttribute('id', "feeds $name $type");
+$field->setAttribute('disabled', 'true');
+if (!empty($param['notice'])) {
+    $field->setNotice($param['notice']);
+}
+if (!empty($param['prefix'])) {
+    $field->setPrefix($param['prefix']);
+}
+if (!empty($param['suffix'])) {
+    $field->setSuffix($param['suffix']);
+}
+break;
+case 'select':
+$type = $param['type'];
+/** @var rex_form_select_element $field */
+$field = $fieldContainer->addGroupedField($group, $type, $name, $value, $attributes);
+$field->setLabel($param['label']);
+$field->setAttribute('id', "feeds $name $type");
+$field->setAttribute('disabled', 'true');
+if (!empty($param['notice'])) {
+    $field->setNotice($param['notice']);
+}
+if (!empty($param['prefix'])) {
+    $field->setPrefix($param['prefix']);
+}
+if (!empty($param['suffix'])) {
+    $field->setSuffix($param['suffix']);
+}
 
-                    $select = $field->getSelect();
-                    if (isset($attributes['multiple'])) {
-                        $select->setMultiple();
-                    }
-                    $select->addOptions($param['options']);
-                    break;
-                case 'media':
-                    $type = $param['type'];
-                    $field = $fieldContainer->addGroupedField($group, $type, $name, $value, $attributes);
-                    $field->setLabel($param['label']);
-                    $field->setAttribute('id', "feeds $name $type");
-                    $field->setAttribute('disabled', 'true');
-                    if (!empty($param['notice'])) {
-                        $field->setNotice($param['notice']);
-                    }
-                    if (!empty($param['prefix'])) {
-                        $field->setPrefix($param['prefix']);
-                    }
-                    if (!empty($param['suffix'])) {
-                        $field->setSuffix($param['suffix']);
-                    }
-                    break;
-                default:
-                    throw new rex_exception('Unexpected param type "' . $param['type'] . '"');
-            }
+$select = $field->getSelect();
+if (isset($attributes['multiple'])) {
+    $select->setMultiple();
+}
+$select->addOptions($param['options']);
+break;
+case 'media':
+$type = $param['type'];
+$field = $fieldContainer->addGroupedField($group, $type, $name, $value, $attributes);
+$field->setLabel($param['label']);
+$field->setAttribute('id', "feeds $name $type");
+$field->setAttribute('disabled', 'true');
+if (!empty($param['notice'])) {
+    $field->setNotice($param['notice']);
+}
+if (!empty($param['prefix'])) {
+    $field->setPrefix($param['prefix']);
+}
+if (!empty($param['suffix'])) {
+    $field->setSuffix($param['suffix']);
+}
+break;
+default:
+throw new rex_exception('Unexpected param type "' . $param['type'] .
+'"');
+}
         }
     }
 

@@ -48,6 +48,9 @@ feeds_stream_url = URL
 feeds_stream_status_activated = Aktiviert
 feeds_stream_status_deactivated = Deaktiviert
 feeds_stream_status_saved = Der Status wurde gespeichert.
+feeds_item_default_status = Einträge standardmäßig
+feeds_item_default_status_online = online schalten
+feeds_item_default_status_offline = offline schalten
 
 
 feeds_cronjob = Feeds: Feeds abrufen
