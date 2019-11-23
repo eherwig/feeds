@@ -14,10 +14,10 @@ feeds_item_date = Datum
 feeds_item_edit = Eintrag bearbeiten
 feeds_item_language = Sprache / Sprachkürzel
 feeds_item_media = Medium
-feeds_item_raw = Gesamte Daten als Json
+feeds_item_raw = Gesamte Daten als JSON
 feeds_item_title = Titel
-feeds_item_url = Url
-feeds_item_uid = Id
+feeds_item_url = URL
+feeds_item_uid = ID
 feeds_item_type = Facebook Type
 feeds_item_mediasource = MediaSource
 
@@ -121,5 +121,13 @@ feeds_vimeo_user_id = User-ID
 feeds_vimeo_access_token = Access Token
 feeds_vimeo_client_secret = Client Secret
 
-
+feeds_places_name = Standort in Google Places / Google My Business
+feeds_places_api_key = API-Schlüssel
+feeds_places_api_key_notice = Google Developer API-Schlüssel: https://developers.google.com/places/web-service/details
+feeds_places_id = Place ID
+feeds_places_id_notice = Google Place ID: https://developers.google.com/places/place-id
+feeds_places_photos: Fotos
+feeds_places_photos_notice: Dem Standort zugehörige Fotos herunterladen
+feeds_places_reviews: Rezensionen
+feeds_places_reviews_notice: Zusätzlich schriftliche Bewertungen (Reviews) abrufen?
 feeds_help = Hilfe
