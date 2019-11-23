@@ -74,7 +74,7 @@ $media_manager_type = 'my_mediatype';
 $stream = rex_feeds_stream::get($stream_id);
 $items = $stream->getPreloadedItems(); // Standard gibt 5 Einträge zurück, sonst gewünschte Anzahl übergeben
     foreach($items as $item) {
-		print '<a href="'. $item->getUrl() .'" title="'. $stream->getTitle() .'">';
+        print '<a href="'. $item->getUrl() .'" title="'. $stream->getTitle() .'">';
         print '<img src="index.php?rex_media_type='. $media_manager_type .'&rex_media_file='. $item->getId() .'.feeds"  alt="'. $item->getTitle() .'" title="'. $item->getTitle() .'">'; 
         print '</a>';
     }
@@ -84,6 +84,14 @@ $items = $stream->getPreloadedItems(); // Standard gibt 5 Einträge zurück, son
 
 Damit Bilder in der Form `/index.php?rex_media_type=media_type&rex_media_file=421.feed`
 ausgegeben werden können, muss das Bild über den Media-Manager-Effekt von Feeds eingelesen werden. Diesen sollte man direkt am Anfang vor allen anderen Effekten setzen.  
+
+## Einträge entfernen
+
+Über das Cronjob-Addon lässt sich ein PHP-Cronjob ausführen, um nicht mehr benötigte Einträge aus der Datenbank zu entfernen. Dazu diese Codezeile ausführen und ggf. die Werte für `stream_id` und `INTERVAL` anpassen.
+
+```php
+<?php rex_sql::factory()->setQuery("DELETE FROM rex_feeds_item WHERE stream_id = 4 AND createdate < (NOW() - INTERVAL 2 MONTH)"); ?>
+```
 
 ## Feeds erweitern
 
