@@ -40,7 +40,7 @@ class rex_feeds_stream_facebook_events extends rex_feeds_stream_abstract
 
         try {
             $socket = rex_socket::factory("graph.facebook.com", 443, true);
-            $socket->setPath('/'.$params['page_name'].'/events/?fields=description,name,start_time,id,link&access_token='.$params['access_token'].'');
+            $socket->setPath('/'.$params['page_name'].'/events/?fields=cover,description,name,start_time,id,link&access_token='.$params['access_token'].'');
             $response = $socket->doGet();
             if ($response->isOk()) {
                 $result = json_decode($response->getBody());
@@ -49,14 +49,15 @@ class rex_feeds_stream_facebook_events extends rex_feeds_stream_abstract
                 } else {
                     foreach ($result->data as $event) {
                         $item = new rex_feeds_item($this->streamId, $event->id);
-                        // $item->setContentRaw();
                         $item->setTitle($event->name);
                         $item->setContent($event->description);
                         $item->setUrl('https://www.facebook.de/events/' . $event->id);
                         $item->setDate(new DateTime($event->start_time));
                         $item->setRaw(json_encode($event));
 
-                        $item->setMedia('https://graph.facebook.com/'.$event->id.'/picture?type=large');
+                        if (isset($event->cover->source)) {
+                            $item->setMedia($event->cover->source);
+                        }
                         $this->updateCount($item);
                         $item->save();
                     }
