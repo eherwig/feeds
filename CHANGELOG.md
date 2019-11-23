@@ -3,13 +3,15 @@ Changelog
 
 ## Feeds
 
-Version 3.0 - XX.XX.2019
+Version 3.0.0 Rumba - XX.XX.2019
 --------------------------
 - Google+ removed
 - new Google Places stream
 - new Facebook Events stream
 - improved Twitter streams
 - improved docs
+- vendor updates – thx @skerbis
+- fancy new release name: Rumba
 
 Version 2.2.0 - 11.10.2019
 --------------------------
@@ -44,7 +46,7 @@ Version 2.0.0 – 02.06.2019
 - Methoden zum Auslesen hinzugefügt @TobiasKrais 
 - Facebook Anpassungen - Video & Album @gegerino 
 - English, Svensk, castellano translation @ytraduko-bot
-- utfmb4 in Titel und Content
+- utf8mb4 in Titel und Content
 
 
 ## YFeed
