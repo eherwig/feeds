@@ -74,6 +74,7 @@ rex_sql_table::get(rex::getTable('feeds_stream'))
     ->ensureColumn(new rex_sql_column('updateuser', 'varchar(255)'))
     ->ensureColumn(new rex_sql_column('createdate', 'datetime'))
     ->ensureColumn(new rex_sql_column('updatedate', 'datetime'))
+    ->ensureForeignKey(new rex_sql_foreign_key('rex_feeds_stream_ibfk_1', rex::getTable('feeds_item'), ['id' => 'stream_id'], rex_sql_foreign_key::CASCADE, rex_sql_foreign_key::CASCADE))
     ->ensure();
 
 rex_sql_table::get(rex::getTable('feeds_item'))
@@ -98,11 +99,10 @@ rex_sql_table::get(rex::getTable('feeds_item'))
     ->ensureColumn(new rex_sql_column('createdate', 'datetime'))
     ->ensureColumn(new rex_sql_column('updatedate', 'datetime'))
     ->ensureIndex(new rex_sql_index('stream_id', ['stream_id']))
-    ->ensureForeignKey(new rex_sql_foreign_key('feeds_item_feeds_fk', rex::getTable('feeds_item'), ['stream_id' => 'id'], rex_sql_foreign_key::CASCADE, rex_sql_foreign_key::CASCADE))
- ->ensure();
+    ->ensureForeignKey(new rex_sql_foreign_key('rex_feeds_item_ibfk_1', rex::getTable('feeds_stream'), ['stream_id' => 'id']))
+    ->ensure();
 
 //CHANGE content to utf8mb4_unicode_ci to display Emoticons
 $c = rex_sql::factory();
 $c->setQuery('ALTER TABLE `' . rex::getTable('feeds_item') . '` CHANGE `content` `content` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci');
 $c->setQuery('ALTER TABLE `' . rex::getTable('feeds_item') . '` CHANGE `title` `title` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci');
-
