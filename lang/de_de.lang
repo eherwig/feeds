@@ -100,12 +100,16 @@ feeds_twitter_hashtag = Twitter :: Hashtag
 feeds_twitter_hashtag_q = Hashtag
 feeds_twitter_hashtag_with_prefix = Hashtag mit # eingeben
 
-feeds_youtube_channel = Youtube :: Channel
-feeds_youtube_channel_id = Channel-ID
+feeds_youtube_channel = Youtube :: Kanal abonnieren
+feeds_youtube_channel_id = ID
+feeds_youtube_channel_id_notice = Die ID des YouTube-Kanals ist einsehbar unter: https://www.youtube.com/account_advanced
 feeds_youtube_count = Anzahl der Einträge
+feeds_youtube_api_key = API-Schlüssel
+feeds_youtube_api_key_notice = Aktiviere die Youtube Data API v3 und hinterlege hier den API_KEY zu den Anmeldedaten.
 
-feeds_youtube_playlist = Youtube :: Playlist
+feeds_youtube_playlist = Youtube :: Playlist laden
 feeds_youtube_playlist_id = Playlist-ID
+feeds_youtube_playlist_id_notice = z.B. <code>PLrevOqFLX0RMyUWioOz3X6gmLiGvAh6M5</code>
 
 feeds_instagram = Instagram
 feeds_instagram_settings = Einstellungen
