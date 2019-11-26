@@ -33,35 +33,41 @@ class rex_feeds_stream_rss extends rex_feeds_stream_abstract
     public function fetch()
     {
         $reader = new Reader();
-        $resource = $reader->download($this->typeParams['url'], $this->lastModified, $this->etag);
-        if (!$resource->isModified()) {
-            return;
-        }
-        $parser = $reader->getParser(
+        try {
+            $resource = $reader->download($this->typeParams['url'], $this->lastModified, $this->etag);
+            if (!$resource->isModified()) {
+                return;
+            }
+            $parser = $reader->getParser(
             $resource->getUrl(),
             $resource->getContent(),
             $resource->getEncoding()
         );
-        $feed = $parser->execute();
+            $feed = $parser->execute();
 
-        /** @var Item $rssItem */
-        foreach ($feed->getItems() as $rssItem) {
-            $item = new rex_feeds_item($this->streamId, $rssItem->getId());
-            $item->setTitle($rssItem->getTitle());
-            $item->setContentRaw($rssItem->getContent());
-            $item->setContent(strip_tags($rssItem->getContent()));
+            /** @var Item $rssItem */
+            foreach ($feed->getItems() as $rssItem) {
+                $item = new rex_feeds_item($this->streamId, $rssItem->getId());
+                $item->setTitle($rssItem->getTitle());
+                $item->setContentRaw($rssItem->getContent());
+                $item->setContent(strip_tags($rssItem->getContent()));
 
-            $item->setUrl($rssItem->getUrl());
-            $item->setDate($rssItem->getDate());
-            $item->setAuthor($rssItem->getAuthor());
-            $item->setLanguage($rssItem->getLanguage());
-            if ($rssItem->getEnclosureUrl()) {
-                $item->setMedia($rssItem->getEnclosureUrl());
-            }
-            $item->setRaw($rssItem);
+                $item->setUrl($rssItem->getUrl());
+                $item->setDate($rssItem->getDate());
+                $item->setAuthor($rssItem->getAuthor());
+                $item->setLanguage($rssItem->getLanguage());
+                if ($rssItem->getEnclosureUrl()) {
+                    $item->setMedia($rssItem->getEnclosureUrl());
+                }
+                $item->setRaw($rssItem);
             
-            $this->updateCount($item);
-            $item->save();
+                $this->updateCount($item);
+                $item->save();
+            }
+        } catch(exception $e) {
+            $messages = preg_split('/\r\n|\r|\n/', $e->getMessage());
+            echo rex_view::error($messages[0]);
+            return false;
         }
     }
 }

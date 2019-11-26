@@ -87,9 +87,12 @@ class rex_feeds_stream_google_places extends rex_feeds_stream_abstract
                     $item = null;
                     if ($this->typeParams['photos'] == 1 && is_array($place_details->photos)) {
                         foreach ($place_details->photos as $photo) {
-                            $url = "https://maps.googleapis.com/maps/api/place/photo?photoreference=".$photo->photo_reference."&maxwidth=1200&place_id=".$credentials['places_id']."&key=".$credentials['api_key'];
 
-                            $item = new rex_feeds_item($this->streamId, $photo->photo_reference);
+                            $socket = rex_socket::factory("maps.googleapis.com", 443, true);
+                            $socket->setPath("/maps/api/place/photo?photoreference=".$photo->photo_reference."&maxwidth=1200&place_id=".$credentials['places_id']."&key=".$credentials['api_key']."");
+                            $response = $socket->doGet();
+                            $url = $response->getHeader('location');
+                            $item = new rex_feeds_item($this->streamId, md5($url));
                             $item->setTitle(strip_tags(implode(",", $photo->html_attributions)));
                             $item->setUrl($url);
                             $item->setAuthor(implode(",", $photo->html_attributions));
@@ -106,7 +109,6 @@ class rex_feeds_stream_google_places extends rex_feeds_stream_abstract
                         foreach ($place_details->reviews as $review) {
                             $item = new rex_feeds_item($this->streamId, md5($review->author_url));
                             $item->setTitle($review->author_name);
-                            $item->setUrl($url);
                             $item->setAuthor($review->author_name);
                             $item->setUrl($review->author_url);
                             $item->setMedia($review->profile_photo_url);
