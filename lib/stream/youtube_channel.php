@@ -25,6 +25,13 @@ class rex_feeds_stream_youtube_channel extends rex_feeds_stream_youtube_playlist
                 'label' => rex_i18n::msg('feeds_youtube_channel_id'),
                 'name' => 'channel_id',
                 'type' => 'string',
+                'notice' => rex_i18n::msg('feeds_youtube_channel_id_notice')
+            ],
+            [
+                'label' => rex_i18n::msg('feeds_youtube_api_key'),
+                'name' => 'api_key',
+                'type' => 'string',
+                'notice' => rex_i18n::msg('feeds_youtube_api_key_notice')
             ],
             [
                 'label' => rex_i18n::msg('feeds_youtube_count'),
@@ -38,8 +45,15 @@ class rex_feeds_stream_youtube_channel extends rex_feeds_stream_youtube_playlist
 
     protected function getPlaylistId(Youtube $youtube)
     {
-        $channel = $youtube->getChannelById($this->typeParams['channel_id'], ['part' => 'contentDetails']);
-
-        return $channel->contentDetails->relatedPlaylists->uploads;
+        try {
+            $channel = $youtube->getChannelById($this->typeParams['channel_id'], ['part' => 'contentDetails']);
+            dump($channel);
+            return $channel->contentDetails->relatedPlaylists->uploads;
+        } catch (exception $e) {
+            dump($e);
+            echo rex_view::error($e->getMessage());
+            return false;
+        }
+      
     }
 }

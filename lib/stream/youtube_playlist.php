@@ -25,6 +25,13 @@ class rex_feeds_stream_youtube_playlist extends rex_feeds_stream_abstract
                 'label' => rex_i18n::msg('feeds_youtube_playlist_id'),
                 'name' => 'playlist_id',
                 'type' => 'string',
+                'notice' => rex_i18n::msg('feeds_youtube_playlist_id_notice')
+            ],
+            [
+                'label' => rex_i18n::msg('feeds_youtube_api_key'),
+                'name' => 'api_key',
+                'type' => 'string',
+                'notice' => rex_i18n::msg('feeds_youtube_api_key_notice')
             ],
             [
                 'label' => rex_i18n::msg('feeds_youtube_count'),
@@ -40,37 +47,45 @@ class rex_feeds_stream_youtube_playlist extends rex_feeds_stream_abstract
     {
         $argSeparator = ini_set('arg_separator.output', '&');
 
-        $youtube = new Youtube(['key' => rex_config::get('feeds', 'google_key')]);
+        $youtube = new Youtube(['key' => $this->typeParams['api_key']]);
 
-        $videos = $youtube->getPlaylistItemsByPlaylistId($this->getPlaylistId($youtube), $this->typeParams['count']);
+        $videos = null;
+        try {
+            $videos = $youtube->getPlaylistItemsByPlaylistId($this->getPlaylistId($youtube), $this->typeParams['count']);
+      
+            ini_set('arg_separator.output', $argSeparator);
 
-        ini_set('arg_separator.output', $argSeparator);
-
-        foreach ($videos as $video) {
-            $item = new rex_feeds_item($this->streamId, $video->contentDetails->videoId);
-
-            $item->setTitle($video->snippet->title);
-            $item->setContentRaw($video->snippet->description);
-            $item->setContent(strip_tags($video->snippet->description));
-
-            $item->setUrl('https://youtube.com/watch?v='.$video->contentDetails->videoId);
-
-            foreach (['maxres', 'standard', 'high', 'medium', 'default'] as $thumbnail) {
-                if (isset($video->snippet->thumbnails->$thumbnail->url)) {
-                    $item->setMedia($video->snippet->thumbnails->$thumbnail->url);
-
-                    break;
+            foreach ($videos as $video) {
+                $item = new rex_feeds_item($this->streamId, $video->contentDetails->videoId);
+    
+                $item->setTitle($video->snippet->title);
+                $item->setContentRaw($video->snippet->description);
+                $item->setContent(strip_tags($video->snippet->description));
+    
+                $item->setUrl('https://youtube.com/watch?v='.$video->contentDetails->videoId);
+    
+                foreach (['maxres', 'standard', 'high', 'medium', 'default'] as $thumbnail) {
+                    if (isset($video->snippet->thumbnails->$thumbnail->url)) {
+                        $item->setMedia($video->snippet->thumbnails->$thumbnail->url);
+    
+                        break;
+                    }
                 }
+    
+                $item->setDate(new DateTime($video->snippet->publishedAt));
+                $item->setAuthor($video->snippet->channelTitle);
+    
+                $item->setRaw($video);
+    
+                $this->updateCount($item);
+                $item->save();
             }
-
-            $item->setDate(new DateTime($video->contentDetails->videoPublishedAt));
-            $item->setAuthor($video->snippet->channelTitle);
-
-            $item->setRaw($video);
-
-            $this->updateCount($item);
-            $item->save();
+      
+        } catch (exception $e) {
+            dump($e);
+            echo rex_view::error($e->getMessage());
         }
+      
     }
 
     protected function getPlaylistId(Youtube $youtube)
