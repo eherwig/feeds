@@ -20,7 +20,7 @@ class rex_feeds_helper
      */
     public static function getDataUri($url)
     {
-        $response = rex_socket::factoryUrl($url)->doGet();
+        $response = rex_socket::factoryUrl($url)->followRedirects(2)->doGet();
         $mimeType = $response->getHeader('content-type');
         $uri = 'data:'.$mimeType;
 
