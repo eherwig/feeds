@@ -1,5 +1,5 @@
 package: feeds
-version: '3.0-dev'
+version: '3.0-beta1'
 author: Friends Of REDAXO
 supportpage: https://github.com/FriendsOfREDAXO/feeds
 
@@ -37,3 +37,4 @@ requires:
 conflicts:
     packages:
         yfeed: '<1.3.0'
+        feeds: '<2.2.1'
