@@ -102,6 +102,7 @@ abstract class rex_feeds_stream_instagram_abstract extends rex_feeds_stream_abst
             }
 
             $item->setAuthor($owner->getFullName() ?: null);
+            $item->setUsername($owner->getUsername());
 
             $item->setRaw($instagramItem);
 

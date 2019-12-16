@@ -21,6 +21,7 @@ class rex_feeds_item
     /** @var DateTimeInterface */
     private $date;
     private $author;
+    private $username;
     private $language;
     private $media;
     private $mediasource;
@@ -37,38 +38,39 @@ class rex_feeds_item
      * @param $streamId Stream ID
      * @param $uid UID
      */
-    public function __construct($streamId = FALSE, $uid = FALSE)
+    public function __construct($streamId = false, $uid = false)
     {
-        if($streamId !== FALSE && $uid !== FALSE) {
-			$this->primaryId = 0;
-			$this->streamId = (int) $streamId;
-			$this->uid = $uid;
-			$this->exists = false;
-			$this->changedByUser = false;
+        if ($streamId !== false && $uid !== false) {
+            $this->primaryId = 0;
+            $this->streamId = (int) $streamId;
+            $this->uid = $uid;
+            $this->exists = false;
+            $this->changedByUser = false;
 
-			$sql = rex_sql::factory();
-			$sql->setQuery('
+            $sql = rex_sql::factory();
+            $sql->setQuery(
+                '
 				SELECT      `id`,
 					`changed_by_user`
 				FROM        ' . self::table() . '
 				WHERE       `stream_id` = :stream_id
 				AND     `uid` = :uid
 				LIMIT       1',
-				[
-				'stream_id' => $this->streamId,
-				'uid' => $this->uid,
-				]
-			);
+                [
+                'stream_id' => $this->streamId,
+                'uid' => $this->uid,
+                ]
+            );
 
-			if ($sql->getRows()) {
-				if ($sql->getValue('changed_by_user') == '1') {
-					$this->changedByUser = true;
-				} else {
-					$this->primaryId = $sql->getValue('id');
-					$this->exists = true;
-				}
-			}
-		}
+            if ($sql->getRows()) {
+                if ($sql->getValue('changed_by_user') == '1') {
+                    $this->changedByUser = true;
+                } else {
+                    $this->primaryId = $sql->getValue('id');
+                    $this->exists = true;
+                }
+            }
+        }
     }
 
     public static function table()
@@ -76,130 +78,138 @@ class rex_feeds_item
         return rex::getTable('feeds_item');
     }
 
-	/**
-	 * Read object stored in database
-	 * @param rex_feeds_item $rex_feeds_item
-	 * @return rex_feeds_item Feeds item or null if not found
-	 */
-	public static function get($id)
-	{
-		$rex_feeds_item = new rex_feeds_item();
-		$rex_feeds_item->primaryId = $id;
+    /**
+     * Read object stored in database
+     * @param rex_feeds_item $rex_feeds_item
+     * @return rex_feeds_item Feeds item or null if not found
+     */
+    public static function get($id)
+    {
+        $rex_feeds_item = new rex_feeds_item();
+        $rex_feeds_item->primaryId = $id;
 
-		$sql = rex_sql::factory();
-		$sql->setQuery('SELECT * FROM ' . self::table() . ' WHERE `id` = ' . $id);
+        $sql = rex_sql::factory();
+        $sql->setQuery('SELECT * FROM ' . self::table() . ' WHERE `id` = ' . $id);
 
-		if ($sql->getRows()) {
-			$rex_feeds_item->changedByUser = $sql->getValue('changed_by_user') == '1' ? TRUE : FALSE;
-			$rex_feeds_item->exists = $sql->getValue('changed_by_user') == '1' ? FALSE : TRUE;
-			$rex_feeds_item->streamId = $sql->getValue('stream_id');
-			$rex_feeds_item->uid = $sql->getValue('uid');
-			$rex_feeds_item->title = $sql->getValue('title');
-			$rex_feeds_item->content = $sql->getValue('content');
-			$rex_feeds_item->contentRaw = $sql->getValue('content_raw');
-			$rex_feeds_item->url = $sql->getValue('url');
-			$rex_feeds_item->date = $sql->getValue('date');
-			$rex_feeds_item->author = $sql->getValue('author');
-			$rex_feeds_item->language = $sql->getValue('language');
-			$rex_feeds_item->media = $sql->getValue('media');
-			$rex_feeds_item->raw = $sql->getValue('raw');
-			$rex_feeds_item->status = $sql->getValue('changed_by_user') == '1' ? TRUE : FALSE;
-			return $rex_feeds_item;
-		}
-		else {
-			return null;
-		}
-	}
+        if ($sql->getRows()) {
+            $rex_feeds_item->changedByUser = $sql->getValue('changed_by_user') == '1' ? true : false;
+            $rex_feeds_item->exists = $sql->getValue('changed_by_user') == '1' ? false : true;
+            $rex_feeds_item->streamId = $sql->getValue('stream_id');
+            $rex_feeds_item->uid = $sql->getValue('uid');
+            $rex_feeds_item->title = $sql->getValue('title');
+            $rex_feeds_item->content = $sql->getValue('content');
+            $rex_feeds_item->contentRaw = $sql->getValue('content_raw');
+            $rex_feeds_item->url = $sql->getValue('url');
+            $rex_feeds_item->date = $sql->getValue('date');
+            $rex_feeds_item->author = $sql->getValue('author');
+            $rex_feeds_item->username = $sql->getValue('username');
+            $rex_feeds_item->language = $sql->getValue('language');
+            $rex_feeds_item->media = $sql->getValue('media');
+            $rex_feeds_item->raw = $sql->getValue('raw');
+            $rex_feeds_item->status = $sql->getValue('changed_by_user') == '1' ? true : false;
+            return $rex_feeds_item;
+        } else {
+            return null;
+        }
+    }
 
-	/**
-	 * Get item title
-	 * @return string title
-	 */
-	public function getTitle()
-	{
-		return $this->title;
-	}
+    /**
+     * Get item title
+     * @return string title
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
 
-	/**
-	 * Get raw content
-	 * @return string Raw content
-	 */
-	public function getContentRaw()
-	{
-		return $this->contentRaw;
-	}
+    /**
+     * Get raw content
+     * @return string Raw content
+     */
+    public function getContentRaw()
+    {
+        return $this->contentRaw;
+    }
 
-	/**
-	 * Get content
-	 * @return string Content
-	 */
-	public function getContent()
-	{
-		return $this->content;
-	}
-	
-	/**
-	 * Get database Id
-	 * @return int Id
-	 */
+    /**
+     * Get content
+     * @return string Content
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+    
+    /**
+     * Get database Id
+     * @return int Id
+     */
     public function getId()
     {
         return $this->primaryId;
     }
-	
-	/**
-	 * Get URL
-	 * @return string URL
-	 */
-	public function getUrl()
-	{
-		return $this->url;
-	}
+    
+    /**
+     * Get URL
+     * @return string URL
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
 
-	/**
-	 * Get date (format: Y-m-d H:i:s)
-	 * @return DateTimeInterface Date
-	 */
-	public function getDate()
-	{
-		return $this->date;
-	}
+    /**
+     * Get date (format: Y-m-d H:i:s)
+     * @return DateTimeInterface Date
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
 
-	/**
-	 * Get author
-	 * @return string Authors name
-	 */
-	public function getAuthor()
-	{
-		return $this->author;
-	}
+    /**
+     * Get author
+     * @return string Authors name
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+    /**
+     * Get username
+     * @return string username
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
 
-	/**
-	 * Get language
-	 * @return string Language
-	 */
-	public function getLanguage()
-	{
-		return $this->language;
-	}
+    /**
+     * Get language
+     * @return string Language
+     */
+    public function getLanguage()
+    {
+        return $this->language;
+    }
 
-	/**
-	 * Get base64 encoded media 
-	 * @return string Media
-	 */
-	public function getMedia()
-	{
-		return $this->media;
-	}
+    /**
+     * Get base64 encoded media
+     * @return string Media
+     */
+    public function getMedia()
+    {
+        return $this->media;
+    }
 
-	/**
-	 * Get raw data.
-	 * @return string JSON encoded raw data
-	 */
-	public function getRaw()
-	{
-		return $this->raw;
-	}
+    /**
+     * Get raw data.
+     * @return string JSON encoded raw data
+     */
+    public function getRaw()
+    {
+        return $this->raw;
+    }
     
     public function setTitle($value)
     {
@@ -234,6 +244,11 @@ class rex_feeds_item
     public function setAuthor($value)
     {
         $this->author = $value;
+    }
+
+    public function setUsername($value)
+    {
+        $this->username = $value;
     }
 
     public function setLanguage($value)
@@ -306,6 +321,9 @@ class rex_feeds_item
         }
         if ($this->author) {
             $sql->setValue('author', $this->author);
+        }
+        if ($this->username) {
+            $sql->setValue('username', $this->username);
         }
         if ($this->language) {
             $sql->setValue('language', $this->language);
