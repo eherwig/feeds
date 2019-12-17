@@ -12,23 +12,22 @@ $addon = rex_addon::get('feeds');
 
 // Check if YFeed is installed, geenrate new tables based on YFeed.
 rex_sql_table::get(rex::getTable('feeds_stream'))
-    ->ensurePrimaryIdColumn()
-    ->ensureColumn(new rex_sql_column('namespace', 'varchar(255)'))
-    ->ensureColumn(new rex_sql_column('type', 'varchar(255)'))
-    ->ensureColumn(new rex_sql_column('type_params', 'text'))
-    ->ensureColumn(new rex_sql_column('title', 'varchar(255)'))
-    ->ensureColumn(new rex_sql_column('image', 'varchar(255)'))
-    ->ensureColumn(new rex_sql_column('etag', 'varchar(255)'))
-    ->ensureColumn(new rex_sql_column('last_modified', 'varchar(255)'))
-    ->ensureColumn(new rex_sql_column('status', 'tinyint(1)'))
-    ->ensureColumn(new rex_sql_column('createuser', 'varchar(255)'))
-    ->ensureColumn(new rex_sql_column('updateuser', 'varchar(255)'))
-    ->ensureColumn(new rex_sql_column('createdate', 'datetime'))
-    ->ensureColumn(new rex_sql_column('updatedate', 'datetime'))
-    ->ensureForeignKey(new rex_sql_foreign_key('rex_feeds_stream_ibfk_1', rex::getTable('feeds_item'), ['id' => 'stream_id'], rex_sql_foreign_key::CASCADE, rex_sql_foreign_key::CASCADE))
-    ->ensure();
+->ensurePrimaryIdColumn()
+->ensureColumn(new rex_sql_column('namespace', 'varchar(255)'))
+->ensureColumn(new rex_sql_column('type', 'varchar(255)'))
+->ensureColumn(new rex_sql_column('type_params', 'text'))
+->ensureColumn(new rex_sql_column('title', 'varchar(255)'))
+->ensureColumn(new rex_sql_column('image', 'varchar(255)'))
+->ensureColumn(new rex_sql_column('etag', 'varchar(255)'))
+->ensureColumn(new rex_sql_column('last_modified', 'varchar(255)'))
+->ensureColumn(new rex_sql_column('status', 'tinyint(1)'))
+->ensureColumn(new rex_sql_column('createuser', 'varchar(255)'))
+->ensureColumn(new rex_sql_column('updateuser', 'varchar(255)'))
+->ensureColumn(new rex_sql_column('createdate', 'datetime'))
+->ensureColumn(new rex_sql_column('updatedate', 'datetime'))
+->ensure();
 
-rex_sql_table::get(rex::getTable('feeds_item'))
+    rex_sql_table::get(rex::getTable('feeds_item'))
     ->ensurePrimaryIdColumn()
     ->ensureColumn(new rex_sql_column('stream_id', 'int(10) unsigned'))
     ->ensureColumn(new rex_sql_column('uid', 'varchar(255)'))
@@ -50,6 +49,13 @@ rex_sql_table::get(rex::getTable('feeds_item'))
     ->ensureColumn(new rex_sql_column('createdate', 'datetime'))
     ->ensureColumn(new rex_sql_column('updatedate', 'datetime'))
     ->ensureIndex(new rex_sql_index('stream_id', ['stream_id']))
+    ->ensure();
+
+    rex_sql_table::get(rex::getTable('feeds_stream'))
+    ->ensureForeignKey(new rex_sql_foreign_key('rex_feeds_stream_ibfk_1', rex::getTable('feeds_item'), ['id' => 'stream_id'], rex_sql_foreign_key::CASCADE, rex_sql_foreign_key::CASCADE))
+    ->ensure();
+
+    rex_sql_table::get(rex::getTable('feeds_item'))
     ->ensureForeignKey(new rex_sql_foreign_key('rex_feeds_item_ibfk_1', rex::getTable('feeds_stream'), ['stream_id' => 'id']))
     ->ensure();
 
