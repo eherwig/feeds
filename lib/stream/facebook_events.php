@@ -66,5 +66,7 @@ class rex_feeds_stream_facebook_events extends rex_feeds_stream_abstract
         } catch (rex_socket_exception $e) {
             echo rex_view::error($e->getMessage());
         }
+        self::registerExtensionPoint($this->streamId);
+
     }
 }

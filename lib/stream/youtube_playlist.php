@@ -85,7 +85,8 @@ class rex_feeds_stream_youtube_playlist extends rex_feeds_stream_abstract
             dump($e);
             echo rex_view::error($e->getMessage());
         }
-      
+        self::registerExtensionPoint($this->streamId);
+ 
     }
 
     protected function getPlaylistId(Youtube $youtube)

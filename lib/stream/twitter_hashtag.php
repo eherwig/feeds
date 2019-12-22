@@ -92,4 +92,6 @@ class rex_feeds_stream_twitter_hashtag extends rex_feeds_stream_abstract
             $item->save();
         }
     }
+    self::registerExtensionPoint($this->streamId);
+
 }
