@@ -75,6 +75,7 @@ class rex_feeds_stream_twitter_hashtag extends rex_feeds_stream_abstract
             $item->setDate(new DateTime($twitterItem->created_at));
 
             $item->setAuthor($twitterItem->user->name);
+            $item->setUsername($twitterItem->user->screen_name);
             $item->setLanguage($twitterItem->lang);
             $item->setRaw($twitterItem);
 
