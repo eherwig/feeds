@@ -12,7 +12,13 @@ class rex_cronjob_feeds extends rex_cronjob
 {
     public function execute()
     {
-        $streams = rex_feeds_stream::getAllActivated();
+        $streams = [];
+        foreach (rex_feeds_stream::getAllActivated() as &$stream) {
+            if (strpos($this->getParam('blacklist_streams'), get_class($stream)) === false) {
+                $streams[] = $stream;
+            };
+        }
+        
         $errors = [];
         $countAdded = 0;
         $countUpdated = 0;
@@ -43,5 +49,23 @@ class rex_cronjob_feeds extends rex_cronjob
     public function getTypeName()
     {
         return rex_addon::get('feeds')->i18n('feeds_cronjob');
+    }
+    public function getParamFields()
+    {
+        $options = [];
+        foreach (rex_feeds_stream::getAllActivated() as $stream) {
+            $options[get_class($stream)] = get_class($stream);
+        }
+
+        $fields[] = [
+            'label' => rex_i18n::msg('feeds_blacklist_sources'),
+            'name' => 'blacklist_streams',
+            'type' => 'select',
+            'attributes' => ['multiple' => 'multiple', 'data-live-search' => 'true'],
+            'options' => $options,
+            'notice' => rex_i18n::msg('feeds_blacklist_sources_notice'),
+        ];
+
+        return $fields;
     }
 }
