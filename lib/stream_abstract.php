@@ -76,6 +76,14 @@ abstract class rex_feeds_stream_abstract
         $this->lastModified = $value;
     }
 
+
+    private function registerExtensionPoint($stream_id) {
+        return rex_extension::registerPoint(new rex_extension_point(
+        'FEEDS_STREAM_FETCHED',
+        [$stream_id]
+        ));
+    }   
+
     public function getAddedCount()
     {
         return $this->countAdded;

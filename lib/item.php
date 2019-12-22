@@ -357,5 +357,11 @@ class rex_feeds_item
             $sql->addGlobalUpdateFields($user);
             $sql->insert();
         }
+
+        rex_extension::registerPoint(new rex_extension_point(
+            'FEEDS_ITEM_SAVED',
+            [$this->streamId, $this->uid]
+        ));
+
     }
 }

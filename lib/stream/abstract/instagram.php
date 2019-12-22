@@ -109,5 +109,7 @@ abstract class rex_feeds_stream_instagram_abstract extends rex_feeds_stream_abst
             $this->updateCount($item);
             $item->save();
         }
+        self::registerExtensionPoint($this->streamId);
+
     }
 }

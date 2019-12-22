@@ -168,6 +168,8 @@ class rex_feeds_stream_facebook_feed extends rex_feeds_stream_abstract
             $this->updateCount($item);
             $item->save();
         }
+        self::registerExtensionPoint($this->streamId);
+
     }
 
     /**
