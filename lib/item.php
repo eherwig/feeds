@@ -359,8 +359,8 @@ class rex_feeds_item
         }
 
         rex_extension::registerPoint(new rex_extension_point(
-            'FEEDS_ITEM_SAVED',
-            [$this->streamId, $this->uid]
+            'FEEDS_ITEM_SAVED', null,
+            ['stream_id' => $this->streamId, 'uid' => $this->uid]
         ));
 
     }
