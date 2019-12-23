@@ -77,10 +77,10 @@ abstract class rex_feeds_stream_abstract
     }
 
 
-    private function registerExtensionPoint($stream_id) {
+    protected function registerExtensionPoint($stream_id) {
         return rex_extension::registerPoint(new rex_extension_point(
         'FEEDS_STREAM_FETCHED',
-        [$stream_id]
+        null, ['stream_id' => $stream_id]
         ));
     }   
 
