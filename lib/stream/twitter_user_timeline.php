@@ -64,7 +64,9 @@ class rex_feeds_stream_twitter_user_timeline extends rex_feeds_stream_abstract
             $item->setContentRaw($twitterItem->full_text);
             $item->setContent(strip_tags($twitterItem->full_text));
 
-            $item->setUrl('https://twitter.com/'.$params['screen_name'].'/status/'.$twitterItem->id_str);
+            dump($twitterItem);
+
+            $item->setUrl('https://twitter.com/'.$twitterItem->user->screen_name.'/status/'.$twitterItem->id_str);
             $item->setDate(new DateTime($twitterItem->created_at));
 
             $item->setAuthor($twitterItem->user->name);
