@@ -82,8 +82,8 @@ $items = $stream->getPreloadedItems(); // Standard gibt 5 Einträge zurück, son
 
 ### Bilder ausgeben
 
-Damit Bilder in der Form `/index.php?rex_media_type=media_type&rex_media_file=421.feed`
-ausgegeben werden können, muss das Bild über den Media-Manager-Effekt von Feeds eingelesen werden. Diesen sollte man direkt am Anfang vor allen anderen Effekten setzen.  
+Damit Bilder in der Form `/index.php?rex_media_type=<medientyp>&rex_media_file=<id>.feeds` bzw. `/media/<medientyp>/<id>.feeds`
+ausgegeben werden können, muss das Bild über den Media-Manager-Effekt von Feeds eingelesen werden. Diesen sollte man direkt am Anfang vor allen anderen Effekten setzen. Als Medientyp das Media-Manager-Profil angeben und als `id` die ID des Eintrags.
 
 ## Einträge entfernen
 
