@@ -20,9 +20,10 @@ Ein REDAXO5-AddOn zum Abruf externer Streams, vormals YFeed.
 ## YFeed-Migration
 
 - Es sollte YFeed 1.3.0 installiert, sein damit eine Migration erfolgen kann. YFeed ggf. daher vorab aktualisieren. 
+- Zum Update zunächst Feeds 2.2.1 migrieren, anschließend lässt sich Feeds updaten.
 - Feeds importiert die Tabellen und Konfiguration von YFeed während der Installation. 
 - Die neu angelegten Tabellen lauten jetzt: TABLEPREFIX_`feeds_item` und TABLEPREFIX_`feeds_stream`, der Abruf in Modulen, AddOns oder Classes muss daher angepasst werden. 
-- Der Aufruf der Bilder mit der Endung .yfeed wird weiterhin unterstützt.
+- Der Aufruf der Bilder mit der Endung `.yfeed` wird weiterhin unterstützt, in Zukunft jedoch `.feeds` verwenden.
 
 ## Lizenz
 
