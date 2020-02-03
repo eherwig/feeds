@@ -24,6 +24,7 @@ Ein REDAXO5-AddOn zum Abruf externer Streams, vormals YFeed.
 - Feeds importiert die Tabellen und Konfiguration von YFeed während der Installation. 
 - Die neu angelegten Tabellen lauten jetzt: TABLEPREFIX_`feeds_item` und TABLEPREFIX_`feeds_stream`, der Abruf in Modulen, AddOns oder Classes muss daher angepasst werden. 
 - Der Aufruf der Bilder mit der Endung `.yfeed` wird weiterhin unterstützt, in Zukunft jedoch `.feeds` verwenden.
+- Anschließend lässt sich Feeds auf die aktuelle Version updaten.
 
 ## Lizenz
 

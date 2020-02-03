@@ -36,5 +36,5 @@ requires:
 
 conflicts:
     packages:
-        yfeed: '<1.3.0'
+        yfeed: '<=1.3.0'
         feeds: '<2.2.1'
