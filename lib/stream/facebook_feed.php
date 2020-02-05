@@ -62,7 +62,7 @@ class rex_feeds_stream_facebook_feed extends rex_feeds_stream_abstract
     {
         $fb = $this->getFacebook();
 
-        $fields = 'id,permalink_url,from,story,message,link,created_time,attachments,type';
+        $fields = 'id,permalink_url,from,story,message,created_time,attachments';
         $url = sprintf(
             '/%s/%s?locale=de&fields=%s&limit=%d',
             $this->typeParams['profile_id'],
