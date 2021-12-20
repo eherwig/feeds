@@ -108,7 +108,7 @@ class rex_feeds_stream_facebook_feed extends rex_feeds_stream_abstract
                 /** @var Facebook\GraphNodes\GraphNode $attachment */
                 foreach ($attachments as $key => $attachment) {
 
-                    switch ($facebookItem->getField('type')) {
+                    switch ($attachment->getField('type')) {
                         case "photo":
                                 if ($isAlbum) {
                                     //get only the first image from album
