@@ -39,9 +39,6 @@ Vendoren, siehe Vendors-Ordner des AddOns
 
 **Projekt-Lead**
 
-[Alexander Walther](https://github.com/alexplusde)
-
-
 ## Verwendung
 
 ### Einen neuen Feed einrichten
