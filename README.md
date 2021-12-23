@@ -37,8 +37,6 @@ Vendoren, siehe Vendors-Ordner des AddOns
 * [Friends Of REDAXO](https://github.com/FriendsOfREDAXO) 
 * [Contributors](https://github.com/FriendsOfREDAXO/feeds/graphs/contributors)
 
-**Projekt-Lead**
-
 ## Verwendung
 
 ### Einen neuen Feed einrichten
