@@ -10,7 +10,6 @@
 
 $addon = rex_addon::get('feeds');
 
-// Check if YFeed is installed, geenrate new tables based on YFeed.
 rex_sql_table::get(rex::getTable('feeds_stream'))
 ->ensurePrimaryIdColumn()
 ->ensureColumn(new rex_sql_column('namespace', 'varchar(255)'))
